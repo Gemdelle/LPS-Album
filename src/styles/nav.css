@@ -28,7 +28,7 @@ nav ul li span {
     color: rgb(98, 94, 76);
 }
 
-a:hover {
+.hover-class {
     text-shadow: 0vw 0.3vw 0.8vw white;
     color: rgb(164, 144, 53);
     transform: scale(110%);
@@ -161,6 +161,6 @@ a:hover {
 }
 
 .stat-filter div {
-    background-image: url("../assets/Filters.png");
-    width: 2.5vw;
+    background-image: url("../assets/Filter.png");
+    width: 1.5vw;
 }

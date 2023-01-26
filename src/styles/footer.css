@@ -1,12 +1,25 @@
 footer {
     display: flex;
     justify-content: center;
-    align-content: center;
-    height: 5vh;
+    height: 7vh;
     font-style: italic;
-    background-color: brown;
+    background-image: url(../assets/Footer.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.4vw;
+    color: rgb(43, 40, 11);
+
+    text-shadow: 0 0.2vw 0.4vw rgb(0, 0, 0);
 }
 
 footer p {
+    height: 100%;
+    width: 30%;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

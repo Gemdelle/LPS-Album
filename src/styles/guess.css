@@ -30,17 +30,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25vw;
-    height: 3.2vw;
+    width: 23vw;
+    height: 4vw;
     background-image: url(/src/assets/Answer.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     margin: 0.3vw 0;
-    cursor: pointer;
     font-family: 'Pinyon Script', cursive;
-    font-size: 1.2vw;
-    color: rgb(29, 31, 8);
+    font-size: 1.4vw;
+    color: rgb(43, 40, 11);
     font-weight: 600;
-    text-shadow: 0 0.4vw 0.4vw black;
+    text-shadow: 0 0.2vw 0.4vw rgb(255, 255, 255);
+}
+
+#answer-container div:hover {
+    cursor: pointer;
 }

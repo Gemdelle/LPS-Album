@@ -52,7 +52,7 @@ const Nav = ({ data, rawData }: any) => {
     return (
         <nav>
             <ul className="navholder">
-                <li><NavLink style={{ textDecoration: 'none' }} to="/" className={({ isActive }) => isActive ? "active" : undefined}><span>Album</span></NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none' }} to="/" className={({ isActive }) => `hover-class ${isActive ? "active" : ""}` }><span>Album</span></NavLink></li>
                 <li><NavLink style={{ textDecoration: 'none' }} to="/catalogue" className={({ isActive }) => isActive ? "active" : undefined}><span>Catalogue</span></NavLink></li>
                 <li><NavLink style={{ textDecoration: 'none' }} to="/guess-game"><span>Game</span></NavLink></li>
             </ul>

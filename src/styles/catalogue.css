@@ -6,19 +6,39 @@ main {
 }
 
 .catalogue-number {
-    border: 1px solid black;
-    width: 50px;
-    margin: 5px;
+    width: 5vw;
+    height: 1.5vw;
+    margin: 0.3vw;
     text-align: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.2vw;
+    font-size: 0.8vw;
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+    transition: all 300ms ease-in-out;
 }
 
 .owned {
-    background-color: aquamarine;
+    background-image: url(/src/assets/ID-background-owned.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.owned:hover {
+    transform: scale(105%);
 }
 
 .not-owned {
-    background-color: brown;
+    background-image: url(/src/assets/ID-background-not-owned.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.not-owned:hover {
+    transform: scale(105%);
 }
 
 .petshop-info {
@@ -57,11 +77,15 @@ main {
     margin-bottom: 10px;
 }
 
-.selected {
-    background-color: black;
+.owned.selected {
+    filter: contrast(200%);
+}
+
+.not-owned.selected {
+    filter: contrast(200%);
     color: white;
 }
 
 .no-image {
-    background-color: gray;
+    background-color: red;
 }
