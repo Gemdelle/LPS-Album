@@ -1,0 +1,8 @@
+#games-container {
+    width: 30vw;
+    height: 30vw;
+    gap: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,27 @@
+.checks-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.visible{
+    display: flex;
+}
+
+.hidden{
+    display: none;
+}
+
+.accordions{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.non-dropdown-filters-container {
+    width: 100%;
+    display: flex;
+}
+
+.non-dropdown-filters {
+    width: 33%;
+}

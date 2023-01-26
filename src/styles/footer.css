@@ -1,0 +1,12 @@
+footer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 5vh;
+    font-style: italic;
+    background-color: brown;
+}
+
+footer p {
+    margin: 0;
+}

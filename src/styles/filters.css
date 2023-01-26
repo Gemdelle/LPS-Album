@@ -1,0 +1,14 @@
+aside {
+    z-index: 2;
+    background-image: url("../assets/Filters.png");
+    background-size: cover;
+    width: 20%;
+    height: 52vw;
+    position: sticky;
+    top: 0;
+    overflow: scroll;
+  }
+
+  .clothes-container {
+    display: flex;
+  }

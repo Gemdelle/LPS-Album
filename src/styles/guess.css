@@ -1,0 +1,40 @@
+#guessing-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#guessing-image {
+    height: 24vw;
+    width: 24vw;
+    background-image: url(/src/assets/Portrait.png);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#guessing-image img {
+    height: 55%;
+    width: 55%;
+}
+
+.answer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#answer-01,
+#answer-02,
+#answer-03 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: 2.5vw;
+    background-color: antiquewhite;
+    margin: 10px 0;
+    cursor: pointer;
+}

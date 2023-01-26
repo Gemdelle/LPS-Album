@@ -1,0 +1,67 @@
+main {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.catalogue-number {
+    border: 1px solid black;
+    width: 50px;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.owned {
+    background-color: aquamarine;
+}
+
+.not-owned {
+    background-color: brown;
+}
+
+.petshop-info {
+    height: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.petshop-info span {
+    margin-left: 10px;
+}
+
+.petshop-image {
+    max-height: 15vw;
+    height: 15vw;
+    max-width: 15vw;
+    width: 15vw;
+    background-image: url(/src/assets/Portrait.png);
+    background-size: contain;
+    padding: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.petshop-image img {
+    height: 68%;
+    width: 68%;
+    margin-right: 10px;
+}
+
+#selected-pet {
+    font-size: large;
+    margin-bottom: 10px;
+}
+
+.selected {
+    background-color: black;
+    color: white;
+}
+
+.no-image {
+    background-color: gray;
+}
