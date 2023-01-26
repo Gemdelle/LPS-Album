@@ -52,9 +52,9 @@ const Nav = ({ data, rawData }: any) => {
     return (
         <nav>
             <ul className="navholder">
-                <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : undefined}>Album</NavLink></li>
-                <li><NavLink to="/catalogue" className={({ isActive }) => isActive ? "active" : undefined}>Catalogue</NavLink></li>
-                <li><NavLink to="/games">Game</NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none' }} to="/" className={({ isActive }) => isActive ? "active" : undefined}><span>Album</span></NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none' }} to="/catalogue" className={({ isActive }) => isActive ? "active" : undefined}><span>Catalogue</span></NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none' }} to="/guess-game"><span>Game</span></NavLink></li>
             </ul>
             <div className='stats-container'>
                 <div className='owned-container'>

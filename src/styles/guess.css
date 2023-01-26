@@ -26,15 +26,21 @@
     align-items: center;
 }
 
-#answer-01,
-#answer-02,
-#answer-03 {
+#answer-container div {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20vw;
-    height: 2.5vw;
-    background-color: antiquewhite;
-    margin: 10px 0;
+    width: 25vw;
+    height: 3.2vw;
+    background-image: url(/src/assets/Answer.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0.3vw 0;
     cursor: pointer;
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.2vw;
+    color: rgb(29, 31, 8);
+    font-weight: 600;
+    text-shadow: 0 0.4vw 0.4vw black;
 }

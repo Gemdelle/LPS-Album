@@ -9,34 +9,51 @@ nav {
     position: sticky;
     top: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    text-decoration: none;
 }
 
 nav ul {
     list-style: none;
     height: 50%;
-    background-color: white;
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.5vw;
+}
+
+nav ul li span {
+    text-shadow: 0vw 0.3vw 0.8vw white;
+    color: rgb(98, 94, 76);
+}
+
+a:hover {
+    text-shadow: 0vw 0.3vw 0.8vw white;
+    color: rgb(164, 144, 53);
+    transform: scale(110%);
 }
 
 .stats-container span {
     font-size: 13px;
+    font-weight: 600;
+    font-family: 'EB Garamond', serif;
+    color: rgb(70, 70, 70);
+    text-shadow: 0vw 0vw 0.3vw white;
 }
 
 .navholder {
+    width: 30%;
     display: flex;
-    align-content: center;
     margin: 0;
-    display: flex;
-    gap: 40px;
+    align-content: center;
+    gap: 20%;
+    padding: 0;
 }
-
-
 .stats-container {
-    background-color: beige;
     display: flex;
-    width: 60vw;
+    justify-content: space-between;
+    width: 55%;
     height: 50%;
 }
 
@@ -45,7 +62,7 @@ nav ul {
 .gender-container,
 .bloodlines-container {
     display: flex;
-    width: 10vw;
+    width: auto;
 }
 
 .stat-owned,
@@ -54,106 +71,96 @@ nav ul {
 .stat-not-named,
 .stat-girls,
 .stat-boys,
-.stat-porveldam {
-    background-color: red;
+.stat-porveldam,
+.stat-spadelline,
+.stat-zephiroth,
+.stat-gladasmy,
+.stat-illwhyrim,
+.stat-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 2.5vw;
+}
+
+.stat-owned div,
+.stat-not-owned div,
+.stat-named div,
+.stat-not-named div,
+.stat-girls div,
+.stat-boys div,
+.stat-porveldam div,
+.stat-spadelline div,
+.stat-zephiroth div,
+.stat-gladasmy div,
+.stat-illwhyrim div,
+.stat-filter div {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+    width: 100%;
+    height: 2vw;
 }
-
 .stat-owned div {
     background-image: url("../assets/Obtained.png");
-    width: 2.5vw;
-    height: 2vw;
 }
 
 .stat-not-owned div {
     background-image: url("../assets/NotObtained.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.5vw;
-    height: 2vw;
 }
 
 .stat-named div {
     background-image: url("../assets/Named.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.5vw;
-    height: 2vw;
 }
 
 .stat-not-named div {
     background-image: url("../assets/NotNamed.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.5vw;
-    height: 2vw;
 }
 
 .stat-girls div {
     background-image: url("../assets/Feminin.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2vw;
-    height: 2vw;
+    width: 1.9vw;
 }
 
 .stat-boys div {
     background-image: url("../assets/Masculin.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 1.6vw;
-    height: 2vw;
+    width: 1.4vw;
 }
 
 .stat-porveldam div {
     background-image: url("../assets/Porveldam.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.2vw;
-    height: 2vw;
+    width: 2.5vw;
+    background-size: 50%;
 }
 
 .stat-spadelline div {
     background-image: url("../assets/Spadelline.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.1vw;
-    height: 2vw;
+    width: 2.5vw;
+    background-size: 50%;
 }
 
 .stat-zephiroth div {
     background-image: url("../assets/Zephiroth.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.2vw;
-    height: 2vw;
+    width: 2.5vw;
+    background-size: 70%;
 }
 
 .stat-gladasmy div {
     background-image: url("../assets/Gladasmy.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.2vw;
-    height: 2vw;
+    width: 2.5vw;
+    background-size: 38%;
 }
 
 .stat-illwhyrim div {
     background-image: url("../assets/Illwhyrim.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.2vw;
-    height: 2vw;
+    width: 2.5vw;
+    background-size: 70%;
 }
 
 .stat-filter div {
     background-image: url("../assets/Filters.png");
-    background-repeat: no-repeat;
-    background-size: contain;
     width: 2.5vw;
-    height: 2vw;
 }

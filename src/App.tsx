@@ -13,7 +13,6 @@ import Footer from './components/Footer';
 
 import LandingPage from './pages/LandingPage';
 import CataloguePage from './pages/CataloguePage';
-import GamesPage from './pages/GamesPage';
 
 import petshop_data from './data/petshops_data.json';
 import Filters from './components/Filters';
@@ -58,16 +57,23 @@ function App() {
   const [location, setLocation] = useState("/");
 
   const [catalogueData, setCatalogueData] = useState(sortedData);
-  const [selectedPetShop, setSelectedPetShop] = useState({})
+  const [selectedPetShop, setSelectedPetShop] = useState({});
+
+  const [guessGameProgress, setGuessGameProgress] = useState(0)
 
   function createCurrentFilter () {
     switch(location) {
-      case "/catalogue" : return <FiltersCatalogue data={catalogueData} defaultData={sortedData} setCatalogueData={setCatalogueData} selectedPetShop={selectedPetShop} />
-      case "/games/guess" :
-      case "/games/write" :
-         return <BarGames/>
-      default : return <Filters petShopData={petShopData} setPetShopData={setPetShopData} defaultData={ownedPetShops} />
+      case "/catalogue" : 
+        return <FiltersCatalogue data={catalogueData} defaultData={sortedData} setCatalogueData={setCatalogueData} selectedPetShop={selectedPetShop} />
+      case "/guess-game" :
+        return <BarGames guessGameProgress={guessGameProgress}/>
+      default : 
+        return <Filters petShopData={petShopData} setPetShopData={setPetShopData} defaultData={ownedPetShops} />
     }
+  }
+
+  function incrementGameProgress() {
+    setGuessGameProgress(guessGameProgress+1);
   }
 
   return (
@@ -83,8 +89,7 @@ function App() {
             <Routes>
               <Route path='/' element={<LandingPage data={petShopData} setLocation={setLocation} />}></Route>
               <Route path='/catalogue' element={<CataloguePage data={catalogueData} setLocation={setLocation} setSelectedPetShop={setSelectedPetShop} selectedPetShop={selectedPetShop}/>}></Route>
-              <Route path='/games' element={<GamesPage setLocation={setLocation}/>}></Route>
-              <Route path='/games/guess' element={<GuessPage setLocation={setLocation}/>}></Route>
+              <Route path='/guess-game' element={<GuessPage setLocation={setLocation} defaultData={ownedPetShops} guessGameProgress={guessGameProgress} incrementGameProgress={incrementGameProgress}/>}></Route>
             </Routes>
           </BrowserRouter>
         </div>
