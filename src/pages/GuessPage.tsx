@@ -45,7 +45,7 @@ const GuessPage = ({ setLocation, defaultData, incrementGameProgress, guessGameP
     while (pickedCount < 15) {
         currentSelection = namedPetshops[Math.floor(Math.random() * namedPetshops.length)]
         auxillairy.push({
-            image: `Images/${currentSelection.id}.jpg`,
+            image: `Images/${String(currentSelection.id).split(" - ")[0]}.jpg`,
             answers: [
                 currentSelection.name,
                 namedPetshops[Math.floor(Math.random() * namedPetshops.length)].name,
