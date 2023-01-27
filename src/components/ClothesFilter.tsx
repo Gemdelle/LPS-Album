@@ -24,7 +24,7 @@ const ClothesFilter = ({ setPetShopData, defaultData }: any) => {
     return (
         <div>
             <div className="title">
-                <div className="arrow" onClick={showClothesContainer}></div>
+                <div className={filterVisible ? "rotating-arrow" : "arrow"} onClick={showClothesContainer}></div>
                 <span>Clothes</span>
             </div>
 

@@ -117,7 +117,7 @@ const TypesFilter = ({ setPetShopData, defaultData }: any) => {
     return (
         <div>
             <div className="title">
-                <div className="arrow" onClick={showTypeContainer}></div>
+                <div className={filterVisible ? "rotating-arrow" : "arrow"} onClick={showTypeContainer}></div>
                 <span>Type</span>
             </div>
                 <div className={filterVisible ? "checks-container + type-filter-container" : "hidden + type-filter-container"}>

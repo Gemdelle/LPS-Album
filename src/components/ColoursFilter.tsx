@@ -25,7 +25,7 @@ const ColoursFilter = ({ setPetShopData, defaultData }: any) => {
     return (
         <div>
             <div className="title">
-                <div className="arrow" onClick={showColourContainer}></div>
+                <div className={filterVisible ? "rotating-arrow" : "arrow"} onClick={showColourContainer}></div>
                 <span>Colour</span>
             </div>
 

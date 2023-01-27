@@ -25,7 +25,7 @@ const YearsFilter = ({ setPetShopData, defaultData }: any) => {
     return (
         <div>
             <div className="title">
-                <div className="arrow" onClick={showYearsContainer}></div>
+                <div className={filterVisible ? "rotating-arrow" : "arrow"} onClick={showYearsContainer}></div>
                 <span>Year</span>
             </div>
 

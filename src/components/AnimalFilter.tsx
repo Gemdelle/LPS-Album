@@ -74,14 +74,13 @@ const AnimalFilter = ({ petShopData, setPetShopData, defaultData }: any) => {
     return (
         <div>
             <div className="title">
-                <div className="arrow" onClick={showAnimalContainer}></div>
+                <div className={filterVisible ? "rotating-arrow" : "arrow"} onClick={showAnimalContainer}></div>
                 <span>Animal</span>
             </div>
 
-
             <div className={filterVisible ? "" : "hidden"}>
                 <p>Animal Types: </p>
-                <div className="checks-container">
+                <div className="checks-container animal-scroll">
                     <div className="accordions">
                         <AccordionItem
                             name="Bear"

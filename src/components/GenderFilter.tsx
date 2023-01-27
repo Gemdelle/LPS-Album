@@ -33,11 +33,11 @@ const GenderFilter = ({ setPetShopData, defaultData }: any) => {
     return (
         <div>
             <div className="title">
-                <div className="arrow" onClick={showGenderContainer}></div>
+                <div className={filterVisible ? "rotating-arrow" : "arrow"} onClick={showGenderContainer}></div>
                 <span>Gender</span>
             </div>
             
-            <div className={filterVisible ? "gender-filter-container + checks-container" : "gender-filter-container + hidden"}>
+            <div className={filterVisible ? "gender-filter-container checks-container" : "hidden"}>
                 <div className='female-container'>
                     <input type="checkbox" onChange={selectFemale} />
                     <div className="female"></div>

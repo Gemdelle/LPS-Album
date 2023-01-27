@@ -33,6 +33,21 @@ main {
   background-size: contain;
   height: 25px;
   width: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin-right: 0.8vw;
+}
+
+.rotating-arrow {
+  background-image: url(/src/assets/Arrow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 25px;
+  width: 25px;
+  transform: rotate(90deg);
+  cursor: pointer;
+  margin-right: 0.8vw;
 }
 
 .title {

@@ -59,7 +59,7 @@ const IdFilter = ({ setPetShopData, defaultData }: any) => {
     return (
         <div>
             <div className="title">
-                <div className="arrow" onClick={showIdContainer}></div>
+                <div className={filterVisible ? "rotating-arrow" : "arrow"} onClick={showIdContainer}></div>
                 <span>Id</span>
             </div>
 
