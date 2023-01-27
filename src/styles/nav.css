@@ -28,7 +28,7 @@ nav ul li span {
     color: rgb(98, 94, 76);
 }
 
-.hover-class {
+.hover-class:hover {
     text-shadow: 0vw 0.3vw 0.8vw white;
     color: rgb(164, 144, 53);
     transform: scale(110%);
