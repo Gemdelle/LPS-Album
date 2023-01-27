@@ -26,11 +26,20 @@ nav ul {
 nav ul li span {
     text-shadow: 0vw 0.3vw 0.8vw white;
     color: rgb(98, 94, 76);
+    transition: all 300ms ease-in-out;
+}
+
+.hover-class {
+    transition: all 300ms ease-in-out;
+    font-weight: 600;
+}
+
+nav ul li span:hover {
+    color: rgb(139, 130, 89);
 }
 
 .hover-class:hover {
     text-shadow: 0vw 0.3vw 0.8vw white;
-    color: rgb(164, 144, 53);
     transform: scale(110%);
 }
 
@@ -50,6 +59,7 @@ nav ul li span {
     gap: 20%;
     padding: 0;
 }
+
 .stats-container {
     display: flex;
     justify-content: space-between;
