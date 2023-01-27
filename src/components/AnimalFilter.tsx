@@ -8,7 +8,7 @@ const AccordionItem = ({ name, breeds, selectAnimal, isSelectedAnimal, selectBre
         <div className="accordion-row-item animal-item">
             <input type="checkbox" onChange={(event) => selectAnimal(event, animalValue)} />
             <span>{name}</span>
-            <div className={isSelectedAnimal(animalValue) ? "visible" : "hidden"}>
+            <div className={isSelectedAnimal(animalValue) ? "visible subspecies" : "hidden"}>
                 {breeds.map((breed: any, index: any) => {
                     return <div key={index} >
                         <input type="checkbox" onChange={(event) => selectBreed(event, breed.split(' ').join('_').toUpperCase())} />

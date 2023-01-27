@@ -36,3 +36,11 @@
     font-style: italic;
 }
 
+.subspecies {
+    display: flex;
+    flex-direction: column !important;
+    font-size: 0.8vw;
+    margin-left: 0.4vw;
+    margin-bottom: 0.2vw;
+    font-style: italic;
+}
