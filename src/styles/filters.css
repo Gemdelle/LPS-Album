@@ -120,9 +120,18 @@
 
 /* Animal Filter */
 
-
-
 .animal-scroll {
-  height: 17vw;
+  height: 14vw;
   overflow: scroll;
+}
+
+.wrap-options {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+}
+
+.animal-item,
+.non-dropdown-filters div {
+  width: 8vw;
 }
