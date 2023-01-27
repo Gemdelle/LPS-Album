@@ -1,5 +1,6 @@
-import NameFilter from "./NameFilter";
 import '../styles/filters.css';
+
+import NameFilter from "./NameFilter";
 import IdFilter from "./IdFilter";
 import GenderFilter from "./GenderFilter";
 import TypesFilter from "./TypesFilter";
@@ -11,9 +12,9 @@ import ClothesFilter from "./ClothesFilter";
 
 const Filters = ({ petShopData, setPetShopData, defaultData }: any) => {
     return (
-        <aside>
+        <aside className="album-aside">
             <span>Filters</span>
-            <NameFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
+            <NameFilter setPetShopData={setPetShopData} defaultData={defaultData} className="name-filter"/>
             <GiftersFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
             <ClothesFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
             <YearsFilter setPetShopData={setPetShopData} defaultData={defaultData}/>

@@ -1,0 +1,29 @@
+.name-filter-container {
+  margin: 1vw 0;
+  font-family: 'Old Standard TT', serif;
+}
+
+.title {
+  font-family: 'Pinyon Script', cursive;
+  font-size: 1.5vw;
+  font-weight: 600;
+  text-shadow: 0vw 0.3vw 0.8vw rgb(0, 0, 0);
+  color: rgb(98, 94, 76);
+  margin-left: 1vw;
+}
+
+.filter-name,
+.simple-option,
+.name-number {
+  margin-left: 2vw;
+}
+
+.simple-option {
+  display: flex;
+  background-color: red;
+}
+
+.name-number {
+  display: flex;
+  background-color: red;
+}

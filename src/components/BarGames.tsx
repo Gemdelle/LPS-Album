@@ -1,4 +1,3 @@
-import '../styles/filterscatalogue.css';
 import '../styles/bar.css';
 
 const BarGames = ({ guessGameProgress }: any) => {

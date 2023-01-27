@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { DebounceInput } from "react-debounce-input";
 
+import '../styles/name-filter.css';
+
 const NameFilter = ({ setPetShopData, defaultData }: any) => {
     const [selectedFilterOption, setSelectedFilterOption] = useState(0);
     const [selectedNameWordsOption, setSelectedNameWordsOption] = useState(0);
@@ -43,31 +45,36 @@ const NameFilter = ({ setPetShopData, defaultData }: any) => {
     }
 
     return (
-        <div>
-            <span>Name: </span>
-            <div>
-                <span>All</span>
-                <input type="radio" name="name" onChange={allFilterSelected} checked={selectedFilterOption === 0}></input>
-            </div>
-            <div>
-                <span>Name</span>
-                <input type="radio" name="name" onChange={nameFilterSelected} checked={selectedFilterOption === 1}></input>
-            </div>
-            <div>
-                <span>No Name</span>
-                <input type="radio" name="name" onChange={noNameFilterSelected} checked={selectedFilterOption === 2}></input>
-            </div>
+        <div className="name-filter-container">
+            <span className="title">Name</span>
 
-            <div>
+            <div className="filter-name">
                 <span>Filter Name</span>
                 <DebounceInput
                     placeholder="search here..."
                     minLength={1}
                     debounceTimeout={500}
                     onChange={nameFilter}
+                    className="name-input"
                 />
             </div>
+            
+            <div className="simple-option">
+                <div>
+                    <span>All</span>
+                    <input type="radio" name="name" onChange={allFilterSelected} checked={selectedFilterOption === 0}></input>
+                </div>
+                <div>
+                    <span>Name</span>
+                    <input type="radio" name="name" onChange={nameFilterSelected} checked={selectedFilterOption === 1}></input>
+                </div>
+                <div>
+                    <span>No Name</span>
+                    <input type="radio" name="name" onChange={noNameFilterSelected} checked={selectedFilterOption === 2}></input>
+                </div>
+            </div>
 
+            <div className="name-number">
             <div>
                 <span>Single</span>
                 <input type="radio" name="name-words" onChange={() => filterByWordAmount(1)} checked={selectedNameWordsOption === 1}></input>
@@ -85,6 +92,7 @@ const NameFilter = ({ setPetShopData, defaultData }: any) => {
                 <span>Quadriple</span>
                 <input type="radio" name="name-words" onChange={() => filterByWordAmount(4)} checked={selectedNameWordsOption === 4}></input>
             </div>
+        </div>
         </div>
     )
 };

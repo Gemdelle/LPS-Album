@@ -1,4 +1,4 @@
-aside {
+.album-aside {
     z-index: 2;
     background-image: url("../assets/Filters.png");
     background-size: cover;
@@ -6,7 +6,13 @@ aside {
     height: 52vw;
     position: sticky;
     top: 0;
-    overflow: scroll;
+    overflow: hidden;
+    padding: 2vw;
+  }
+
+  .name-filter {
+    display: flex;
+    background-color: red;
   }
 
   .clothes-container {
