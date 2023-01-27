@@ -76,13 +76,16 @@ function App() {
     setGuessGameProgress(guessGameProgress+1);
   }
 
+  function createHeader(){
+    if (location == "/guess-game") return
+    return <Header />
+  }
+
   return (
     <div className="App">
-      <Header />
+      {createHeader()}
       <div className='container'>
-        {
-          createCurrentFilter()           
-        }
+        {createCurrentFilter()}
         <div className='router'>
           <BrowserRouter>
             <Nav data={petShopData} rawData={petshop_data} />
