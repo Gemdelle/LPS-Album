@@ -120,35 +120,34 @@ const TypesFilter = ({ setPetShopData, defaultData }: any) => {
                 <div className="arrow" onClick={showTypeContainer}></div>
                 <span>Type</span>
             </div>
-
-                <div className={filterVisible ? "checks-container" : "hidden"}>
+                <div className={filterVisible ? "checks-container + type-filter-container" : "hidden + type-filter-container"}>
                     <div>
-                        <span>🏳</span>
                         <input type="checkbox" onChange={selectNormal} />
+                        <span>🏳</span>
                     </div>
                     <div>
-                        <span>✥</span>
                         <input type="checkbox" onChange={selectHairy} />
+                        <span>✥</span>
                     </div>
                     <div>
-                        <span>✤</span>
                         <input type="checkbox" onChange={selectFuzzy} />
+                        <span>✤</span>
                     </div>
                     <div>
-                        <span>🎖</span>
                         <input type="checkbox" onChange={selectEvent} />
+                        <span>🎖</span>
                     </div>
                     <div>
-                        <span>▩</span>
                         <input type="checkbox" onChange={selectPostcard} />
+                        <span>▩</span>
                     </div>
                     <div>
-                        <span>✵</span>
                         <input type="checkbox" onChange={selectShiny} />
+                        <span>✵</span>
                     </div>
                     <div>
-                        <span>✧</span>
                         <input type="checkbox" onChange={selectFairy} />
+                        <span>✧</span>
                     </div>
                 </div>
             </div>

@@ -5,8 +5,8 @@
 }
 
 #guessing-image {
-    height: 24vw;
-    width: 24vw;
+    height: 26vw;
+    width: 26vw;
     background-image: url(/src/assets/Portrait.png);
     background-size: cover;
     display: flex;
@@ -47,7 +47,8 @@
 
 #answer-container div:hover {
     cursor: pointer;
-    transform: scale(110%);
+    transform: scale(105%);
+    filter: contrast(180%);
 }
 
 .correct-answer{
@@ -71,4 +72,24 @@
 
 .finish-container img {
     width: 50vw;
+}
+
+.progress-count {
+    background-image: url(../assets/Progress.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 6vw;
+    width: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.1vw;
+    filter: contrast(160%);
+    position: absolute;
+    top: 27vw;
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1vw;
+    color: rgb(201, 200, 191);
+    font-weight: 600;
+    text-shadow: 0 0.2vw 0.4vw rgb(63, 59, 59);
 }

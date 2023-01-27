@@ -1,6 +1,6 @@
 .filters-title {
   font-family: 'Pinyon Script', cursive;
-  font-size: 2.5vw;
+  font-size: 2.5vw !important;
   font-weight: 600;
   color: rgb(43, 38, 17);
   text-shadow: 0vw 0.3vw 0.8vw rgb(43, 43, 32);
@@ -29,7 +29,7 @@
 }
 
 .option {
-  width: 4vw;
+  width: 3vw;
   font-family: 'Old Standard TT', serif;
 }
 
@@ -104,6 +104,14 @@
   font-style: italic;
 }
 
-.gender-filter-container {
+.type-filter-container {
   display: flex;
+  flex-direction: row !important;
+  justify-content: space-between;
+  font-size: 1vw;
+  font-weight: 600;
+  color: rgb(58, 58, 34);
+  text-shadow: 0 0.4vw 0.4vw rgb(80, 76, 53);
+  margin-bottom: 1vw;
+  margin-left: 1vw;
 }

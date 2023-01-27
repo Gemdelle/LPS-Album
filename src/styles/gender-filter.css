@@ -1,0 +1,17 @@
+.gender-filter-container {
+  display: flex !important;
+  flex-direction: row !important;
+  margin-left: 1vw;
+  margin-bottom: 1vw;
+}
+
+.gender-filter-container div {
+  display: flex;
+  align-items: center;
+}
+
+.female-container,
+.male-container {
+  width: 3vw;
+  height: 1.3vw;
+}

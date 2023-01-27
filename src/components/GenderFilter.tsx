@@ -1,3 +1,5 @@
+import '../styles/gender-filter.css';
+
 import { useState } from "react";
 
 const GenderFilter = ({ setPetShopData, defaultData }: any) => {
@@ -35,12 +37,12 @@ const GenderFilter = ({ setPetShopData, defaultData }: any) => {
                 <span>Gender</span>
             </div>
             
-            <div className={filterVisible ? "checks-container + gender-filter-container" : "gender-filter-container + hidden"}>
-                <div>
+            <div className={filterVisible ? "gender-filter-container + checks-container" : "gender-filter-container + hidden"}>
+                <div className='female-container'>
                     <input type="checkbox" onChange={selectFemale} />
                     <div className="female"></div>
                 </div>
-                <div>
+                <div className='male-container'>
                     <input type="checkbox" onChange={selectMale} />
                     <div className="male"></div>
                 </div>

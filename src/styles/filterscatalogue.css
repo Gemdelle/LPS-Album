@@ -9,3 +9,20 @@ aside {
     overflow: hidden;
     padding: 2vw;
 }
+
+.selected-petshop-info {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Old Standard TT', serif;
+    font-weight: 600;
+    font-size: 1vw;
+    color: rgb(51, 46, 24);
+}
+
+.petshop-image {
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 15vw;
+    width: 14vw;
+}
+

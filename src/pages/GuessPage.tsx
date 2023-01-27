@@ -4,7 +4,7 @@ import '../styles/guess.css';
 
 const Cheats = ({ toggleCheats }: any) => {
     return (
-        <div className="cheats" onClick={toggleCheats}>CHEATS</div>
+        <div className="cheats" onClick={toggleCheats}></div>
     )
 }
 
@@ -42,7 +42,7 @@ const GuessGame = ({ selectedPetshop, answerRight, answerWrong, cheatsEnabled, g
             <div id="guessing-image">
                 <img src={selectedPetshop.image} alt="" />
             </div>
-            <span>{guessGameProgress}/16</span>
+            <span className='progress-count'>{guessGameProgress} / 16</span>
             <div id="answer-container">
                 {answers.map((answer: any, index: any) => {
                     return <div

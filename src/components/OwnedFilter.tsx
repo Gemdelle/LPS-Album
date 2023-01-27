@@ -29,11 +29,11 @@ const OwnedFilter = ({ setCatalogueData, defaultData }: any) => {
             </div>
 
             <div className={filterVisible ? "clothes-container" : "hidden"}>
-                <div>
+                <div className='option'>
                     <input type="checkbox" onChange={(event) => selectOwned(event, "OWNED")} />
                     <span>Yes</span>
                 </div>
-                <div>
+                <div className='option'>
                     <input type="checkbox" onChange={(event) => selectOwned(event, "NOT_OWNED")} />
                     <span>No</span>
                 </div>
