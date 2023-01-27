@@ -13,7 +13,7 @@ import ClothesFilter from "./ClothesFilter";
 const Filters = ({ petShopData, setPetShopData, defaultData }: any) => {
     return (
         <aside className="album-aside">
-            <span>Filters</span>
+            <span className='filters-title'>Filters</span>
             <NameFilter setPetShopData={setPetShopData} defaultData={defaultData} className="name-filter"/>
             <GiftersFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
             <ClothesFilter setPetShopData={setPetShopData} defaultData={defaultData}/>

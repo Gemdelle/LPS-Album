@@ -29,7 +29,7 @@ const YearsFilter = ({ setPetShopData, defaultData }: any) => {
                 <span>Year</span>
             </div>
 
-            <div className={filterVisible ? "" : "hidden"}>
+            <div className={filterVisible ? "year-container" : "year-container + hidden"}>
                 <div>
                     <input type="checkbox" onChange={(event) => selectYears(event, "2016")} />
                     <span>2016</span>

@@ -58,41 +58,41 @@ const NameFilter = ({ setPetShopData, defaultData }: any) => {
                     className="name-input"
                 />
             </div>
-            
+
             <div className="simple-option">
                 <div>
-                    <span>All</span>
                     <input type="radio" name="name" onChange={allFilterSelected} checked={selectedFilterOption === 0}></input>
+                    <span>All</span>
                 </div>
                 <div>
-                    <span>Name</span>
                     <input type="radio" name="name" onChange={nameFilterSelected} checked={selectedFilterOption === 1}></input>
+                    <span>Name</span>
                 </div>
                 <div>
-                    <span>No Name</span>
                     <input type="radio" name="name" onChange={noNameFilterSelected} checked={selectedFilterOption === 2}></input>
+                    <span>No Name</span>
                 </div>
             </div>
 
             <div className="name-number">
-            <div>
-                <span>Single</span>
-                <input type="radio" name="name-words" onChange={() => filterByWordAmount(1)} checked={selectedNameWordsOption === 1}></input>
-            </div>
-            <div>
-                <span>Double</span>
-                <input type="radio" name="name-words" onChange={() => filterByWordAmount(2)} checked={selectedNameWordsOption === 2}></input>
-            </div>
-            <div>
-                <span>Triple</span>
-                <input type="radio" name="name-words" onChange={() => filterByWordAmount(3)} checked={selectedNameWordsOption === 3}></input>
-            </div>
+                <div>
+                    <input type="radio" name="name-words" onChange={() => filterByWordAmount(1)} checked={selectedNameWordsOption === 1}></input>
+                    <span>Single</span>
+                </div>
+                <div>
+                    <input type="radio" name="name-words" onChange={() => filterByWordAmount(2)} checked={selectedNameWordsOption === 2}></input>
+                    <span>Double</span>
+                </div>
+                <div>
+                    <input type="radio" name="name-words" onChange={() => filterByWordAmount(3)} checked={selectedNameWordsOption === 3}></input>
+                    <span>Triple</span>
+                </div>
 
-            <div>
-                <span>Quadriple</span>
-                <input type="radio" name="name-words" onChange={() => filterByWordAmount(4)} checked={selectedNameWordsOption === 4}></input>
+                <div>
+                    <input type="radio" name="name-words" onChange={() => filterByWordAmount(4)} checked={selectedNameWordsOption === 4}></input>
+                    <span>Quadriple</span>
+                </div>
             </div>
-        </div>
         </div>
     )
 };

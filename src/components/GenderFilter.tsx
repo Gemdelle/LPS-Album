@@ -35,7 +35,7 @@ const GenderFilter = ({ setPetShopData, defaultData }: any) => {
                 <span>Gender</span>
             </div>
             
-            <div className={filterVisible ? "checks-container" : "hidden"}>
+            <div className={filterVisible ? "checks-container + gender-filter-container" : "gender-filter-container + hidden"}>
                 <div>
                     <input type="checkbox" onChange={selectFemale} />
                     <div className="female"></div>

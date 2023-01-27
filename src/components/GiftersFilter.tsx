@@ -1,3 +1,5 @@
+import '../styles/gifters-filter.css';
+
 const GiftersFilter = ({ setPetShopData, defaultData }: any) => {
     const giftersFromDefaultData = defaultData.map((data:any) => {
         return data.gifter;
@@ -18,9 +20,9 @@ const GiftersFilter = ({ setPetShopData, defaultData }: any) => {
     }
 
     return (
-        <div>
-            <p>Gifters </p>
-            <select onChange={selectGifters}>
+        <div className="gifters-container">
+            <p className="title">Gifters </p>
+            <select onChange={selectGifters} className="select-gifters">
                 <option value="">Choose One</option>
                 {gifters.map((gifter) => {
                     return <option value={gifter.toUpperCase()}>{gifter}</option>

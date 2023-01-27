@@ -29,11 +29,11 @@ const ClothesFilter = ({ setPetShopData, defaultData }: any) => {
             </div>
 
             <div className={filterVisible ? "clothes-container" : "hidden"}>
-                <div>
+                <div className="option">
                     <input type="checkbox" onChange={(event) => selectClothes(event, "YES")} />
                     <span>Yes</span>
                 </div>
-                <div>
+                <div className="option">
                     <input type="checkbox" onChange={(event) => selectClothes(event, "NO")} />
                     <span>No</span>
                 </div>

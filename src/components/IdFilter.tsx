@@ -63,9 +63,9 @@ const IdFilter = ({ setPetShopData, defaultData }: any) => {
                 <span>Id</span>
             </div>
 
-            <div className={filterVisible ? "" : "hidden"}>
-                <div>
-                    <span>By Specific Id: </span>
+            <div className={filterVisible ? "id-filter-container" : "id-filter-container + hidden"}>
+                <div className="specific-id-filter">
+                    <span>Specific: </span>
                     <DebounceInput
                         placeholder="search here..."
                         minLength={1}
@@ -73,23 +73,25 @@ const IdFilter = ({ setPetShopData, defaultData }: any) => {
                         onChange={idFilter}
                     />
                 </div>
-                <div>
-                    <p>By Range Id: </p>
-                    <span>Min Range</span>
-                    <DebounceInput
-                        placeholder="search here..."
-                        minLength={1}
-                        debounceTimeout={500}
-                        onChange={minRangeIdFilter}
-                    />
-                    <br />
-                    <span>Max Range</span>
-                    <DebounceInput
-                        placeholder="search here..."
-                        minLength={1}
-                        debounceTimeout={500}
-                        onChange={maxRangeIdFilter}
-                    />
+                <div className="range-id-filter">
+                    <p>Range: </p>
+                    <div className="min-max-range">
+                        <span>Min</span>
+                        <DebounceInput
+                            placeholder="search here..."
+                            minLength={1}
+                            debounceTimeout={500}
+                            onChange={minRangeIdFilter}
+                        />
+                        <br />
+                        <span>Max</span>
+                        <DebounceInput
+                            placeholder="search here..."
+                            minLength={1}
+                            debounceTimeout={500}
+                            onChange={maxRangeIdFilter}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

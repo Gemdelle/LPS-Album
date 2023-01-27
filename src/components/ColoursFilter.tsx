@@ -29,7 +29,7 @@ const ColoursFilter = ({ setPetShopData, defaultData }: any) => {
                 <span>Colour</span>
             </div>
 
-            <div className={filterVisible ? "" : "hidden"}>
+            <div className={filterVisible ? "colour-container" : "colour-container + hidden"}>
                 <div>
                     <input type="checkbox" onChange={(event) => selectColour(event, "BLACK")} />
                     <span>Black</span>

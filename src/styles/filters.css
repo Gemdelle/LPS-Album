@@ -1,20 +1,109 @@
+.filters-title {
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2.5vw;
+  font-weight: 600;
+  color: rgb(43, 38, 17);
+  text-shadow: 0vw 0.3vw 0.8vw rgb(43, 43, 32);
+}
+
 .album-aside {
-    z-index: 2;
-    background-image: url("../assets/Filters.png");
-    background-size: cover;
-    width: 20%;
-    height: 52vw;
-    position: sticky;
-    top: 0;
-    overflow: hidden;
-    padding: 2vw;
-  }
+  z-index: 2;
+  background-image: url("../assets/Filters.png");
+  background-size: cover;
+  width: 20%;
+  height: 52vw;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  padding: 2vw;
+}
 
-  .name-filter {
-    display: flex;
-    background-color: red;
-  }
+.name-filter {
+  display: flex;
+}
 
-  .clothes-container {
-    display: flex;
-  }
+.clothes-container {
+  display: flex;
+  margin-bottom: 1vw;
+  margin-left: 1vw;
+}
+
+.option {
+  width: 4vw;
+  font-family: 'Old Standard TT', serif;
+}
+
+.year-container {
+  display: flex;
+  font-family: 'Old Standard TT', serif;
+  margin-left: 1vw;
+}
+
+.year-container div {
+  width: 4vw;
+  margin-bottom: 1vw;
+  font-weight: 600;
+  color: rgb(76, 69, 38);
+}
+
+.colour-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1vw;
+  margin-bottom: 1vw;
+  font-family: 'Old Standard TT', serif;
+  font-weight: 600;
+  color: rgb(76, 69, 38);
+}
+
+.colour-container div {
+  width: 5vw;
+}
+
+.id-filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1vw;
+  margin-bottom: 1vw;
+  font-family: 'Old Standard TT', serif;
+  font-weight: 600;
+  color: rgb(76, 69, 38);
+}
+
+.range-id-filter {
+  display:flex;
+  align-items: center;
+}
+
+.specific-id-filter {
+  width: 17vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.specific-id-filter input{
+  width: 75%;
+  height: 1vw;
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+}
+
+.min-max-range {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 15vw;
+  height: 2vw;
+}
+
+.min-max-range input {
+  width: 4vw;
+  height: 1vw;
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+}
+
+.gender-filter-container {
+  display: flex;
+}

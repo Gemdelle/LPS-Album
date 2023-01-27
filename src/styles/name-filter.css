@@ -5,25 +5,45 @@
 
 .title {
   font-family: 'Pinyon Script', cursive;
-  font-size: 1.5vw;
+  font-size: 1.4vw;
   font-weight: 600;
   text-shadow: 0vw 0.3vw 0.8vw rgb(0, 0, 0);
   color: rgb(87, 79, 43);
-  margin-left: 1vw;
+  margin-left: 0.5vw;
+  margin-bottom: 0;
 }
 
 .filter-name,
 .simple-option,
 .name-number {
-  margin-left: 2vw;
+  margin: 0.5vw 0;
+  font-weight: 600;
+  color: rgb(76, 69, 38);
+}
+
+.filter-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name-input {
+  width: 13vw;
+  height: 1vw;
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+}
+
+.simple-option div,
+.name-number div {
+  width: 4.7vw;
 }
 
 .simple-option {
   display: flex;
-  background-color: red;
+  margin: 0.5vw 0;
 }
 
 .name-number {
   display: flex;
-  background-color: red;
 }

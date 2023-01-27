@@ -1,0 +1,17 @@
+.title {
+  margin-bottom: 0.5vw;
+}
+
+.gifters-container {
+  margin: 1vw 0;
+  font-family: 'Old Standard TT', serif;
+  height: 4vw;
+}
+
+.select-gifters {
+  margin: 0;
+  width: 7vw;
+  font-family: 'Old Standard TT', serif;
+  font-weight: 600;
+  padding: 0.3vw;
+}
