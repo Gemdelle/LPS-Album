@@ -12,8 +12,6 @@ const CataloguePage = ({setLocation, data, setSelectedPetShop, selectedPetShop}:
         <main>
             {
                 data.map((data: any) => {
-
-                    
                     try {
                         const source = require(`../../public/Images/${data.id}.jpg`);
                         return <div className={`catalogue-number ${data.status == "OWNED" ? "owned" : "not-owned"} ${data.id === selectedPetShop.id ? "selected" : ""}`} onClick={() => selectPetShop(data)}>{data.id}</div>

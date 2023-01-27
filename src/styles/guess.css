@@ -42,8 +42,33 @@
     color: rgb(43, 40, 11);
     font-weight: 600;
     text-shadow: 0 0.2vw 0.4vw rgb(255, 255, 255);
+    transition: all 300ms ease-in-out;
 }
 
 #answer-container div:hover {
     cursor: pointer;
+    transform: scale(110%);
+}
+
+.correct-answer{
+    background-color: green;
+}
+
+.cheats{
+    width: 3vw;
+    height: 2vw;
+    position: absolute;
+    left: 30%;
+}
+
+.finish-container {
+    width: 50vw;
+    height: 40vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.finish-container img {
+    width: 50vw;
 }
