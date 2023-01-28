@@ -22,6 +22,25 @@
     display: flex;
 }
 
-.non-dropdown-filters {
-    width: 33%;
+.animal-lists-container {
+    margin-bottom: 1vw;
+    margin-left: 1vw;
+    font-family: 'Old Standard TT', serif;
+    font-weight: 600;
+    color: rgb(58, 58, 34);
+}
+
+.animal-lists-container p {
+    font-size: 1vw;
+    text-shadow: 0 0.4vw 0.4vw rgb(52, 49, 35);
+    font-style: italic;
+}
+
+.subspecies {
+    display: flex;
+    flex-direction: column !important;
+    font-size: 0.8vw;
+    margin-left: 0.4vw;
+    margin-bottom: 0.2vw;
+    font-style: italic;
 }
