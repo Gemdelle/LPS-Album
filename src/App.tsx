@@ -58,20 +58,30 @@ function App() {
   const [selectedPetShop, setSelectedPetShop] = useState({});
 
   const [guessGameProgress, setGuessGameProgress] = useState(0)
+  const [starsAmount, setStarsAmount] = useState(0)
 
   function createCurrentFilter() {
     switch (location) {
       case "/catalogue":
         return <FiltersCatalogue data={catalogueData} defaultData={sortedData} setCatalogueData={setCatalogueData} selectedPetShop={selectedPetShop} />
       case "/guess-game":
-        return <BarGames guessGameProgress={guessGameProgress} />
+        return <BarGames guessGameProgress={guessGameProgress} starsAmount={starsAmount} />
       default:
         return <Filters petShopData={petShopData} setPetShopData={setPetShopData} defaultData={ownedPetShops} />
     }
   }
 
   function incrementGameProgress() {
-    setGuessGameProgress(guessGameProgress + 1);
+    let newProgress = guessGameProgress + 1
+    setGuessGameProgress(newProgress);
+    switch(newProgress) {
+      case 5:
+      case 10:
+      case 16:
+        return setStarsAmount(starsAmount+1);
+      default:
+        return;
+    }
   }
 
   function createHeader() {
@@ -80,7 +90,8 @@ function App() {
   }
 
   function resetGuessGame() {
-    setGuessGameProgress(0)
+    setGuessGameProgress(0);
+    setStarsAmount(0);
   }
 
   return (
@@ -94,7 +105,15 @@ function App() {
             <Routes>
               <Route path='/' element={<LandingPage data={petShopData} setLocation={setLocation} />}></Route>
               <Route path='/catalogue' element={<CataloguePage data={catalogueData} setLocation={setLocation} setSelectedPetShop={setSelectedPetShop} selectedPetShop={selectedPetShop} />}></Route>
-              <Route path='/guess-game' element={<GuessPage setLocation={setLocation} defaultData={ownedPetShops} guessGameProgress={guessGameProgress} incrementGameProgress={incrementGameProgress} replay={resetGuessGame} />}></Route>
+              <Route path='/guess-game' element={
+                <GuessPage
+                  setLocation={setLocation}
+                  defaultData={ownedPetShops}
+                  guessGameProgress={guessGameProgress}
+                  incrementGameProgress={incrementGameProgress}
+                  replay={resetGuessGame}
+                  starsAmount={starsAmount}
+                />}></Route>
             </Routes>
           </BrowserRouter>
         </div>

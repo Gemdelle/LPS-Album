@@ -24,8 +24,8 @@ const GiftersFilter = ({ setPetShopData, defaultData }: any) => {
             <p className="title">Gifters </p>
             <select onChange={selectGifters} className="select-gifters">
                 <option value="">Choose One</option>
-                {gifters.map((gifter) => {
-                    return <option value={gifter.toUpperCase()}>{gifter}</option>
+                {gifters.map((gifter, index) => {
+                    return <option key={index} value={gifter.toUpperCase()}>{gifter}</option>
                 })}
             </select>
         </div>

@@ -4,27 +4,43 @@ import '../styles/guess.css';
 
 const Cheats = ({ toggleCheats }: any) => {
     return (
-        <div className="cheats" onClick={toggleCheats}></div>
+        <div className="cheats" onClick={toggleCheats}>CHEATS</div>
     )
 }
 
-const FinishGame = ({ guessGameProgress, replay, setCurrentGuessIndex }: any) => {
+const FinishGame = ({ guessGameProgress, replay, setCurrentGuessIndex, starsAmount }: any) => {
+    var stars = [];
 
     function resetGame() {
         setCurrentGuessIndex(0);
         replay();
     }
 
+    for (var index = 1; index <= 3; index++) {
+        if (index <= starsAmount) {
+            stars.push(true);
+        } else {
+            stars.push(false)
+        }
+    }
+
     return (
         <div className="finish-container">
-            <span>{guessGameProgress} / 16</span>
-            <img src='https://gifs.eco.br/wp-content/uploads/2021/06/gifs-de-parabens-19.gif' />
-            <div onClick={resetGame}>REPLAY</div>
+            <div className='finish-background'></div>
+            <div className='stars-container'>
+                {stars.map((accomplish, index) => {
+                    return <div key={index} className={accomplish ? "star-accomplish" : "star-missing"}></div>
+                })}
+            </div>
+            <div className='game-progress-container'><span>{guessGameProgress} / 16</span></div>
+            <div className='replay-btn' onClick={resetGame}>
+                <span>Replay</span>
+            </div>
         </div>
     )
 }
 
-const GuessGame = ({ selectedPetshop, answerRight, answerWrong, cheatsEnabled, guessGameProgress }: any) => {
+const GuessGame = ({ selectedPetshop, answerRight, answerWrong, cheatsEnabled, currentGuessIndex }: any) => {
     const answers = selectedPetshop.answers.sort(function () {
         return Math.random() - 0.5;
     });
@@ -42,7 +58,7 @@ const GuessGame = ({ selectedPetshop, answerRight, answerWrong, cheatsEnabled, g
             <div id="guessing-image">
                 <img src={selectedPetshop.image} alt="" />
             </div>
-            <span className='progress-count'>{guessGameProgress} / 16</span>
+            <span className='progress-count'>{currentGuessIndex} / 16</span>
             <div id="answer-container">
                 {answers.map((answer: any, index: any) => {
                     return <div
@@ -57,7 +73,7 @@ const GuessGame = ({ selectedPetshop, answerRight, answerWrong, cheatsEnabled, g
     )
 }
 
-const GuessPage = ({ setLocation, defaultData, incrementGameProgress, guessGameProgress, replay }: any) => {
+const GuessPage = ({ setLocation, defaultData, incrementGameProgress, guessGameProgress, replay, starsAmount }: any) => {
     const namedPetshops = defaultData.filter((petshop: any) => petshop.name !== '');
 
     const currentLocation = useLocation();
@@ -104,13 +120,13 @@ const GuessPage = ({ setLocation, defaultData, incrementGameProgress, guessGameP
         if (currentGuessIndex <= 15) {
             return <GuessGame
                 selectedPetshop={selectedPetshops[currentGuessIndex]}
-                guessGameProgress={guessGameProgress}
+                currentGuessIndex={currentGuessIndex}
                 answerRight={answerRight}
                 answerWrong={answerWrong}
                 cheatsEnabled={cheatsEnabled}
             />
         } else {
-            return <FinishGame guessGameProgress={guessGameProgress} replay={replay} setCurrentGuessIndex={setCurrentGuessIndex} />
+            return <FinishGame guessGameProgress={guessGameProgress} replay={replay} setCurrentGuessIndex={setCurrentGuessIndex} starsAmount={starsAmount} />
         }
     }
 
@@ -124,7 +140,7 @@ const GuessPage = ({ setLocation, defaultData, incrementGameProgress, guessGameP
 
     return (
         <main>
-            <Cheats toggleCheats={toggleCheats} />
+            {/* <Cheats toggleCheats={toggleCheats} /> */}
             {showContent()}
         </main>
     )
