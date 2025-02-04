@@ -17,7 +17,7 @@ main {
 }
 
 .container {
-  background-color: rgb(150, 151, 144);
+  background-color: rgb(95, 95, 77);
   display: flex;
   height: 100%;
 }
@@ -25,7 +25,7 @@ main {
 .router {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
 }
 
 .arrow {

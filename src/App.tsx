@@ -98,7 +98,7 @@ function App() {
     <div className="App">
       {createHeader()}
       <div className='container'>
-        {createCurrentFilter()}
+        {/* {createCurrentFilter()} */}
         <div className='router'>
           <BrowserRouter>
             <Nav data={petShopData} rawData={petshop_data} />

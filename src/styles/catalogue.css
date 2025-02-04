@@ -5,40 +5,97 @@ main {
     padding: 10px;
 }
 
-.catalogue-number {
-    width: 5vw;
-    height: 1.5vw;
-    margin: 0.3vw;
-    text-align: center;
-    cursor: pointer;
+.petshop-img {
+    width: 80%;
+    height: 70%;
+    border: 6px groove #c0c2b3;      
+    margin: 0.3vw 0vw;
+}
+
+.no-image-placeholder {
+    background-color: red;
+}
+
+.pet-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 0.2vw;
-    font-size: 0.8vw;
-    font-family: 'EB Garamond', serif;
-    font-weight: 600;
+    width: 8vw;
+    height: 9.5vw;
+    margin: 1.2vw 0.5vw;
+    position: relative;
+    /* background-color: aquamarine; */
+}
+
+.status {
+    position: absolute;
+    /* background-color: blue; */
+    left: 5%;
+    top: -7%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 1.5vw;
+    width: 1.5vw;
+    z-index: 1;
     transition: all 300ms ease-in-out;
+    filter: opacity(70%) !important;
 }
 
-.owned {
-    background-image: url(/src/assets/ID-background-owned.png);
-    background-size: cover;
+.status:hover {
+    cursor: pointer;
+    scale: 105%;
+}
+
+.unlocked {
+    background-image: url('/public/icons/unlocked.png');
+    filter: saturate(150%) invert(35%) brightness(200%);
+}
+
+.locked {
+    background-image: url('/public/icons/locked.png');
+}
+
+.gender {
+    position: absolute;
+    right: 3%;
+    top: -5%;
     background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 1.5vw;
+    width: 1.5vw;
+    z-index: 1;
 }
 
-.owned:hover {
-    transform: scale(105%);
+.female {
+    background-image: url('/src/assets/Feminin.png');
 }
 
-.not-owned {
-    background-image: url(/src/assets/ID-background-not-owned.png);
-    background-size: cover;
-    background-position: center;
+.male {
+    background-image: url('/src/assets/Masculin.png');
+    height: 1.2vw;
+    width: 1.2vw;
+    right: 4%;
 }
 
-.not-owned:hover {
-    transform: scale(105%);
+.petshop-name,
+.catalogue-number {
+    height: 10%;
+    font-family: 'Old Standard TT', serif;
+    font-size: 0.8vw;
+    color: rgb(254, 255, 240);
+    display: flex;
+    text-align: center;
+}
+
+.petshop-name {
+    letter-spacing: 0.05vw;
+}
+
+.not-owned .petshop-img {
+    filter: grayscale(100%) brightness(60%);
 }
 
 .petshop-info {
