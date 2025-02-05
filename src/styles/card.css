@@ -13,7 +13,7 @@
   height: 30vw;
   margin: 0.8vw;
   transition: all ease 200ms;
-  background-image: url("../assets/Base.png");
+  background-image: url("../assets/name-frame.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   display: flex;
@@ -24,7 +24,7 @@
 }
 
 .cardName {
-  /* background-image: url("../assets/BaseName.png"); */
+  background-image: url("../assets/no-name-frame.png");
 }
 
 .card-body {
