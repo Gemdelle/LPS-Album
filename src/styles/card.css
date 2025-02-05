@@ -1,4 +1,9 @@
 
+@font-face {
+  font-family: 'MedusaGothic';
+  src: url('../assets/font/MedusaGothic.otf') format('opentype');
+}
+
 .cards {
   /* background-color: rgb(150, 151, 144); */
   width: 95%;
@@ -59,10 +64,10 @@
   }
 
 .name {
-  font-family: 'Old Standard TT', serif;
-  font-size: 1vw;
-  font-weight: 400;
-  color: rgb(66, 67, 54);
+  font-family: 'MedusaGothic';
+  font-size: 0.65vw;
+  letter-spacing: 0.15vw;
+  color: rgb(98, 99, 89);
   text-align: center;
 }
 
