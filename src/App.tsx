@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import './styles/landing.css';
 
-import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 
@@ -84,11 +83,6 @@ function App() {
     }
   }
 
-  function createHeader() {
-    if (location == "/guess-game") return
-    return <Header />
-  }
-
   function resetGuessGame() {
     setGuessGameProgress(0);
     setStarsAmount(0);
@@ -96,7 +90,6 @@ function App() {
 
   return (
     <div className="App">
-      {createHeader()}
       <div className='container'>
         {/* {createCurrentFilter()} */}
         <div className='router'>

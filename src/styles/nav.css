@@ -1,8 +1,8 @@
 nav {
     background-image: url("../assets/Nav.png");
-    background-size: cover;
+    background-size: 100% 100%;
     overflow: visible;
-    height: 13vh;
+    height: 17vh;
     width: 100%;
     z-index: 3;
     margin: 0;

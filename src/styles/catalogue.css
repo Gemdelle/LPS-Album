@@ -94,6 +94,10 @@ main {
     letter-spacing: 0.05vw;
 }
 
+.not-owned .petshop-name {
+    color: rgb(0, 0, 0);
+}
+
 .not-owned .petshop-img {
     filter: grayscale(100%) brightness(60%);
 }

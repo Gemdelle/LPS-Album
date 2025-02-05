@@ -27,25 +27,25 @@ const Nav = ({ data, rawData }: any) => {
         return data.gender == "M";
     });
 
-    const totalPorveldam = totalOwned.filter((data: any) => {
-        return data.bloodline == "Porveldam";
-    });
+    // const totalPorveldam = totalOwned.filter((data: any) => {
+    //     return data.bloodline == "Porveldam";
+    // });
 
-    const totalSpadelline = totalOwned.filter((data: any) => {
-        return data.bloodline == "Spadelline";
-    });
+    // const totalSpadelline = totalOwned.filter((data: any) => {
+    //     return data.bloodline == "Spadelline";
+    // });
 
-    const totalZephiroth = totalOwned.filter((data: any) => {
-        return data.bloodline == "Zephiroth";
-    });
+    // const totalZephiroth = totalOwned.filter((data: any) => {
+    //     return data.bloodline == "Zephiroth";
+    // });
 
-    const totalGladasmy = totalOwned.filter((data: any) => {
-        return data.bloodline == "Gladasmy";
-    });
+    // const totalGladasmy = totalOwned.filter((data: any) => {
+    //     return data.bloodline == "Gladasmy";
+    // });
 
-    const totalIllwhyrim = totalOwned.filter((data: any) => {
-        return data.bloodline == "Illwhyrim";
-    });
+    // const totalIllwhyrim = totalOwned.filter((data: any) => {
+    //     return data.bloodline == "Illwhyrim";
+    // });
 
 
 
@@ -87,7 +87,7 @@ const Nav = ({ data, rawData }: any) => {
                         <span>{totalMasculin.length}</span>
                     </div>
                 </div>
-                <div className='bloodlines-container'>
+                {/* <div className='bloodlines-container'>
                     <div className='stat-porveldam'>
                         <div />
                         <span>{totalPorveldam.length}</span>
@@ -108,11 +108,7 @@ const Nav = ({ data, rawData }: any) => {
                         <div />
                         <span>{totalIllwhyrim.length}</span>
                     </div>
-                </div>
-                <div className='stat-filter'>
-                    <div />
-                    <span>{data.length}</span>
-                </div>
+                </div> */}
             </div>
         </nav>
     )
