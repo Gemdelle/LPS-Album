@@ -61,7 +61,6 @@ const Card = ({ data: {
           <span><strong><i>Animal: </i></strong>{animal}</span>
           <span><strong><i>Breed: </i></strong>{breed}</span>
           <span><strong><i>Colour: </i></strong>{colour}</span>
-          <span><strong><i>Clothes: </i></strong>{clothes}</span>
           <span><strong><i>Birthday: </i></strong>{birthday}</span>
           <span><strong><i>Gifter: </i></strong>{gifter}</span>
         </div>
