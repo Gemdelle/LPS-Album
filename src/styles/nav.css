@@ -1,6 +1,7 @@
 nav {
     background-image: url("../assets/Nav.png");
-    background-size: 100% 100%;
+    background-size: 100% 160%;
+    background-position-y: 80%;
     overflow: visible;
     height: 17vh;
     width: 100%;
@@ -10,6 +11,7 @@ nav {
     top: 0;
     display: flex;
     justify-content: space-evenly;
+    padding-top: 0.5vw;
     text-decoration: none;
 }
 
@@ -21,6 +23,7 @@ nav ul {
     justify-content: center;
     font-family: 'Pinyon Script', cursive;
     font-size: 1.5vw;
+    background-color: red;
 }
 
 nav ul li span {
@@ -43,12 +46,12 @@ nav ul li span:hover {
     transform: scale(110%);
 }
 
-.stats-container span {
-    font-size: 13px;
-    font-weight: 600;
-    font-family: 'EB Garamond', serif;
-    color: rgb(70, 70, 70);
-    text-shadow: 0vw 0vw 0.3vw white;
+.stats-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 30%;
+    height: 50%;
 }
 
 .navholder {
@@ -60,19 +63,15 @@ nav ul li span:hover {
     padding: 0;
 }
 
-.stats-container {
-    display: flex;
-    justify-content: space-between;
-    width: 55%;
-    height: 50%;
-}
-
 .owned-container,
 .named-container,
 .gender-container,
 .bloodlines-container {
     display: flex;
-    width: auto;
+    align-items: center;
+    justify-content: center;
+    width: 23%;
+    height: 100%;
 }
 
 .stat-owned,
@@ -90,9 +89,11 @@ nav ul li span:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 2.5vw;
+    width: 50%;
+    height: 100%;
 }
 
+/* STAT IMG */
 .stat-owned div,
 .stat-not-owned div,
 .stat-named div,
@@ -112,8 +113,20 @@ nav ul li span:hover {
     background-size: contain;
     background-position: center;
     width: 100%;
-    height: 2vw;
+    height: 70%;
 }
+
+/* STAT N° */
+.stats-container span {
+    font-size: 0.8vw;
+    font-family: 'EB Garamond', serif;
+    color: rgb(70, 70, 70);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30%;
+}
+
 .stat-owned div {
     background-image: url("../assets/Obtained.png");
 }
@@ -132,14 +145,15 @@ nav ul li span:hover {
 
 .stat-girls div {
     background-image: url("../assets/Feminin.png");
-    width: 1.9vw;
+    width: 70%;
 }
 
 .stat-boys div {
     background-image: url("../assets/Masculin.png");
-    width: 1.4vw;
+    width: 60%;
 }
 
+/* 
 .stat-porveldam div {
     background-image: url("../assets/Porveldam.png");
     width: 2.5vw;
@@ -168,9 +182,4 @@ nav ul li span:hover {
     background-image: url("../assets/Illwhyrim.png");
     width: 2.5vw;
     background-size: 70%;
-}
-
-.stat-filter div {
-    background-image: url("../assets/Filter.png");
-    width: 1.5vw;
-}
+} */
