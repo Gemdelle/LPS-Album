@@ -1,21 +1,21 @@
+.filters-container {
+  z-index: 2;
+  background-image: url("../assets/Filters.png");
+  background-size: cover;
+  width: 20%;
+  height: 40%;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  padding: 2vw;
+}
+
 .filters-title {
   font-family: 'Pinyon Script', cursive;
   font-size: 2.5vw !important;
   font-weight: 600;
   color: rgb(43, 38, 17);
   text-shadow: 0vw 0.3vw 0.8vw rgb(43, 43, 32);
-}
-
-.album-aside {
-  z-index: 2;
-  background-image: url("../assets/Filters.png");
-  background-size: cover;
-  width: 20%;
-  height: 52vw;
-  position: sticky;
-  top: 0;
-  overflow: hidden;
-  padding: 2vw;
 }
 
 .name-filter {

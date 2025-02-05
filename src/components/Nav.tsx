@@ -1,5 +1,6 @@
 import '../styles/nav.css';
 import { NavLink } from 'react-router-dom'; /* Para usar el active cuando se ingresa a una de las páginas. */
+import Filters from '../components/Filters';
 
 const Nav = ({ data, rawData }: any) => {
 
@@ -52,10 +53,13 @@ const Nav = ({ data, rawData }: any) => {
     return (
         <nav>
             <ul className="navholder">
-                <li className='hover-class'><NavLink style={{ textDecoration: 'none' }} to="/" className={({ isActive }) => `${isActive ? "active" : ""}` }><span>Album</span></NavLink></li>
-                <li className='hover-class'><NavLink style={{ textDecoration: 'none' }} to="/catalogue" className={({ isActive }) => `${isActive ? "active" : ""}`}><span>Catalogue</span></NavLink></li>
-                <li className='hover-class'><NavLink style={{ textDecoration: 'none' }} to="/guess-game"><span>Game</span></NavLink></li>
+                <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/" className={({ isActive }) => `${isActive ? "active" : ""}` }><span>Album</span></NavLink></li>
+                <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/catalogue" className={({ isActive }) => `${isActive ? "active" : ""}`}><span>Catalogue</span></NavLink></li>
+                <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/guess-game"><span>Game</span></NavLink></li>
             </ul>
+
+            <div className='filter-container'></div>
+
             <div className='stats-container'>
                 <div className='owned-container'>
                     <div className='stat-owned'>

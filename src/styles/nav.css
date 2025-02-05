@@ -3,64 +3,64 @@ nav {
     background-size: 100% 160%;
     background-position-y: 80%;
     overflow: visible;
-    height: 17vh;
+    height: 15vh;
     width: 100%;
     z-index: 3;
-    margin: 0;
     position: sticky;
-    top: 0;
     display: flex;
-    justify-content: space-evenly;
-    padding-top: 0.5vw;
-    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.8vw;
 }
 
-nav ul {
-    list-style: none;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Pinyon Script', cursive;
-    font-size: 1.5vw;
+/* START FILTERS */
+.filter-container {
+    width: 45%;
+    height: 60%;
+    margin: 0vw 2.5vw;
     background-color: red;
 }
 
+/* END FILTERS */
+
+/* START LINKS */
+nav ul {
+    height: 60%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Old Standard TT', serif;
+    font-size: 1.3vw;
+    list-style: none;
+    padding: 0;
+    /* background-color: violet; */
+}
+
 nav ul li span {
-    text-shadow: 0vw 0.3vw 0.8vw white;
-    color: rgb(98, 94, 76);
+    color: rgb(124, 120, 101);
+}
+
+.link {
     transition: all 300ms ease-in-out;
+    font-style: italic;
+    font-weight: bold;
 }
 
-.hover-class {
-    transition: all 300ms ease-in-out;
-    font-weight: 600;
+.link:hover {
+    transform: scale(105%);
+    color: rgb(61, 59, 51);
 }
+/* END LINKS */
 
-nav ul li span:hover {
-    color: rgb(139, 134, 115);
-}
-
-.hover-class:hover {
-    text-shadow: 0vw 0.3vw 0.8vw white;
-    transform: scale(110%);
-}
-
+/* START STATS */
 .stats-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 30%;
-    height: 50%;
-}
-
-.navholder {
-    width: 30%;
-    display: flex;
-    margin: 0;
-    align-content: center;
-    gap: 20%;
-    padding: 0;
+    width: 23%;
+    height: 60%;
+    /* background-color: aquamarine; */
 }
 
 .owned-container,
@@ -89,6 +89,7 @@ nav ul li span:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     width: 50%;
     height: 100%;
 }
@@ -113,18 +114,20 @@ nav ul li span:hover {
     background-size: contain;
     background-position: center;
     width: 100%;
-    height: 70%;
+    height: 60%;
 }
 
-/* STAT N° */
+/* stat N° */
 .stats-container span {
-    font-size: 0.8vw;
+    font-size: 1vw;
     font-family: 'EB Garamond', serif;
     color: rgb(70, 70, 70);
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 30%;
+    height: 35%;
+    font-weight: bold;
+    letter-spacing: 0.05vw;
 }
 
 .stat-owned div {
@@ -183,3 +186,4 @@ nav ul li span:hover {
     width: 2.5vw;
     background-size: 70%;
 } */
+/* END STAT */
