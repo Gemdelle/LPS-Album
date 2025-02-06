@@ -1,36 +1,42 @@
 import '../styles/catalogue.css';
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
-const CataloguePage = ({ setLocation, data, updateGoogleSheet }: any) => {
+const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: any) => {
     setLocation('/catalogue');
 
-    // Estados para la edición
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editableName, setEditableName] = useState<string>("");
+    const [catalogueData, setCatalogueData] = useState(data);
 
-    // Función para manejar doble clic y activar edición
+    useEffect(() => {
+        const syncData = async () => {
+            const updatedData = await refreshData();
+            setCatalogueData(updatedData);
+        };
+        syncData();
+    }, [data]);
+
     const handleNameClick = (petshop: any) => {
         setEditingId(petshop.id);
-        setEditableName(petshop.name || ""); // Set initial name for editing
+        setEditableName(petshop.name || "");
     };
 
-    // Función para manejar cambios en el input
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEditableName(e.target.value);
     };
 
-    // Función para manejar el guardado al presionar Enter
     const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>, petshop: any) => {
         if (e.key === 'Enter') {
             try {
-                // Buscar el índice del petshop en la lista para obtener la fila correcta
-                const rowIndex = data.findIndex((p: any) => p.id === petshop.id);
+                const rowIndex = catalogueData.findIndex((p: any) => p.id === petshop.id);
                 if (rowIndex === -1) return alert("Error: ID no encontrado");
 
-                await updateGoogleSheet(rowIndex + 1, 2, editableName); // Fila +1 porque las filas en Sheets comienzan en 1
+                await updateGoogleSheet(rowIndex + 2, 2, editableName);
+                petshop.name = editableName;
+                setEditingId(null);
 
-                petshop.name = editableName; // Actualizar nombre localmente
-                setEditingId(null); // Salir del modo edición
+                const updatedData = await refreshData();
+                setCatalogueData(updatedData);
             } catch (error) {
                 alert("Error al actualizar el nombre. Inténtalo de nuevo.");
                 console.error(error);
@@ -38,9 +44,45 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet }: any) => {
         }
     };
 
+    const toggleStatus = async (petshop: any) => {
+        try {
+            const newStatus = petshop.status === "OWNED" ? "NOT_OWNED" : "OWNED";
+            const rowIndex = catalogueData.findIndex((p: any) => p.id === petshop.id);
+            if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+            await updateGoogleSheet(rowIndex + 2, 13, newStatus);
+            debugger
+            petshop.status = newStatus;
+            
+            const updatedData = await refreshData();
+            setCatalogueData(updatedData);
+        } catch (error) {
+            alert("Error al actualizar el estado. Inténtalo de nuevo.");
+            console.error(error);
+        }
+    };
+
+    const toggleGender = async (petshop: any) => {
+        try {
+            const newGender = petshop.gender === "M" ? "F" : "M";
+            const rowIndex = catalogueData.findIndex((p: any) => p.id === petshop.id);
+            if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+            await updateGoogleSheet(rowIndex + 2, 3, newGender);
+            debugger
+            petshop.gender = newGender;
+            
+            const updatedData = await refreshData();
+            setCatalogueData(updatedData);
+        } catch (error) {
+            alert("Error al actualizar el género. Inténtalo de nuevo.");
+            console.error(error);
+        }
+    };
+
     return (
         <main>
-            {data.map((petshop: any) => {
+            {catalogueData.map((petshop: any) => {
                 let imageSrc;
                 try {
                     imageSrc = require(`../../public/Images/${petshop.id}.jpg`);
@@ -49,22 +91,15 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet }: any) => {
                 }
 
                 return (
-                    <div
-                        key={petshop.id}
-                        className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}
-                    >
-                        <div className={`status ${petshop.status === 'OWNED' ? 'unlocked' : 'locked'}`}></div>
-                        <div className="catalogue-number">
-                            <i>- {petshop.id} -</i>
-                        </div>
-                        <div className={`gender ${petshop.gender === 'M' ? 'male' : 'female'}`}></div>
+                    <div key={petshop.id} className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}>
+                        <div className={`status ${petshop.status === 'OWNED' ? 'unlocked' : 'locked'}`} onClick={() => toggleStatus(petshop)}></div>
+                        <div className="catalogue-number"><i>- {petshop.id} -</i></div>
+                        <div className={`gender ${petshop.gender === 'M' ? 'male' : 'female'}`} onClick={() => toggleGender(petshop)}></div>
                         {imageSrc ? (
                             <img src={imageSrc} alt={`Petshop ${petshop.id}`} className="petshop-img" />
                         ) : (
                             <div className="no-image-placeholder">No Image</div>
                         )}
-
-                        {/* Editable Name Field */}
                         <div className="petshop-name">
                             {editingId === petshop.id ? (
                                 <input
@@ -72,13 +107,11 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet }: any) => {
                                     value={editableName}
                                     onChange={handleNameChange}
                                     onKeyDown={(e) => handleKeyPress(e, petshop)}
-                                    onBlur={() => setEditingId(null)} // Exit edit mode on blur
+                                    onBlur={() => setEditingId(null)}
                                     autoFocus
                                 />
                             ) : (
-                                <span onDoubleClick={() => handleNameClick(petshop)}>
-                                    {petshop.name || '?'}
-                                </span>
+                                <span onDoubleClick={() => handleNameClick(petshop)}>{petshop.name || '?'}</span>
                             )}
                         </div>
                     </div>

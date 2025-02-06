@@ -11,7 +11,7 @@ import GuessPage from './pages/GuessPage';
 import BarGames from './components/BarGames';
 
 // Configuración de Google Sheets
-const SPREADSHEET_ID = '1VOkgZollnIT5-sihkeW9vUx7FKMaYPFGFukpa8ErY7Q';
+const SPREADSHEET_ID = '1VMph1DH_c0vy-gGib8CAgHWm03G7j5YVceESn3z1dFc';
 const SHEET_NAME = "Hoja1";
 
 
@@ -33,7 +33,8 @@ function App() {
       const rows = text.trim().split("\n").map(row => row.split(",").map(cell => cell.replace(/"/g, "").trim()));
 
       // Define the expected headers
-      const expectedHeaders = ["id", "name", "gender", "animal", "breed", "rarity", "colour", "type", "vip", "birthday", "gifter", "bloodline", "status"];
+      const expectedHeaders = ["id", "name", "gender", "animal", "breed", "rarity", "colour", "type", "vip", "birthday", "gifter", "bloodline", "status", 
+  "generation", "season", "pre-evolution", "post-evolution", "wishlist-link"];
 
       // Find actual headers in the CSV and map them to the expected ones
       const actualHeaders = rows[0];
@@ -69,7 +70,7 @@ function App() {
   //
   const updateGoogleSheet = async (row:any, column:any, value:any) => {
     try {
-      const url = "https://script.google.com/macros/s/AKfycbxQ1MnqEnX-FHBn3Eu-Z-y5sA6Rfpez3qJ9CKNV7SSyZyf4jaTBdqEoSP_ECZrbJAk_FQ/exec"; // Asegúrate de usar la URL correcta
+      const url = "https://script.google.com/macros/s/AKfycbxQ1MnqEnX-FHBn3Eu-Z-y5sA6Rfpez3qJ9CKNV7SSyZyf4jaTBdqEoSP_ECZrbJAk_FQ/exec"; 
       console.log(`Enviando datos a: ${url}`);
 
       const response = await fetch(url, {
@@ -87,6 +88,7 @@ function App() {
       console.log("Respuesta del servidor:", data);
       alert("Datos actualizados correctamente.");
     } catch (error) {
+      debugger
       console.error("Error en updateGoogleSheet:", error);
       alert("Error al actualizar la hoja de cálculo. Revisa la consola.");
     }
@@ -157,6 +159,7 @@ function App() {
                           setSelectedPetShop={setSelectedPetShop}
                           selectedPetShop={selectedPetShop}
                           updateGoogleSheet={updateGoogleSheet}
+                          refreshData={fetchDataFromGoogleSheets}
                       />
                     }
                 />

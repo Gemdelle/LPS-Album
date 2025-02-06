@@ -57,6 +57,11 @@ main {
     background-image: url('/public/icons/locked.png');
 }
 
+.gender:hover {
+    cursor: pointer;
+    scale: 105%;
+}
+
 .gender {
     position: absolute;
     right: 3%;
