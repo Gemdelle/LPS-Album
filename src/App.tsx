@@ -34,7 +34,7 @@ function App() {
 
       // Define the expected headers
       const expectedHeaders = ["id", "name", "gender", "animal", "breed", "rarity", "colour", "type", "vip", "birthday", "gifter", "bloodline", "status", 
-  "generation", "season", "pre-evolution", "post-evolution", "wishlist-link"];
+  "generation", "season", "pre-evolution", "post-evolution"];
 
       // Find actual headers in the CSV and map them to the expected ones
       const actualHeaders = rows[0];
