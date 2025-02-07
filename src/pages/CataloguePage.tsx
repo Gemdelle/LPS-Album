@@ -1,5 +1,6 @@
 import '../styles/catalogue.css';
 import { useState, useEffect } from "react";
+import Card from "../components/Card";
 
 const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: any) => {
     setLocation('/catalogue');
@@ -7,6 +8,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editableName, setEditableName] = useState<string>("");
     const [catalogueData, setCatalogueData] = useState(data);
+    const [useCardView, setUseCardView] = useState(false);
 
     useEffect(() => {
         const syncData = async () => {
@@ -82,6 +84,9 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
 
     return (
         <main>
+            <button onClick={() => setUseCardView(!useCardView)}>
+                {useCardView ? "Mostrar Catalogo" : "Mostrar con Cards"}
+            </button>
             {catalogueData.map((petshop: any) => {
                 let imageSrc;
                 try {
@@ -90,13 +95,17 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                     imageSrc = null;
                 }
 
-                return (
-                    <div key={petshop.id} className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}>
-                        <div className={`status ${petshop.status === 'OWNED' ? 'unlocked' : 'locked'}`} onClick={() => toggleStatus(petshop)}></div>
+                return useCardView ? (
+                    <Card key={petshop.id} data={petshop} />
+                ) : (
+                    <div key={petshop.id}
+                         className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}>
+                        <div className={`status ${petshop.status === 'OWNED' ? 'unlocked' : 'locked'}`}
+                             onClick={() => toggleStatus(petshop)}></div>
                         <div className="catalogue-number"><i>- {petshop.id} -</i></div>
                         <div className={`gender ${petshop.gender === 'M' ? 'male' : 'female'}`} onClick={() => toggleGender(petshop)}></div>
                         {imageSrc ? (
-                            <img src={imageSrc} alt={`Petshop ${petshop.id}`} className="petshop-img" />
+                            <img src={imageSrc} alt={`Petshop ${petshop.id}`} className="petshop-img"/>
                         ) : (
                             <div className="no-image-placeholder">No Image</div>
                         )}
