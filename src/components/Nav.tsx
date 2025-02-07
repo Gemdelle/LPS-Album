@@ -1,8 +1,16 @@
 import '../styles/nav.css';
 import { NavLink } from 'react-router-dom'; /* Para usar el active cuando se ingresa a una de las páginas. */
 import Filters from '../components/Filters';
+import NameFilter from "./NameFilter";
+import GiftersFilter from "./GiftersFilter";
+import YearsFilter from "./YearsFilter";
+import ColoursFilter from "./ColoursFilter";
+import IdFilter from "./IdFilter";
+import GenderFilter from "./GenderFilter";
+import TypesFilter from "./TypesFilter";
+import AnimalFilter from "./AnimalFilter";
 
-const Nav = ({ data, rawData }: any) => {
+const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData }: any) => {
 
     const totalOwned = rawData.filter((data: any) => {
         return data.status == "OWNED";
@@ -58,7 +66,16 @@ const Nav = ({ data, rawData }: any) => {
                 <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/guess-game"><span>Game</span></NavLink></li>
             </ul>
 
-            <div className='filter-container'></div>
+            <div className='filter-container'>
+                <NameFilter setPetShopData={setPetShopData} defaultData={defaultData} className="name-filter"/>
+                <GiftersFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
+                <YearsFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
+                <ColoursFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
+                <IdFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
+                <GenderFilter setPetShopData={setPetShopData} defaultData={defaultData} />
+                <TypesFilter setPetShopData={setPetShopData} defaultData={defaultData} />
+                <AnimalFilter petShopData={petShopData} setPetShopData={setPetShopData} defaultData={defaultData} />
+            </div>
 
             <div className='stats-container'>
                 <div className='owned-container'>
