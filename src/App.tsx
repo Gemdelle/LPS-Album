@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './styles/landing.css';
+import './styles/names.css';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import LandingPage from './pages/LandingPage';
+import NamesPage from './pages/NamesPage';
 import CataloguePage from './pages/CataloguePage';
-import Filters from './components/Filters';
-import FiltersCatalogue from './components/FiltersCatalogue';
 import GuessPage from './pages/GuessPage';
-import BarGames from './components/BarGames';
 
 // Configuración de Google Sheets
 const SPREADSHEET_ID = '1VMph1DH_c0vy-gGib8CAgHWm03G7j5YVceESn3z1dFc';
@@ -133,11 +130,11 @@ function App() {
                   defaultData={catalogueData}
                   petShopData={petShopData}
                   setPetShopData={setPetShopData}
+                  setCatalogueData={setCatalogueData}
               />
               <Routes>
-                <Route path="/" element={<LandingPage data={petShopData} setLocation={setLocation} />} />
                 <Route
-                    path="/catalogue"
+                    path="/"
                     element={
                       <CataloguePage
                           data={catalogueData}
@@ -162,6 +159,16 @@ function App() {
                       />
                     }
                 />
+              <Route
+                  path="/names"
+                  element={
+                  <NamesPage
+                      data={petShopData}
+                      setLocation={setLocation}
+                      setSelectedPetShop={setSelectedPetShop}
+                      selectedPetShop={selectedPetShop}
+                  />
+              } />
               </Routes>
             </BrowserRouter>
           </div>
