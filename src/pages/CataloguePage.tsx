@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Card from "../components/Card";
 
 const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: any) => {
-    setLocation('/catalogue');
+    setLocation('/');
 
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editableName, setEditableName] = useState<string>("");

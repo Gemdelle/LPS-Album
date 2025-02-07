@@ -62,8 +62,8 @@ const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData, setCatal
     return (
         <nav>
             <ul className="navholder">
-                <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/" className={({ isActive }) => `${isActive ? "active" : ""}` }><span>Album</span></NavLink></li>
-                <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/catalogue" className={({ isActive }) => `${isActive ? "active" : ""}`}><span>Catalogue</span></NavLink></li>
+                <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/" className={({ isActive }) => `${isActive ? "active" : ""}` }><span>Catalogue</span></NavLink></li>
+                <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/names" className={({ isActive }) => `${isActive ? "active" : ""}`}><span>Names</span></NavLink></li>
                 <li className='link'><NavLink style={{ textDecoration: 'none' }} to="/guess-game"><span>Game</span></NavLink></li>
             </ul>
 
