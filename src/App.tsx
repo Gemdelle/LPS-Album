@@ -108,25 +108,6 @@ function App() {
     loadData();
   }, []);
 
-  // 🔹 Función para generar filtros según la vista
-  function createCurrentFilter() {
-    switch (location) {
-      case "/catalogue":
-        return (
-            <FiltersCatalogue
-                data={catalogueData}
-                defaultData={catalogueData}
-                setCatalogueData={setCatalogueData}
-                selectedPetShop={selectedPetShop}
-            />
-        );
-      case "/guess-game":
-        return <BarGames guessGameProgress={guessGameProgress} starsAmount={starsAmount} />;
-      default:
-        return <Filters petShopData={petShopData} setPetShopData={setPetShopData} defaultData={petShopData} />;
-    }
-  }
-
   // 🔹 Función para incrementar progreso del juego
   function incrementGameProgress() {
     let newProgress = guessGameProgress + 1;
@@ -144,10 +125,15 @@ function App() {
   return (
       <div className="App">
         <div className="container">
-          {createCurrentFilter()}
           <div className="router">
             <BrowserRouter>
-              <Nav data={petShopData} rawData={catalogueData} />
+              <Nav
+                  data={petShopData}
+                  rawData={catalogueData}
+                  defaultData={catalogueData}
+                  petShopData={petShopData}
+                  setPetShopData={setPetShopData}
+              />
               <Routes>
                 <Route path="/" element={<LandingPage data={petShopData} setLocation={setLocation} />} />
                 <Route
