@@ -144,7 +144,7 @@ function App() {
   return (
       <div className="App">
         <div className="container">
-          {/* {createCurrentFilter()} */}
+          {createCurrentFilter()}
           <div className="router">
             <BrowserRouter>
               <Nav data={petShopData} rawData={catalogueData} />
