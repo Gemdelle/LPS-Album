@@ -133,6 +133,7 @@ function App() {
                   defaultData={catalogueData}
                   petShopData={petShopData}
                   setPetShopData={setPetShopData}
+                  setCatalogueData={setCatalogueData}
               />
               <Routes>
                 <Route path="/" element={<LandingPage data={petShopData} setLocation={setLocation} />} />

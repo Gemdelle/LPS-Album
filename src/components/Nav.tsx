@@ -9,8 +9,9 @@ import IdFilter from "./IdFilter";
 import GenderFilter from "./GenderFilter";
 import TypesFilter from "./TypesFilter";
 import AnimalFilter from "./AnimalFilter";
+import OwnedFilter from "./OwnedFilter";
 
-const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData }: any) => {
+const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData, setCatalogueData }: any) => {
 
     const totalOwned = rawData.filter((data: any) => {
         return data.status == "OWNED";
@@ -68,6 +69,7 @@ const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData }: any) =
 
             <div className='filter-container'>
                 <NameFilter setPetShopData={setPetShopData} defaultData={defaultData} className="name-filter"/>
+                <OwnedFilter setCatalogueData={setCatalogueData} defaultData={defaultData} />
                 <GiftersFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
                 <YearsFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
                 <ColoursFilter setPetShopData={setPetShopData} defaultData={defaultData}/>
