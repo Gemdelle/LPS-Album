@@ -11,7 +11,7 @@ interface IPetshopData{
     gender: string
     animal: string
     breed: string
-    rarity: number
+    liked: boolean
     colour: string
     type: string
     bloodline: string
@@ -26,7 +26,7 @@ const CardAsRow = ({ data: {
     gender,
     animal,
     breed,
-    rarity,
+    liked,
     colour,
     type,
     bloodline,
@@ -76,7 +76,7 @@ const CardAsRow = ({ data: {
                         {[1, 2, 3].map((number, index) => {
                             return <div
                                 key={index}
-                                className={number <= rarity ? `rarity-active rarity-${index}` : `rarity-inactive rarity-${index}`}
+                                className={liked ? `rarity-active rarity-${index}` : `rarity-inactive rarity-${index}`}
                             ></div>
                         })}
                     </div>

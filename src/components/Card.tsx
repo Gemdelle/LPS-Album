@@ -2,7 +2,11 @@ import "../styles/card.css";
 import default_image from "../assets/default_image.jpg";
 
 interface ICardData {
-  data: IPetshopData
+  data: IPetshopData,
+  updateGoogleSheet: (row: number, column: number, value: any) => Promise<void>;
+  refreshData: () => Promise<any>;
+  catalogueData: any;
+  setCatalogueData: any;
 }
 
 interface IPetshopData {
@@ -11,7 +15,7 @@ interface IPetshopData {
   gender: string
   animal: string
   breed: string
-  rarity: number
+  liked: string
   colour: string
   type: string
   bloodline: string
@@ -26,17 +30,34 @@ const Card = ({ data: {
   gender,
   animal,
   breed,
-  rarity,
+  liked,
   colour,
   type,
   bloodline,
   birthday,
   clothes,
   gifter
-} }: ICardData) => {
+}, updateGoogleSheet, refreshData, catalogueData, setCatalogueData }: ICardData) => {
 
   const imageId = String(id).split(" - ")[0];
 
+  const toggleLiked = async () => {
+    try {
+      const newLiked = liked === "TRUE" ? "FALSE" : "TRUE";
+      const rowIndex = catalogueData.findIndex((p: any) => p.id === id);
+      if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+      await updateGoogleSheet(rowIndex + 2, 6, newLiked); // Columna 6 (liked)
+      liked = newLiked;
+
+      const updatedData = await refreshData();
+      setCatalogueData(updatedData);
+    } catch (error) {
+      alert("Error al actualizar el estado de liked. Inténtalo de nuevo.");
+      console.error(error);
+    }
+  };
+  debugger
   return (
     <div
       className={name ? "card" : "cardName"}
@@ -65,13 +86,10 @@ const Card = ({ data: {
           <span><strong><i>Gifter: </i></strong>{gifter}</span>
         </div>
 
-        <div className="rarity-container">
-          {[1, 2, 3].map((number, index) => {
-            return <div
-              key={index}
-              className={number <= rarity ? `rarity-active rarity-${index}` : `rarity-inactive rarity-${index}`}
-            ></div>
-          })}
+        <div className="like-container" onClick={() => toggleLiked()}>
+          <div
+              className={"like " + liked == "TRUE" ? `liked-pet rarity-2` : `not-liked-pet rarity-2`}
+          ></div>
         </div>
 
       </div>

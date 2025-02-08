@@ -102,7 +102,14 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                 }
 
                 return useCardView ? (
-                    <Card key={petshop.id} data={petshop}/>
+                    <Card
+                        key={petshop.id}
+                        data={petshop}
+                        updateGoogleSheet={updateGoogleSheet}
+                        refreshData={refreshData}
+                        catalogueData={catalogueData}
+                        setCatalogueData={setCatalogueData}
+                    />
                 ) : (
                     <div key={petshop.id}
                          className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}>

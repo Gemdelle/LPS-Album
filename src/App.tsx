@@ -30,7 +30,7 @@ function App() {
       const rows = text.trim().split("\n").map(row => row.split(",").map(cell => cell.replace(/"/g, "").trim()));
 
       // Define the expected headers
-      const expectedHeaders = ["id", "name", "gender", "animal", "breed", "rarity", "colour", "type", "vip", "birthday", "gifter", "bloodline", "status", 
+      const expectedHeaders = ["id", "name", "gender", "animal", "breed", "liked", "colour", "type", "vip", "birthday", "gifter", "bloodline", "status",
   "generation", "season", "pre-evolution", "post-evolution"];
 
       // Find actual headers in the CSV and map them to the expected ones
