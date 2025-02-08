@@ -84,9 +84,12 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
 
     return (
         <main>
-            <button onClick={() => setUseCardView(!useCardView)}>
-                {useCardView ? "Mostrar Catalogo" : "Mostrar con Cards"}
-            </button>
+            <div className='view-container'>
+                <button className='view-button' onClick={() => setUseCardView(!useCardView)}>
+                    {useCardView ? "Cards" : "Catalogue"}
+                </button>
+            </div>
+            
             {catalogueData.map((petshop: any) => {
                 let imageSrc;
                 try {

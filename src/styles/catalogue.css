@@ -3,6 +3,18 @@ main {
     justify-content: center;
     flex-wrap: wrap;
     padding: 10px;
+    position: relative;
+}
+
+.view-container {
+    position: fixed;
+    z-index: 99;
+    right: 3.5vw;
+    top: 10vw;
+}
+
+.view-button {
+    position: absolute;
 }
 
 .petshop-img {
