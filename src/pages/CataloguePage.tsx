@@ -99,14 +99,15 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                 }
 
                 return useCardView ? (
-                    <Card key={petshop.id} data={petshop} />
+                    <Card key={petshop.id} data={petshop}/>
                 ) : (
                     <div key={petshop.id}
                          className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}>
                         <div className={`status ${petshop.status === 'OWNED' ? 'unlocked' : 'locked'}`}
                              onClick={() => toggleStatus(petshop)}></div>
                         <div className="catalogue-number"><i>- {petshop.id} -</i></div>
-                        <div className={`gender ${petshop.gender === 'M' ? 'male' : 'female'}`} onClick={() => toggleGender(petshop)}></div>
+                        <div className={`gender ${petshop.gender === 'M' ? 'male' : 'female'}`}
+                             onClick={() => toggleGender(petshop)}></div>
                         {imageSrc ? (
                             <img src={imageSrc} alt={`Petshop ${petshop.id}`} className="petshop-img"/>
                         ) : (
@@ -130,7 +131,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                 );
             })}
         </main>
-    );
+);
 };
 
 export default CataloguePage;

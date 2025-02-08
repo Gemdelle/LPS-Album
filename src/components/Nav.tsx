@@ -1,6 +1,5 @@
 import '../styles/nav.css';
 import { NavLink } from 'react-router-dom'; /* Para usar el active cuando se ingresa a una de las páginas. */
-import Filters from '../components/Filters';
 import NameFilter from "./NameFilter";
 import GiftersFilter from "./GiftersFilter";
 import YearsFilter from "./YearsFilter";

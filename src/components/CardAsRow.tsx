@@ -39,7 +39,7 @@ const CardAsRow = ({ data: {
 
     return (
         <div
-            className={name ? "card" : "cardName"}
+            className={"card-as-row " + name ? "card" : "cardName"}
         >
             <div className="card-body">
                 <div className="image-container">
