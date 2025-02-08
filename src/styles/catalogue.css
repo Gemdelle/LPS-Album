@@ -2,19 +2,33 @@ main {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 10px;
+    padding-left: 3vw;
     position: relative;
 }
 
 .view-container {
+    width: 5vw;
+    height: 9vw;
     position: fixed;
     z-index: 99;
-    right: 3.5vw;
+    left: 0vw;
     top: 10vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-image: url(../assets/catalogue-card-view.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    /* background-color: red; */
 }
 
 .view-button {
     position: absolute;
+    background-color: transparent;
+    border: none;
+    writing-mode:vertical-rl;
+    margin-left: 0.6vw;
 }
 
 .petshop-img {
