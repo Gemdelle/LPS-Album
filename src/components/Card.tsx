@@ -88,7 +88,7 @@ const Card = ({ data: {
 
         <div className="like-container" onClick={() => toggleLiked()}>
           <div
-              className={"like " + liked == "TRUE" ? `liked-pet rarity-2` : `not-liked-pet rarity-2`}
+              className={liked === "TRUE" ? `liked-pet` : `not-liked-pet`}
           ></div>
         </div>
 
