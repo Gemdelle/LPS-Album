@@ -6,31 +6,6 @@ main {
     position: relative;
 }
 
-.view-container {
-    width: 5vw;
-    height: 9vw;
-    position: fixed;
-    z-index: 99;
-    left: 0vw;
-    top: 10vw;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-image: url(../assets/catalogue-card-view.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: left;
-    /* background-color: red; */
-}
-
-.view-button {
-    position: absolute;
-    background-color: transparent;
-    border: none;
-    writing-mode:vertical-rl;
-    margin-left: 0.6vw;
-}
-
 .petshop-img {
     width: 80%;
     height: 70%;
@@ -109,6 +84,43 @@ main {
     height: 1.2vw;
     width: 1.2vw;
     right: 4%;
+}
+
+.view-container {
+    width: 4vw;
+    height: 21vw;
+    position: fixed;
+    z-index: 99;
+    left: 0vw;
+    top: 10vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.view-button {
+    background-color: transparent;
+    border: none;
+    height: 46%;
+    width: 100%;
+    background-image: url(../assets/catalogue-card-view.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-right: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-title {
+    transform: rotate(-90deg);
+    color: rgb(124, 120, 101);
+    font-family: 'Old Standard TT', serif;
+    font-size: 1vw;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 0.08vw;
 }
 
 .petshop-name,
