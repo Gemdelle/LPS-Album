@@ -161,6 +161,20 @@
   background-repeat: no-repeat;
 }
 
+.base-pet {
+  position: absolute;
+  width: 2.2vw;
+  height: 2.2vw;
+  background-image: url("/public/icons/base-pet-symbol.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  right: 20%;
+  top: 12%;
+  z-index: 9;
+  rotate: 15deg;
+}
+
 
 .rarity-1 {
   margin-top: 1vw;

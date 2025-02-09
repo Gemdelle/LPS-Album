@@ -85,6 +85,7 @@ const Card = ({ data: {
           <span><strong><i>Birthday: </i></strong>{birthday}</span>
           <span><strong><i>Gifter: </i></strong>{gifter}</span>
         </div>
+        <div className="base-pet"></div>
 
         <div className="like-container" onClick={() => toggleLiked()}>
           <div
