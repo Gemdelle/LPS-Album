@@ -24,6 +24,9 @@ interface IPetshopData {
   gifter: string
   base: string
   favourite: string
+  vip: string
+  studied: string
+  status: string
 }
 
 const Card = ({ data: {
@@ -40,7 +43,10 @@ const Card = ({ data: {
   clothes,
   gifter,
   base,
-  favourite
+  favourite,
+  vip,
+  studied,
+  status
 }, updateGoogleSheet, refreshData, catalogueData, setCatalogueData }: ICardData) => {
 
   const imageId = String(id).split(" - ")[0];
@@ -61,10 +67,43 @@ const Card = ({ data: {
       console.error(error);
     }
   };
+
+  const toggleVip = async () => {
+    try {
+      const newVip = Number(vip) + 1 > 2 ? "0" : `${Number(vip) + 1}`;
+      const rowIndex = catalogueData.findIndex((p: any) => p.id === id);
+      if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+      await updateGoogleSheet(rowIndex + 2, 20, newVip); // Columna 20 (vip)
+      vip = newVip;
+
+      const updatedData = await refreshData();
+      setCatalogueData(updatedData);
+    } catch (error) {
+      alert("Error al actualizar el estado de vip. Inténtalo de nuevo.");
+      console.error(error);
+    }
+  };
+
+  const toggleStudied = async () => {
+    try {
+      const newStudied = studied === "true" ? "FALSE" : "TRUE";
+      const rowIndex = catalogueData.findIndex((p: any) => p.id === id);
+      if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+      await updateGoogleSheet(rowIndex + 2, 19, newStudied); // Columna 19 (studied)
+      studied = newStudied;
+
+      const updatedData = await refreshData();
+      setCatalogueData(updatedData);
+    } catch (error) {
+      alert("Error al actualizar el estado de studied. Inténtalo de nuevo.");
+      console.error(error);
+    }
+  };
+
   return (
-    <div
-      className={name ? "card" : "cardName"}
-    >
+    <div className={`${name ? "card" : "cardName"} ${status === "OWNED" ? "owned" : "not-owned"}`}>
       <div className="card-body">
 
         <div className="id-container">
@@ -89,11 +128,14 @@ const Card = ({ data: {
           <span><strong><i>Gifter: </i></strong>{gifter}</span>
         </div>
         <div className={base === "true" ? "base-pet" : ""}></div>
-
+        <div className="studied-container" onClick={() => toggleStudied()}>
+          <div className={studied === "true" ? `studied-pet` : `not-studied-pet`}></div>
+        </div>
         <div className="like-container" onClick={() => toggleFavourite()}>
-          <div
-              className={favourite === "true" ? `liked-pet` : `not-liked-pet`}
-          ></div>
+          <div className={favourite === "true" ? `liked-pet` : `not-liked-pet`}></div>
+        </div>
+        <div className="vip-container" onClick={() => toggleVip()}>
+          <div className={`vip-${vip}`}></div>
         </div>
 
       </div>
