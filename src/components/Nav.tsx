@@ -9,8 +9,11 @@ import GenderFilter from "./GenderFilter";
 import TypesFilter from "./TypesFilter";
 import AnimalFilter from "./AnimalFilter";
 import OwnedFilter from "./OwnedFilter";
+import DefaultLogin from "./DefaultLogin";
+import {useState} from "react";
 
 const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData, setCatalogueData }: any) => {
+    const [isModalOpen, setModalOpen] = useState(false);
 
     const totalOwned = rawData.filter((data: any) => {
         return data.status == "OWNED";
@@ -108,6 +111,12 @@ const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData, setCatal
                         <div />
                         <span>{totalMasculin.length}</span>
                     </div>
+                </div>
+                <div>
+                    <button onClick={() => setModalOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded">
+                        Iniciar Sesión
+                    </button>
+                    <DefaultLogin isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
                 </div>
                 {/* <div className='bloodlines-container'>
                     <div className='stat-porveldam'>
