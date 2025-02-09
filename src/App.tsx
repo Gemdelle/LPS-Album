@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import NamesPage from './pages/NamesPage';
 import CataloguePage from './pages/CataloguePage';
 import GuessPage from './pages/GuessPage';
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Configuración de Google Sheets
 const SPREADSHEET_ID = '1VMph1DH_c0vy-gGib8CAgHWm03G7j5YVceESn3z1dFc';
@@ -159,16 +160,18 @@ function App() {
                       />
                     }
                 />
-              <Route
-                  path="/names"
-                  element={
-                  <NamesPage
-                      data={petShopData}
-                      setLocation={setLocation}
-                      setSelectedPetShop={setSelectedPetShop}
-                      selectedPetShop={selectedPetShop}
-                  />
-              } />
+              <Route element={<ProtectedRoute />}>
+                  <Route
+                      path="/names"
+                      element={
+                          <NamesPage
+                              data={petShopData}
+                              setLocation={setLocation}
+                              setSelectedPetShop={setSelectedPetShop}
+                              selectedPetShop={selectedPetShop}
+                          />
+                      } />
+              </Route>
               </Routes>
             </BrowserRouter>
           </div>

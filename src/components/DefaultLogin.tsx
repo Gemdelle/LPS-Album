@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../data/firebaseConfig";
-import {loginWithEmail} from "../services/authService";
+import { loginWithEmail } from "../services/authService";
+import {useAuth} from "../services/useAuth";
 
 interface LoginProps {
     isOpen: boolean;
@@ -13,32 +12,46 @@ const DefaultLogin: React.FC<LoginProps> = ({ isOpen, onClose }) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    if (!isOpen) return null;
-
+    if (!isOpen) return null; // No renderizar si no está abierto
     const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
         try {
-            await loginWithEmail(email, password);
-            alert("Inicio de sesión exitoso");
-            onClose(); // Cerrar modal al iniciar sesión
+            await loginWithEmail(email, password); // Login and set the user state
+            setError("");  // Clear any previous error
         } catch (error) {
-            setError("Credenciales incorrectas");
+            setError("Login failed. Please try again.");
+            console.error("Login error:", error);
         }
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                <h2 className="text-xl font-semibold mb-4">Iniciar Sesión</h2>
-                {error && <p className="text-red-500">{error}</p>}
-                <form onSubmit={handleLogin}>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+            {/* Modal */}
+            <div className="bg-white p-6 rounded-2xl shadow-xl w-96 relative animate-fade-in">
+                {/* Botón Cerrar */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl"
+                >
+                    &times;
+                </button>
+
+                {/* Título */}
+                <h2 className="text-2xl font-semibold mb-4 text-center text-gray-800">
+                    Iniciar Sesión
+                </h2>
+
+                {/* Mostrar error */}
+                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
+                {/* Formulario */}
+                <form onSubmit={handleLogin} className="space-y-4">
                     <input
                         type="email"
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full p-2 border rounded mb-2"
+                        className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400"
                     />
                     <input
                         type="password"
@@ -46,15 +59,15 @@ const DefaultLogin: React.FC<LoginProps> = ({ isOpen, onClose }) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="w-full p-2 border rounded mb-2"
+                        className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400"
                     />
-                    <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition"
+                    >
                         Ingresar
                     </button>
                 </form>
-                <button className="mt-4 text-gray-500" onClick={onClose}>
-                    Cerrar
-                </button>
             </div>
         </div>
     );

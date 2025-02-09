@@ -93,7 +93,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                 </button>
             </div>
             
-            {catalogueData.map((petshop: any) => {
+            {catalogueData.map((petshop: any, index:any) => {
                 let imageSrc;
                 try {
                     imageSrc = require(`../../public/Images/${petshop.id}.jpg`);
@@ -103,7 +103,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
 
                 return useCardView ? (
                     <Card
-                        key={petshop.id}
+                        key={`${index}-${petshop.id}`}
                         data={petshop}
                         updateGoogleSheet={updateGoogleSheet}
                         refreshData={refreshData}

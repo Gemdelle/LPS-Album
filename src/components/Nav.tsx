@@ -1,5 +1,5 @@
 import '../styles/nav.css';
-import { NavLink } from 'react-router-dom'; /* Para usar el active cuando se ingresa a una de las páginas. */
+import {NavLink} from 'react-router-dom'; /* Para usar el active cuando se ingresa a una de las páginas. */
 import NameFilter from "./NameFilter";
 import GiftersFilter from "./GiftersFilter";
 import YearsFilter from "./YearsFilter";
@@ -11,9 +11,12 @@ import AnimalFilter from "./AnimalFilter";
 import OwnedFilter from "./OwnedFilter";
 import DefaultLogin from "./DefaultLogin";
 import {useState} from "react";
+import {logout} from "../services/authService";
+import {useAuth} from "../services/useAuth";
 
 const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData, setCatalogueData }: any) => {
     const [isModalOpen, setModalOpen] = useState(false);
+    const user = useAuth();
 
     const totalOwned = rawData.filter((data: any) => {
         return data.status == "OWNED";
@@ -59,7 +62,13 @@ const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData, setCatal
     //     return data.bloodline == "Illwhyrim";
     // });
 
-
+    const handleLogout = async () => {
+        try {
+            await logout(); // Logout the user
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
 
     return (
         <nav>
@@ -113,9 +122,22 @@ const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData, setCatal
                     </div>
                 </div>
                 <div>
-                    <button onClick={() => setModalOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded">
-                        Iniciar Sesión
-                    </button>
+                    {!user ? (
+                        <button
+                            onClick={() => setModalOpen(true)}
+                            className="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+                        >
+                            Iniciar Sesión
+                        </button>
+                    ) : (
+                        // Show the "Logout" button if the user is logged in
+                        <button
+                            onClick={handleLogout}
+                            className="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                        >
+                            Logout
+                        </button>
+                    )}
                     <DefaultLogin isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
                 </div>
                 {/* <div className='bloodlines-container'>
