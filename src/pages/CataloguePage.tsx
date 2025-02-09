@@ -85,10 +85,10 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
     return (
         <main>
             <div className='view-container'>
-                <button className='view-button' onClick={() => setUseCardView(!useCardView)}>
+                <button className='view-button' onClick={() => setUseCardView(true)}>
                     <div className='button-title'>Cards</div>
                 </button>
-                <button className='view-button'>
+                <button className='view-button' onClick={() => setUseCardView(false)}>
                     <div className='button-title'>Catalogue</div>
                 </button>
             </div>
