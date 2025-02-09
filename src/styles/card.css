@@ -134,6 +134,13 @@
   align-items: center;
   position: absolute;
   bottom: -2vw;
+  transition: all 300ms ease-in-out;
+  z-index: 99;
+}
+
+.like-container:hover {
+  size: 110%;
+  cursor: pointer;
 }
 
 .liked-pet {
@@ -143,7 +150,6 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: blue;
 }
 
 .not-liked-pet {

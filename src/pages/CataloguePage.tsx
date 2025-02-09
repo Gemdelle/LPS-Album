@@ -88,9 +88,9 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                 <button className='view-button' onClick={() => setUseCardView(!useCardView)}>
                     {useCardView ? "Cards" : "Catalogue"}
                 </button>
-                {/* <button className='view-button'>
+                <button className='view-button catalogue-button'>
                     button 2
-                </button> */}
+                </button>
             </div>
             
             {catalogueData.map((petshop: any) => {
