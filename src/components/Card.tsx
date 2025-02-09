@@ -22,6 +22,8 @@ interface IPetshopData {
   birthday: string
   clothes: string
   gifter: string
+  base: string
+  favourite: string
 }
 
 const Card = ({ data: {
@@ -36,19 +38,21 @@ const Card = ({ data: {
   bloodline,
   birthday,
   clothes,
-  gifter
+  gifter,
+  base,
+  favourite
 }, updateGoogleSheet, refreshData, catalogueData, setCatalogueData }: ICardData) => {
 
   const imageId = String(id).split(" - ")[0];
 
-  const toggleLiked = async () => {
+  const toggleFavourite = async () => {
     try {
-      const newLiked = liked === "TRUE" ? "FALSE" : "TRUE";
+      const newLiked = favourite === "true" ? "FALSE" : "TRUE";
       const rowIndex = catalogueData.findIndex((p: any) => p.id === id);
       if (rowIndex === -1) return alert("Error: ID no encontrado");
 
       await updateGoogleSheet(rowIndex + 2, 6, newLiked); // Columna 6 (liked)
-      liked = newLiked;
+      favourite = newLiked;
 
       const updatedData = await refreshData();
       setCatalogueData(updatedData);
@@ -57,7 +61,6 @@ const Card = ({ data: {
       console.error(error);
     }
   };
-  debugger
   return (
     <div
       className={name ? "card" : "cardName"}
@@ -85,11 +88,11 @@ const Card = ({ data: {
           <span><strong><i>Birthday: </i></strong>{birthday}</span>
           <span><strong><i>Gifter: </i></strong>{gifter}</span>
         </div>
-        <div className="base-pet"></div>
+        <div className={base === "true" ? "base-pet" : ""}></div>
 
-        <div className="like-container" onClick={() => toggleLiked()}>
+        <div className="like-container" onClick={() => toggleFavourite()}>
           <div
-              className={liked === "TRUE" ? `liked-pet` : `not-liked-pet`}
+              className={favourite === "true" ? `liked-pet` : `not-liked-pet`}
           ></div>
         </div>
 

@@ -139,7 +139,7 @@
 }
 
 .like-container:hover {
-  size: 110%;
+  transform: scale(105%);
   cursor: pointer;
 }
 

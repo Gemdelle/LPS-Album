@@ -111,7 +111,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                         setCatalogueData={setCatalogueData}
                     />
                 ) : (
-                    <div key={petshop.id}
+                    <div key={`${index}-${petshop.id}`}
                          className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}>
                         <div className={`status ${petshop.status === 'OWNED' ? 'unlocked' : 'locked'}`}
                              onClick={() => toggleStatus(petshop)}></div>

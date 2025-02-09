@@ -22,47 +22,50 @@ function App() {
   const [starsAmount, setStarsAmount] = useState(0);
 
   // 🔹 Función para obtener datos de Google Sheets (hoja pública)
-  const fetchDataFromGoogleSheets = async () => {
-    try {
-      const response = await fetch(`https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${SHEET_NAME}`);
-      const text = await response.text();
+    const fetchDataFromGoogleSheets = async () => {
+        try {
+            const response = await fetch(
+                "https://script.google.com/macros/s/AKfycbxQ1MnqEnX-FHBn3Eu-Z-y5sA6Rfpez3qJ9CKNV7SSyZyf4jaTBdqEoSP_ECZrbJAk_FQ/exec",
+                {
+                    method: "GET",
+                    headers: { "Content-Type": "text/plain" },
+                    redirect: "follow"  // Esto maneja redirecciones automáticamente
+                }
+            );
+            const text = await response.text();
 
-      // Split rows and parse CSV data
-      const rows = text.trim().split("\n").map(row => row.split(",").map(cell => cell.replace(/"/g, "").trim()));
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
 
-      // Define the expected headers
-      const expectedHeaders = ["id", "name", "gender", "animal", "breed", "liked", "colour", "type", "vip", "birthday", "gifter", "bloodline", "status",
-  "generation", "season", "pre-evolution", "post-evolution"];
+            const rows = text.trim().split("\n").map(row => row.split(",").map(cell => cell.replace(/"/g, "").trim()));
 
-      // Find actual headers in the CSV and map them to the expected ones
-      const actualHeaders = rows[0];
-      const headerIndexes = expectedHeaders.map(header => actualHeaders.indexOf(header));
+            const expectedHeaders = ["id", "name", "gender", "animal", "breed", "favourite", "colour", "type", "birthday", "gifter", "bloodline", "status", "generation", "season", "pre-evolution", "post-evolution", "wishlist-link", "base", "studied", "vip"];
 
-      // Check for missing headers
-      if (headerIndexes.some(index => index === -1)) {
-        throw new Error("CSV format error: Missing expected columns.");
-      }
+            const actualHeaders = rows[0];
+            const headerIndexes = expectedHeaders.map(header => actualHeaders.indexOf(header));
 
-      // Process data
-      const data = rows.slice(1)
-          .map(row => {
-            const item = {} as any;
-            expectedHeaders.forEach((header, i) => {
-              let value: string | number = row[headerIndexes[i]] || ""; // Ensure missing values are set to ""
-              value = isNaN(value as any) || value === "" ? value : Number(value); // Convert numbers
-              item[header] = value;
-            });
-            return item;
-          })
-          .filter(item => item.id !== ""); // Remove entries with empty "id"
+            if (headerIndexes.some(index => index === -1)) {
+                throw new Error("CSV format error: Missing expected columns.");
+            }
 
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      return [];
-    }
-  };
+            const data = rows.slice(1).map(row => {
+                const item = {} as any;
+                expectedHeaders.forEach((header, i) => {
+                    let value: string | number = row[headerIndexes[i]] || "";
+                    value = isNaN(value as any) || value === "" ? value : Number(value);
+                    item[header] = value;
+                });
+                return item;
+            }).filter(item => item.id !== "");
+
+            console.log("Fetched data:", data);
+            return data;
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            return [];
+        }
+    };
 
 
   //
@@ -73,13 +76,13 @@ function App() {
 
       const response = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify({ row, column, value }),
-        mode: "no-cors", // Desactiva CORS si es necesario
+        redirect: "follow"
       });
 
       if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
+          throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
       }
 
       const data = await response.json();
