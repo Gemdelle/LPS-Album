@@ -164,7 +164,7 @@
 .base-pet {
   position: absolute;
   width: 2.2vw;
-  height: 2.2vw;
+  height: 1.5vw;
   background-image: url("/public/icons/base-pet-symbol.png");
   background-position: center;
   background-size: contain;
