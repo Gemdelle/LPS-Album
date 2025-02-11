@@ -199,6 +199,7 @@
   background-repeat: no-repeat;
 }
 
+
 .owned-container {
   width: 40%;
   height: 12%;
@@ -273,6 +274,14 @@
   transition: transform 0.3s ease-in-out;
 }
 
+.not-owned .studied-pet{
+  background-image: url("/src/assets/filters/study-filter-inactive.png");
+}
+
+.not-owned .not-studied-pet{
+  background-image: url("/src/assets/filters/study-filter-inactive.png");
+}
+
 .vip-container {
   width: 40%;
   height: 12%;
@@ -307,6 +316,14 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.not-owned .vip-0{
+  background-image: url("/src/assets/filters/vip-filter-1-inactive.png");
+}
+
+.not-owned .vip-1 {
+  background-image: url("/src/assets/filters/vip-filter-2-inactive.png");
 }
 
 
