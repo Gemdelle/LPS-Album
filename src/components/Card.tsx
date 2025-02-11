@@ -65,7 +65,7 @@ const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalog
 
   const toggleVip = async () => {
     try {
-      const newVip = Number(data.vip) + 1 > 2 ? "0" : `${Number(data.vip) + 1}`;
+      const newVip = (data.vip == "" || Number(data.vip) == 0 || Number(data.vip) > 1) ? "1" : "0";
       const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
       if (rowIndex === -1) return alert("Error: ID no encontrado");
 
@@ -93,6 +93,23 @@ const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalog
       setCatalogueData(updatedData);
     } catch (error) {
       alert("Error al actualizar el estado de studied. Inténtalo de nuevo.");
+      console.error(error);
+    }
+  };
+
+  const toggleOwned = async () => {
+    try {
+      const newOwned = data.status === "OWNED" ? "NOT_OWNED" : "OWNED";
+      const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
+      if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+      await updateGoogleSheet(rowIndex + 2, 12, newOwned); // Columna 12 (status)
+      data.status = newOwned;
+
+      const updatedData = await refreshData();
+      setCatalogueData(updatedData);
+    } catch (error) {
+      alert("Error al actualizar el estado de status. Inténtalo de nuevo.");
       console.error(error);
     }
   };
@@ -147,8 +164,11 @@ const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalog
         <div className="like-container" onClick={() => toggleFavourite()}>
           <div className={data.favourite === "true" ? `liked-pet` : `not-liked-pet`}></div>
         </div>
+        <div className="owned-container" onClick={() => toggleOwned()}>
+          <div className={data.status === "OWNED" ? `owned` : "not-owned"}></div>
+        </div>
         <div className="vip-container" onClick={() => toggleVip()}>
-          <div className={`vip-${data.vip}`}></div>
+          <div className={`vip-${data.vip == "" || Number(data.vip) > 1  ? "0" : data.vip}`}></div>
         </div>
       </div>
     </div>

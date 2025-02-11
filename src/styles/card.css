@@ -143,6 +143,7 @@
   align-items: center;
   position: absolute;
   bottom: -2vw;
+  left: 2vw;
   transition: all 300ms ease-in-out;
   z-index: 99;
 }
@@ -165,6 +166,41 @@
   width: 100%;
   height: 100%;
   background-image: url("/public/icons/heart-dark.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.owned-container {
+  width: 40%;
+  height: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -2vw;
+  transition: all 300ms ease-in-out;
+  z-index: 99;
+}
+
+.owned-container:hover {
+  transform: scale(105%);
+  cursor: pointer;
+}
+
+.owned-container .owned {
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/assets/filters/owned-filter.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.owned-container .not-owned {
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/assets/filters/not-owned-filter.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -230,7 +266,7 @@
 .vip-0 {
   width: 100%;
   height: 100%;
-  background-image: url("/public/icons/studied_active.png");
+  background-image: url("/src/assets/filters/no-vip-filter.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -239,20 +275,12 @@
 .vip-1 {
   width: 100%;
   height: 100%;
-  background-image: url("/public/icons/studied_active.png");
+  background-image: url("/src/assets/filters/vip-filter.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-.vip-2 {
-  width: 100%;
-  height: 100%;
-  background-image: url("/public/icons/studied_active.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
 
 .not-owned {
   transition: all 300ms ease-in-out;
