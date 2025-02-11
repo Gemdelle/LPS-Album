@@ -40,6 +40,34 @@
   position: relative;
 }
 
+.card-container.vip {
+  background-image: url("../assets/card-frames/vip-frame.png");
+  width: 17vw;
+  height: 30vw;
+  margin: 1.5vw 0.8vw;
+  transition: all ease 200ms;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.card-container.favourite {
+  background-image: url("../assets/card-frames/favourite-frame.png");
+  width: 17vw;
+  height: 30vw;
+  margin: 1.5vw 0.8vw;
+  transition: all ease 200ms;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 .card-body {
   width: 75%;
   height: 87%;
