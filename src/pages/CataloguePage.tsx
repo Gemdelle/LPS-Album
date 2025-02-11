@@ -1,6 +1,7 @@
 import '../styles/catalogue.css';
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
+import { IPetshopData } from '../types/types';
 
 const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: any) => {
     setLocation('/');
@@ -27,24 +28,38 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
         setEditableName(e.target.value);
     };
 
-    const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>, petshop: any) => {
-        if (e.key === 'Enter') {
-            try {
-                const rowIndex = catalogueData.findIndex((p: any) => p.id === petshop.id);
-                if (rowIndex === -1) return alert("Error: ID no encontrado");
-
-                await updateGoogleSheet(rowIndex + 2, 2, editableName);
-                petshop.name = editableName;
-                setEditingId(null);
-
-                const updatedData = await refreshData();
-                setCatalogueData(updatedData);
-            } catch (error) {
-                alert("Error al actualizar el nombre. Inténtalo de nuevo.");
-                console.error(error);
-            }
+    const handleUpdateField = async (petshop: any, field: keyof IPetshopData, value: any) => {
+        try {
+            const fieldMap: { [key in keyof IPetshopData]: number } = {
+                id: 1, name: 2, gender: 3, animal: 4, breed: 5, 
+                favourite: 6, colour: 7, type: 8, birthday: 9, 
+                gifter: 10, status: 13, base: 18, 
+                studied: 19, vip: 20
+            };
+    
+            const columnIndex = fieldMap[field];
+            if (!columnIndex) return alert("Error: Campo no válido");
+    
+            const rowIndex = catalogueData.findIndex((p: any) => p.id === petshop.id);
+            if (rowIndex === -1) return alert("Error: ID no encontrado");
+    
+            await updateGoogleSheet(rowIndex + 2, columnIndex, value);
+    
+            // Actualizar el dato en la UI
+            const updatedData = await refreshData();
+            setCatalogueData(updatedData);
+        } catch (error) {
+            alert(`Error al actualizar ${field}. Inténtalo de nuevo.`);
+            console.error(error);
         }
     };
+
+    const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>, petshop: any) => {
+        if (e.key === 'Enter') {
+            await handleUpdateField(petshop, "name", editableName);
+            setEditingId(null);
+        }
+    };    
 
     const toggleStatus = async (petshop: any) => {
         try {
@@ -109,6 +124,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                         refreshData={refreshData}
                         catalogueData={catalogueData}
                         setCatalogueData={setCatalogueData}
+                        handleUpdateField={handleUpdateField}
                     />
                 ) : (
                     <div key={`${index}-${petshop.id}`}
