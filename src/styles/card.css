@@ -12,13 +12,12 @@
   justify-content: center;
 }
 
-.card,
-.cardName {
+.card{
   width: 17vw;
   height: 30vw;
   margin: 1.5vw 0.8vw;
   transition: all ease 200ms;
-  background-image: url("../assets/name-frame.png");
+  background-image: url("../assets/card-frames/name-frame.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   display: flex;
@@ -28,7 +27,17 @@
 }
 
 .cardName {
-  background-image: url("../assets/no-name-frame.png");
+  background-image: url("../assets/card-frames/no-name-frame.png");
+  width: 17vw;
+  height: 30vw;
+  margin: 1.5vw 0.8vw;
+  transition: all ease 200ms;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .card-body {
@@ -169,32 +178,35 @@
   align-items: center;
   position: absolute;
   bottom: -1.5vw;
-  left: 1.5vw;
+  left: -0.5vw;
   transition: all 300ms ease-in-out;
   z-index: 99;
 }
 
 .studied-container:hover {
-  transform: scale(105%);
   cursor: pointer;
 }
 
 .studied-pet {
-  width: 100%;
-  height: 100%;
-  background-image: url("/public/icons/studied_active.png");
+  width: 7vh;
+  height: 7vh;
+  background-image: url("/src/assets/filters/study-filter.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(1vh);
 }
 
+
 .not-studied-pet {
-  width: 100%;
-  height: 100%;
-  background-image: url("/public/icons/studied_inactive.png");
+  width: 7vh;
+  height: 7vh;
+  background-image: url("/src/assets/filters/study-filter.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: transform 0.3s ease-in-out;
 }
 
 .vip-container {
