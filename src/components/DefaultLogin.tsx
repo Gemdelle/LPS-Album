@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { loginWithEmail } from "../services/authService";
 import {useAuth} from "../services/useAuth";
+import '../styles/login.css';
 
 interface LoginProps {
     isOpen: boolean;
@@ -24,7 +25,22 @@ const DefaultLogin: React.FC<LoginProps> = ({ isOpen, onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+        <div className="login-container fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+            <div className="pet-selection-container">
+                    <div className="pet-selection pet-1">
+                        <div className="pet-background"></div>
+                    </div>
+                    <div className="pet-selection pet-2">
+                        <div className="pet-background"></div>
+                    </div>
+                    <div className="pet-selection pet-3">
+                        <div className="pet-background"></div>
+                    </div>
+                    <div className="pet-selection pet-4">
+                        <div className="pet-background"></div>
+                    </div>
+                </div>
+
             {/* Modal */}
             <div className="bg-white p-6 rounded-2xl shadow-xl w-96 relative animate-fade-in">
                 {/* Botón Cerrar */}

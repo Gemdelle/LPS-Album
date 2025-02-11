@@ -121,7 +121,7 @@ const Nav = ({ data, rawData, defaultData, petShopData, setPetShopData, setCatal
                         <span>{totalMasculin.length}</span>
                     </div>
                 </div>
-                <div>
+                <div className={isModalOpen ? 'account-modal' : ''}>
                     {!user ? (
                         <button
                             onClick={() => setModalOpen(true)}

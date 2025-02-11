@@ -1,0 +1,66 @@
+.login-container {
+    position: relative;
+    width: 80%;
+    height: 65%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1vw;
+}
+
+.pet-selection-container {
+    position: relative;
+    height: 50%;
+    width: 100%;
+    /* background-color: violet; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pet-selection {
+    width: 22%;
+    height: 100%;
+    margin: 0;
+    background-size: 85% 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 300ms ease-in-out;
+    filter: saturate(0%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pet-1 {
+    background-image: url(/public/Images/1.jpg);
+}
+
+.pet-2 {
+    background-image: url(/public/Images/2.jpg);
+}
+
+.pet-3 {
+    background-image: url(/public/Images/3.jpg);
+}
+
+.pet-4 {
+    background-image: url(/public/Images/5.jpg);
+}
+
+.pet-background {
+    width: 100%;
+    height: 105%;
+    background-image: url(../assets/frames/pet-selection-frame.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.pet-selection:hover {
+    transform: scale(105%);
+    filter: saturate(100%);
+}
