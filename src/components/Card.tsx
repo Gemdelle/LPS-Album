@@ -114,14 +114,15 @@ const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalog
       console.error(error);
     }
   };
+
   return (
-    <div className={`card-container ${Number(data.vip) == 1 ? "vip" : data.favourite == "true" ? "favourite" : data.status === "OWNED" ? `${data.name ? "card" : "cardName"}` : "cardName"}`}>
+    <div className={`card-container ${data.status === "OWNED" ? `owned` : "not-owned"} ${Number(data.vip) == 1 ? "vip" : data.favourite == "true" ? "favourite" : data.status === "OWNED" ? `${data.name ? "card" : "cardName"}` : "cardName"}`}>
       <div className="card-body">
         <div className="id-container">
           <p className="id">- {data.id} -</p>
         </div>
 
-        <div className={`image-container ${data.status === "OWNED" ? `owned` : "not-owned"}`}>
+        <div className={`image-container`}>
           <img className="image" src={`Images/${data.id}.jpg` || default_image} alt="" />
         </div>
 

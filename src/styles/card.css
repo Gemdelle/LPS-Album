@@ -314,11 +314,8 @@
   transition: all 300ms ease-in-out;
   filter: saturate(0);
 }
-.card-container:has(.not-owned):hover {
+.card-container.not-owned:hover {
   cursor: pointer;
-}
-
-.card-container:hover .not-owned {
   filter: none;
 }
 
