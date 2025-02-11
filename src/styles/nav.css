@@ -20,6 +20,8 @@ nav {
     height: 60%;
     margin: 0vw 2.5vw;
     background-color: red;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 /* END FILTERS */
