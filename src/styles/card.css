@@ -270,6 +270,10 @@
   
 }
 
+.gender-field {
+  opacity: 0;
+}
+
 /* .Porveldam {
   background-image: url("../assets/Porveldam.png");
   background-position: center;

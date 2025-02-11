@@ -108,6 +108,7 @@ function App() {
     };
     loadData();
   }, []);
+  
 
   // 🔹 Función para incrementar progreso del juego
   function incrementGameProgress() {
