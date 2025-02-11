@@ -245,6 +245,13 @@
 .not-owned {
   filter: saturate(0);
 }
+.card-container:has(.not-owned):hover {
+  cursor: pointer;
+}
+
+.card-container:hover .not-owned {
+  filter: none;
+}
 
 .cardName.not-owned {
   filter: saturate(0);

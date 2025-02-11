@@ -98,7 +98,7 @@ const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalog
   };
 
   return (
-    <div className={`${data.status === "OWNED" ? `${data.name ? "card" : "cardName"}` : "cardName"}`}>
+    <div className={`card-container ${data.status === "OWNED" ? `${data.name ? "card" : "cardName"}` : "cardName"}`}>
       <div className="card-body">
         <div className="id-container">
           <p className="id">- {data.id} -</p>
