@@ -12,7 +12,7 @@ interface ICardData {
   handleUpdateField: (petshop: any, field: keyof IPetshopData, value: any) => Promise<void>;
 }
 
-const Card = ({ data, handleUpdateField }: ICardData) => {
+const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalogueData, setCatalogueData }: ICardData) => {
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editableValue, setEditableValue] = useState<string>("");
 
@@ -46,11 +46,62 @@ const Card = ({ data, handleUpdateField }: ICardData) => {
     );
   };
 
+  const toggleFavourite = async () => {
+    try {
+      const newLiked = data.favourite === "true" ? "FALSE" : "TRUE";
+      const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
+      if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+      await updateGoogleSheet(rowIndex + 2, 6, newLiked); // Columna 6 (liked)
+      data.favourite = newLiked;
+
+      const updatedData = await refreshData();
+      setCatalogueData(updatedData);
+    } catch (error) {
+      alert("Error al actualizar el estado de liked. Inténtalo de nuevo.");
+      console.error(error);
+    }
+  };
+
+  const toggleVip = async () => {
+    try {
+      const newVip = Number(data.vip) + 1 > 2 ? "0" : `${Number(data.vip) + 1}`;
+      const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
+      if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+      await updateGoogleSheet(rowIndex + 2, 20, newVip); // Columna 20 (vip)
+      data.vip = newVip;
+
+      const updatedData = await refreshData();
+      setCatalogueData(updatedData);
+    } catch (error) {
+      alert("Error al actualizar el estado de vip. Inténtalo de nuevo.");
+      console.error(error);
+    }
+  };
+
+  const toggleStudied = async () => {
+    try {
+      const newStudied = data.studied === "true" ? "FALSE" : "TRUE";
+      const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
+      if (rowIndex === -1) return alert("Error: ID no encontrado");
+
+      await updateGoogleSheet(rowIndex + 2, 19, newStudied); // Columna 19 (studied)
+      data.studied = newStudied;
+
+      const updatedData = await refreshData();
+      setCatalogueData(updatedData);
+    } catch (error) {
+      alert("Error al actualizar el estado de studied. Inténtalo de nuevo.");
+      console.error(error);
+    }
+  };
+
   return (
     <div className={`${data.name ? "card" : "cardName"} ${data.status === "OWNED" ? "owned" : "not-owned"}`}>
       <div className="card-body">
         <div className="id-container">
-          {renderEditableField("id", data.id)}
+          {data.id}
         </div>
 
         <div className="image-container">
@@ -88,6 +139,16 @@ const Card = ({ data, handleUpdateField }: ICardData) => {
           <span><strong><i>Colour: </i></strong>{renderEditableField("colour", data.colour)}</span>
           <span><strong><i>Birthday: </i></strong>{renderEditableField("birthday", data.birthday)}</span>
           <span><strong><i>Gifter: </i></strong>{renderEditableField("gifter", data.gifter)}</span>
+        </div>
+        <div className={data.base === "true" ? "base-pet" : ""}></div>
+        <div className="studied-container" onClick={() => toggleStudied()}>
+          <div className={data.studied === "true" ? `studied-pet` : `not-studied-pet`}></div>
+        </div>
+        <div className="like-container" onClick={() => toggleFavourite()}>
+          <div className={data.favourite === "true" ? `liked-pet` : `not-liked-pet`}></div>
+        </div>
+        <div className="vip-container" onClick={() => toggleVip()}>
+          <div className={`vip-${data.vip}`}></div>
         </div>
       </div>
     </div>
