@@ -101,7 +101,7 @@ const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalog
     <div className={`${data.name ? "card" : "cardName"} ${data.status === "OWNED" ? "owned" : "not-owned"}`}>
       <div className="card-body">
         <div className="id-container">
-          {data.id}
+          <p className="id">- {data.id} -</p>
         </div>
 
         <div className="image-container">
@@ -109,7 +109,7 @@ const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalog
         </div>
 
         <div className="name-container">
-          {renderEditableField("name", data.name)}
+          <p className="name">{renderEditableField("name", data.name)}</p>
         </div>
 
         <div className="data-container">
