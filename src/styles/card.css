@@ -242,7 +242,7 @@
   background-repeat: no-repeat;
 }
 
-.card.not-owned {
+.not-owned {
   filter: saturate(0);
 }
 

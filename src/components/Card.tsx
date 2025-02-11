@@ -98,13 +98,13 @@ const Card = ({ data, handleUpdateField, updateGoogleSheet, refreshData, catalog
   };
 
   return (
-    <div className={`${data.name ? "card" : "cardName"} ${data.status === "OWNED" ? "owned" : "not-owned"}`}>
+    <div className={`${data.status === "OWNED" ? `${data.name ? "card" : "cardName"}` : "cardName"}`}>
       <div className="card-body">
         <div className="id-container">
           <p className="id">- {data.id} -</p>
         </div>
 
-        <div className="image-container">
+        <div className={`image-container ${data.status === "OWNED" ? `owned` : "not-owned"}`}>
           <img className="image" src={`Images/${data.id}.jpg` || default_image} alt="" />
         </div>
 
