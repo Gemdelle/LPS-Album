@@ -31,20 +31,20 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
     const handleUpdateField = async (petshop: any, field: keyof IPetshopData, value: any) => {
         try {
             const fieldMap: { [key in keyof IPetshopData]: number } = {
-                id: 1, name: 2, gender: 3, animal: 4, breed: 5, 
-                favourite: 6, colour: 7, type: 8, birthday: 9, 
-                gifter: 10, status: 13, base: 18, 
+                id: 1, name: 2, gender: 3, animal: 4, breed: 5,
+                favourite: 6, colour: 7, type: 8, birthday: 9,
+                gifter: 10, status: 13, base: 18,
                 studied: 19, vip: 20
             };
-    
+
             const columnIndex = fieldMap[field];
             if (!columnIndex) return alert("Error: Campo no válido");
-    
+
             const rowIndex = catalogueData.findIndex((p: any) => p.id === petshop.id);
             if (rowIndex === -1) return alert("Error: ID no encontrado");
-    
+
             await updateGoogleSheet(rowIndex + 2, columnIndex, value);
-    
+
             // Actualizar el dato en la UI
             const updatedData = await refreshData();
             setCatalogueData(updatedData);
@@ -59,7 +59,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
             await handleUpdateField(petshop, "name", editableName);
             setEditingId(null);
         }
-    };    
+    };
 
     const toggleStatus = async (petshop: any) => {
         try {
@@ -70,7 +70,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
             await updateGoogleSheet(rowIndex + 2, 13, newStatus);
             debugger
             petshop.status = newStatus;
-            
+
             const updatedData = await refreshData();
             setCatalogueData(updatedData);
         } catch (error) {
@@ -88,7 +88,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
             await updateGoogleSheet(rowIndex + 2, 3, newGender);
             debugger
             petshop.gender = newGender;
-            
+
             const updatedData = await refreshData();
             setCatalogueData(updatedData);
         } catch (error) {
@@ -99,16 +99,22 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
 
     return (
         <main>
-            <div className='view-container'>
-                <button className='view-button' onClick={() => setUseCardView(true)}>
-                    <div className='button-title'>Cards</div>
+            <div className="view-container">
+                <button
+                    className={`view-button ${useCardView ? 'active-view-button' : ''}`}
+                    onClick={() => setUseCardView(true)}
+                >
+                    <div className="button-title">Cards</div>
                 </button>
-                <button className='view-button' onClick={() => setUseCardView(false)}>
-                    <div className='button-title'>Catalogue</div>
+                <button
+                    className={`view-button ${!useCardView ? 'active-view-button' : ''}`}
+                    onClick={() => setUseCardView(false)}
+                >
+                    <div className="button-title">Catalogue</div>
                 </button>
             </div>
-            
-            {catalogueData.map((petshop: any, index:any) => {
+
+            {catalogueData.map((petshop: any, index: any) => {
                 let imageSrc;
                 try {
                     imageSrc = require(`../../public/Images/${petshop.id}.jpg`);
@@ -128,14 +134,14 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                     />
                 ) : (
                     <div key={`${index}-${petshop.id}`}
-                         className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}>
+                        className={`pet-container ${petshop.status === 'OWNED' ? 'owned' : 'not-owned'}`}>
                         <div className={`status ${petshop.status === 'OWNED' ? 'unlocked' : 'locked'}`}
-                             onClick={() => toggleStatus(petshop)}></div>
+                            onClick={() => toggleStatus(petshop)}></div>
                         <div className="catalogue-number"><i>- {petshop.id} -</i></div>
                         <div className={`gender ${petshop.gender === 'M' ? 'male' : 'female'}`}
-                             onClick={() => toggleGender(petshop)}></div>
+                            onClick={() => toggleGender(petshop)}></div>
                         {imageSrc ? (
-                            <img src={imageSrc} alt={`Petshop ${petshop.id}`} className="petshop-img"/>
+                            <img src={imageSrc} alt={`Petshop ${petshop.id}`} className="petshop-img" />
                         ) : (
                             <div className="no-image-placeholder">No Image</div>
                         )}
@@ -157,7 +163,7 @@ const CataloguePage = ({ setLocation, data, updateGoogleSheet, refreshData }: an
                 );
             })}
         </main>
-);
+    );
 };
 
 export default CataloguePage;

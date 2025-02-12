@@ -12,6 +12,7 @@ nav {
     justify-content: center;
     align-items: center;
     padding-bottom: 0.8vw;
+    z-index: 999;
 }
 
 /* START FILTERS */

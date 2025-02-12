@@ -111,6 +111,17 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    filter: brightness(85%);
+    transition: all 300ms ease-in-out;
+}
+
+.active-view-button {
+    filter: brightness(100%);
+}
+
+.view-button:hover {
+    filter: brightness(100%);
 }
 
 .button-title {
