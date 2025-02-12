@@ -1,367 +1,406 @@
-
 @font-face {
-  font-family: 'MedusaGothic';
-  src: url('../assets/font/MedusaGothic.otf') format('opentype');
+    font-family: 'MedusaGothic';
+    src: url('../assets/font/MedusaGothic.otf') format('opentype');
 }
 
 .cards {
-  /* background-color: rgb(150, 151, 144); */
-  width: 95%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    /* background-color: rgb(150, 151, 144); */
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.card{
-  width: 17vw;
-  height: 30vw;
-  margin: 1.5vw 0.8vw;
-  transition: all ease 200ms;
-  background-image: url("../assets/card-frames/name-frame.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+.card {
+    width: 17vw;
+    height: 30vw;
+    margin: 1.5vw 0.8vw;
+    transition: all ease 200ms;
+    background-image: url("../assets/card-frames/name-frame.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .cardName {
-  background-image: url("../assets/card-frames/no-name-frame.png");
-  width: 17vw;
-  height: 30vw;
-  margin: 1.5vw 0.8vw;
-  transition: all ease 200ms;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+    background-image: url("../assets/card-frames/no-name-frame.png");
+    width: 17vw;
+    height: 30vw;
+    margin: 1.5vw 0.8vw;
+    transition: all ease 200ms;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.card-container.not-owned.cardName:hover {
+  background-image: url("../assets/card-frames/name-frame.png");
 }
 
 .card-container.vip {
+    background-image: url("../assets/card-frames/vip-frame.png");
+    width: 17vw;
+    height: 30vw;
+    margin: 1.5vw 0.8vw;
+    transition: all ease 200ms;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.card-container.vip.not-owned {
+    background-image: url("../assets/card-frames/vip-not-owned.png");
+    width: 17vw;
+    height: 30vw;
+    margin: 1.5vw 0.8vw;
+    transition: all ease 200ms;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.card-container.vip.not-owned:hover {
   background-image: url("../assets/card-frames/vip-frame.png");
-  width: 17vw;
-  height: 30vw;
-  margin: 1.5vw 0.8vw;
-  transition: all ease 200ms;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 }
 
 .card-container.favourite {
+    background-image: url("../assets/card-frames/favourite-frame.png");
+    width: 17vw;
+    height: 30vw;
+    margin: 1.5vw 0.8vw;
+    transition: all ease 200ms;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.card-container.favourite.not-owned {
+    background-image: url("../assets/card-frames/favourite-not-owned.png");
+    width: 17vw;
+    height: 30vw;
+    margin: 1.5vw 0.8vw;
+    transition: all ease 200ms;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.card-container.favourite.not-owned:hover {
   background-image: url("../assets/card-frames/favourite-frame.png");
-  width: 17vw;
-  height: 30vw;
-  margin: 1.5vw 0.8vw;
-  transition: all ease 200ms;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 }
 
 .card-body {
-  width: 75%;
-  height: 87%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+    width: 75%;
+    height: 87%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .image-container {
-  width: 70%;
-  height: 70%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 70%;
+    height: 70%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .image-container img {
-  z-index: 2;
-  width: 100%;
-  height: 100%;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.image.not-owned {
+    transition: all 300ms ease-in-out;
+    filter: saturate(0);
+}
+
+.card-container.not-owned:hover .image.not-owned {
+    filter: none;
 }
 
 .name-container {
-  width: 90%;
-  height: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.8vw;
-  }
+    width: 90%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.8vw;
+}
 
 .name {
-  font-family: 'MedusaGothic';
-  font-size: 0.65vw;
-  letter-spacing: 0.15vw;
-  color: rgb(98, 99, 89);
-  text-align: center;
+    font-family: 'MedusaGothic';
+    font-size: 0.65vw;
+    letter-spacing: 0.15vw;
+    color: rgb(98, 99, 89);
+    text-align: center;
 }
 
 .id-container {
-  display: flex;
-  width: 100%;
-  height: 6%;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0.3vw;
+    display: flex;
+    width: 100%;
+    height: 6%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.3vw;
 }
 
 .id {
-  font-size: 1vw;
-  font-family: 'Pinyon Script', cursive;
-  font-weight: 800;
-  color: rgb(89, 91, 78);
+    font-size: 1vw;
+    font-family: 'Pinyon Script', cursive;
+    font-weight: 800;
+    color: rgb(89, 91, 78);
 }
 
 .data-container {
-  font-size: medium;
-  width: 75%;
-  height: 85%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  font-size: 0.8vw;
-  font-family: 'Old Standard TT', serif;
+    font-size: medium;
+    width: 75%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 0.8vw;
+    font-family: 'Old Standard TT', serif;
 }
 
 .item {
-  font-style: italic;
-  font-weight: bold;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .female {
-  background-image: url("../assets/Feminin.png");
-  background-position: center;
-  background-size: contain;
-  width: 1.5vw;
-  height: 1.5vw;
-  background-repeat: no-repeat;
-  display: inline-block;
-  vertical-align: bottom;;
+    background-image: url("../assets/Feminin.png");
+    background-position: center;
+    background-size: contain;
+    width: 1.5vw;
+    height: 1.5vw;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: bottom;;
 }
 
 .male {
-  background-image: url("../assets/Masculin.png");
-  background-position: center;
-  background-size: contain;
-  width: 1.2vw;
-  height: 1.2vw;
-  background-repeat: no-repeat;
-  display: inline-block;
-  vertical-align: bottom;
+    background-image: url("../assets/Masculin.png");
+    background-position: center;
+    background-size: contain;
+    width: 1.2vw;
+    height: 1.2vw;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: bottom;
 }
 
 .like-container {
-  width: 40%;
-  height: 12%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: -2vw;
-  left: 2vw;
-  transition: all 300ms ease-in-out;
-  z-index: 99;
+    width: 40%;
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -2vw;
+    left: 2vw;
+    transition: all 300ms ease-in-out;
+    z-index: 99;
 }
 
 .like-container:hover {
-  transform: scale(105%);
-  cursor: pointer;
+    transform: scale(105%);
+    cursor: pointer;
 }
 
 .liked-pet {
-  width: 100%;
-  height: 100%;
-  background-image: url("/public/icons/heart-light.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-image: url("/public/icons/heart-light.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .not-liked-pet {
-  width: 100%;
-  height: 100%;
-  background-image: url("/public/icons/heart-dark.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-image: url("/public/icons/heart-dark.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 
 .owned-container {
-  width: 40%;
-  height: 12%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: -2vw;
-  transition: all 300ms ease-in-out;
-  z-index: 99;
+    width: 40%;
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -2vw;
+    transition: all 300ms ease-in-out;
+    z-index: 99;
 }
 
 .owned-container:hover {
-  transform: scale(105%);
-  cursor: pointer;
+    transform: scale(105%);
+    cursor: pointer;
 }
 
 .owned-container .owned {
-  width: 100%;
-  height: 100%;
-  background-image: url("/src/assets/filters/owned-filter.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-image: url("/src/assets/filters/owned-filter.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .owned-container .not-owned {
-  width: 100%;
-  height: 100%;
-  background-image: url("/src/assets/filters/not-owned-filter.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-image: url("/src/assets/filters/not-owned-filter.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .studied-container {
-  width: 40%;
-  height: 12%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: -1.5vw;
-  left: -0.5vw;
-  transition: all 300ms ease-in-out;
-  z-index: 99;
+    width: 40%;
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -1.5vw;
+    left: -0.5vw;
+    transition: all 300ms ease-in-out;
+    z-index: 99;
 }
 
 .studied-container:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .studied-pet {
-  width: 7vh;
-  height: 7vh;
-  background-image: url("/src/assets/filters/study-filter.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  transition: transform 0.3s ease-in-out;
-  transform: translateY(1vh);
+    width: 7vh;
+    height: 7vh;
+    background-image: url("/src/assets/filters/study-filter.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(1vh);
 }
 
 
 .not-studied-pet {
-  width: 7vh;
-  height: 7vh;
-  background-image: url("/src/assets/filters/study-filter.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  transition: transform 0.3s ease-in-out;
+    width: 7vh;
+    height: 7vh;
+    background-image: url("/src/assets/filters/study-filter.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease-in-out;
 }
 
-.not-owned .studied-pet{
-  background-image: url("/src/assets/filters/study-filter-inactive.png");
+.not-owned .studied-pet {
+    background-image: url("/src/assets/filters/study-filter-inactive.png");
 }
 
-.not-owned .not-studied-pet{
-  background-image: url("/src/assets/filters/study-filter-inactive.png");
+.not-owned .not-studied-pet {
+    background-image: url("/src/assets/filters/study-filter-inactive.png");
 }
 
 .vip-container {
-  width: 40%;
-  height: 12%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: -1.5vw;
-  right: 1.5vw;
-  transition: all 300ms ease-in-out;
-  z-index: 99;
+    width: 40%;
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -1.5vw;
+    right: 1.5vw;
+    transition: all 300ms ease-in-out;
+    z-index: 99;
 }
 
 .vip-container:hover {
-  transform: scale(105%);
-  cursor: pointer;
+    transform: scale(105%);
+    cursor: pointer;
 }
 
 .vip-0 {
-  width: 100%;
-  height: 100%;
-  background-image: url("/src/assets/filters/no-vip-filter.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-image: url("/src/assets/filters/no-vip-filter.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .vip-1 {
-  width: 100%;
-  height: 100%;
-  background-image: url("/src/assets/filters/vip-filter.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-image: url("/src/assets/filters/vip-filter.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
-.not-owned .vip-0{
-  background-image: url("/src/assets/filters/vip-filter-1-inactive.png");
+.not-owned .vip-0 {
+    background-image: url("/src/assets/filters/vip-filter-1-inactive.png");
 }
 
 .not-owned .vip-1 {
-  background-image: url("/src/assets/filters/vip-filter-2-inactive.png");
+    background-image: url("/src/assets/filters/vip-filter-2-inactive.png");
 }
 
-
-.not-owned {
-  transition: all 300ms ease-in-out;
-  filter: saturate(0);
-}
 .card-container.not-owned:hover {
-  cursor: pointer;
-  filter: none;
-}
-
-.cardName.not-owned {
-  filter: saturate(0);
+    cursor: pointer;
+    filter: none;
 }
 
 .base-pet {
-  position: absolute;
-  width: 2.2vw;
-  height: 1.5vw;
-  background-image: url("/public/icons/base-pet-symbol.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  right: 20%;
-  top: 12%;
-  z-index: 9;
-  rotate: 15deg;
+    position: absolute;
+    width: 2.2vw;
+    height: 1.5vw;
+    background-image: url("/public/icons/base-pet-symbol.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: 20%;
+    top: 12%;
+    z-index: 9;
+    rotate: 15deg;
 }
 
 
 .rarity-1 {
-  margin-top: 1vw;
-  
+    margin-top: 1vw;
+
 }
 
 .gender-field {
-  opacity: 0;
+    opacity: 0;
 }
 
 /* .Porveldam {
