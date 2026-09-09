@@ -13,5 +13,22 @@
 .female-container,
 .male-container {
   width: 3vw;
-  height: 1.3vw;
+  height: 1.6vw;
+}
+
+.gender-filter-container .female,
+.gender-filter-container .male {
+  width: 1.4vw;
+  height: 1.4vw;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.gender-filter-container .female {
+  background-image: url('../assets/icons/F-gem.png');
+}
+
+.gender-filter-container .male {
+  background-image: url('../assets/icons/M-gem.png');
 }

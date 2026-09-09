@@ -1,5 +1,6 @@
 import '../styles/names.css';
 import CardAsRow from "../components/CardAsRow";
+import Footer from "../components/Footer";
 
 const NamesPage = ({ data, setLocation }: any) => {
     
@@ -10,6 +11,7 @@ const NamesPage = ({ data, setLocation }: any) => {
             <div className="cards">
                 {data.map((petshop: any) => (<CardAsRow key={petshop.id} data={petshop} />))}
             </div>
+            <Footer />
         </main>
     )
 }

@@ -1,109 +1,231 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './styles/names.css';
 import Nav from './components/Nav';
-import Footer from './components/Footer';
 import NamesPage from './pages/NamesPage';
 import CataloguePage from './pages/CataloguePage';
 import GuessPage from './pages/GuessPage';
 import ProtectedRoute from "./components/ProtectedRoute";
+import localPetshops from './data/petshops_data.json';
+import { applyOverrides, clearOverrides, mergePet, saveOverride } from './services/petOverrides';
+import { applyCatalogueFilters, CatalogueFilters, EMPTY_FILTERS } from './services/catalogueFilters';
+import { isCacheFresh, loadSheetCache, patchSheetCache, saveSheetCache } from './services/sheetCache';
 
-// Configuración de Google Sheets
-const SPREADSHEET_ID = '1VMph1DH_c0vy-gGib8CAgHWm03G7j5YVceESn3z1dFc';
-const SHEET_NAME = "Hoja1";
+// Spreadsheet público: https://docs.google.com/spreadsheets/d/1wo8iJYUg_1tjJbJ_RnFbSk-cHmMgV2s3MlmYcRvMACg
+const SPREADSHEET_ID = '1wo8iJYUg_1tjJbJ_RnFbSk-cHmMgV2s3MlmYcRvMACg';
+const SHEET_GID = '0';
+const GOOGLE_SHEETS_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
+const GOOGLE_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwEdxi_rF3vMyu592vTSmjN3d2eelkSmL0QTr6gm5Aj5zergyjGHtVvSbrSXhHvCMyqcA/exec";
+
+const SHEET_HEADERS = ["id", "name", "gender", "animal", "breed", "favourite", "colour", "type", "birthday", "gifter", "bloodline", "status", "generation", "season", "pre-evolution", "post-evolution", "wishlist-link", "base", "studied", "vip"];
+
+function parseCsv(text: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (inQuotes) {
+      if (char === '"') {
+        if (text[i + 1] === '"') {
+          cell += '"';
+          i += 1;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        cell += char;
+      }
+    } else if (char === '"') {
+      inQuotes = true;
+    } else if (char === ",") {
+      row.push(cell.trim());
+      cell = "";
+    } else if (char === "\n") {
+      row.push(cell.trim());
+      if (row.some((value) => value !== "")) {
+        rows.push(row);
+      }
+      row = [];
+      cell = "";
+    } else if (char !== "\r") {
+      cell += char;
+    }
+  }
+
+  if (cell !== "" || row.length > 0) {
+    row.push(cell.trim());
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+function normalizeSheetValue(header: string, value: string) {
+  if (header === "favourite" || header === "studied" || header === "base") {
+    const lower = value.toLowerCase();
+    if (lower === "true" || lower === "false") {
+      return lower;
+    }
+  }
+  if (header === "gender") {
+    const gender = value.trim().toUpperCase();
+    if (gender.startsWith("M")) {
+      return "M";
+    }
+    if (gender.startsWith("F")) {
+      return "F";
+    }
+    return gender;
+  }
+  if (value !== "" && !Number.isNaN(Number(value)) && header !== "id" && header !== "name" && header !== "gender") {
+    return Number(value);
+  }
+  return value;
+}
 
 
 function App() {
-  const [petShopData, setPetShopData] = useState<any[]>([]);
-  const [catalogueData, setCatalogueData] = useState<any[]>([]);
+  const [sourceData, setSourceData] = useState<any[]>([]);
+  const [filters, setFilters] = useState<CatalogueFilters>(EMPTY_FILTERS);
   const [location, setLocation] = useState("/");
   const [selectedPetShop, setSelectedPetShop] = useState({});
   const [guessGameProgress, setGuessGameProgress] = useState(0);
   const [starsAmount, setStarsAmount] = useState(0);
+  const [lastSheetSync, setLastSheetSync] = useState<number | null>(null);
+  const [isRefreshingSheet, setIsRefreshingSheet] = useState(false);
+  const sourceDataRef = useRef<any[]>([]);
+  sourceDataRef.current = sourceData;
+
+  const catalogueData = useMemo(
+    () => applyCatalogueFilters(sourceData, filters),
+    [sourceData, filters]
+  );
+  const petShopData = useMemo(
+    () => sourceData.filter((item: any) => item.status === "OWNED"),
+    [sourceData]
+  );
+
+  const patchFilters = (partial: Partial<CatalogueFilters>) => {
+    setFilters((prev) => ({ ...prev, ...partial }));
+  };
 
   // 🔹 Función para obtener datos de Google Sheets (hoja pública)
     const fetchDataFromGoogleSheets = async () => {
         try {
-            const response = await fetch(
-                "https://script.google.com/macros/s/AKfycbxQ1MnqEnX-FHBn3Eu-Z-y5sA6Rfpez3qJ9CKNV7SSyZyf4jaTBdqEoSP_ECZrbJAk_FQ/exec",
-                {
-                    method: "GET",
-                    headers: { "Content-Type": "text/plain" },
-                    redirect: "follow"  // Esto maneja redirecciones automáticamente
-                }
-            );
-            const text = await response.text();
+            const response = await fetch(GOOGLE_SHEETS_CSV_URL, {
+                method: "GET",
+                redirect: "follow"
+            });
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
 
-            const rows = text.trim().split("\n").map(row => row.split(",").map(cell => cell.replace(/"/g, "").trim()));
+            const rows = parseCsv(await response.text());
+            const actualHeaders = rows[0].map((header) => header.replace(/"/g, "").trim());
+            const headerIndexes = SHEET_HEADERS.map((header) => {
+                const aliases = header === "generation"
+                    ? ["generation", "generacion", "generación", "gen"]
+                    : [header];
+                return actualHeaders.findIndex((actual) =>
+                    aliases.some((alias) => actual.toLowerCase() === alias.toLowerCase())
+                );
+            });
 
-            const expectedHeaders = ["id", "name", "gender", "animal", "breed", "favourite", "colour", "type", "birthday", "gifter", "bloodline", "status", "generation", "season", "pre-evolution", "post-evolution", "wishlist-link", "base", "studied", "vip"];
-
-            const actualHeaders = rows[0];
-            const headerIndexes = expectedHeaders.map(header => actualHeaders.indexOf(header));
-
-            if (headerIndexes.some(index => index === -1)) {
-                throw new Error("CSV format error: Missing expected columns.");
+            if (headerIndexes[SHEET_HEADERS.indexOf("id")] === -1) {
+                throw new Error("CSV format error: Missing id column.");
             }
 
-            const data = rows.slice(1).map(row => {
+            const data = rows.slice(1).map((row) => {
                 const item = {} as any;
-                expectedHeaders.forEach((header, i) => {
-                    let value: string | number = row[headerIndexes[i]] || "";
-                    value = isNaN(value as any) || value === "" ? value : Number(value);
-                    item[header] = value;
+                SHEET_HEADERS.forEach((header, i) => {
+                    const columnIndex = headerIndexes[i];
+                    const raw = columnIndex === -1 ? "" : (row[columnIndex] || "").replace(/"/g, "").trim();
+                    item[header] = columnIndex === -1 ? "" : normalizeSheetValue(header, raw);
                 });
                 return item;
-            }).filter(item => item.id !== "");
+            }).filter((item) => item.id !== "");
 
-            console.log("Fetched data:", data);
+            if (data.length === 0) {
+                throw new Error("Google Sheets returned no rows.");
+            }
+
+            console.log("Fetched data:", data.length, "pets from spreadsheet");
+            saveSheetCache(data);
+            setLastSheetSync(Date.now());
             return data;
         } catch (error) {
-            console.error("Error fetching data:", error);
-            return [];
+            const staleCache = loadSheetCache();
+            if (staleCache?.data?.length) {
+                console.warn(`Sheet fetch failed, using cached copy for ${SPREADSHEET_ID}:`, error);
+                setLastSheetSync(staleCache.fetchedAt);
+                return applyOverrides(staleCache.data);
+            }
+            console.warn(`Using local petshops data. Google Sheets fetch failed for ${SPREADSHEET_ID}:`, error);
+            return applyOverrides(localPetshops as any[]);
         }
     };
 
 
   //
-  const updateGoogleSheet = async (row:any, column:any, value:any) => {
+  const updateGoogleSheet = async (id: string | number, field: string, value: any) => {
     try {
-      const url = "https://script.google.com/macros/s/AKfycbxQ1MnqEnX-FHBn3Eu-Z-y5sA6Rfpez3qJ9CKNV7SSyZyf4jaTBdqEoSP_ECZrbJAk_FQ/exec"; 
-      console.log(`Enviando datos a: ${url}`);
-
-      const response = await fetch(url, {
+      const response = await fetch(GOOGLE_SHEETS_SCRIPT_URL, {
         method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({ row, column, value }),
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ id, field, value }),
         redirect: "follow"
       });
 
       if (!response.ok) {
           throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
       }
-
-      const data = await response.json();
-      console.log("Respuesta del servidor:", data);
-      alert("Datos actualizados correctamente.");
     } catch (error) {
-      debugger
-      console.error("Error en updateGoogleSheet:", error);
-      alert("Error al actualizar la hoja de cálculo. Revisa la consola.");
+      console.warn("Google Sheets update skipped:", error);
     }
+  };
+
+  const updatePet = (id: string | number, patch: Record<string, any>) => {
+    Object.entries(patch).forEach(([field, value]) => {
+      updateGoogleSheet(id, field, value);
+    });
+    saveOverride(id, patch);
+    patchSheetCache(id, patch);
+    setSourceData((prev) => mergePet(prev, id, patch));
   };
 
 
   // 🔹 Cargar datos al montar el componente
-  useEffect(() => {
-    const loadData = async () => {
+  const refreshFromSheet = async () => {
+    setIsRefreshingSheet(true);
+    try {
+      clearOverrides();
       const data = await fetchDataFromGoogleSheets();
       if (data.length > 0) {
-        const ownedPetShops = data.filter((item: any) => item.status === "OWNED");
-        setPetShopData(ownedPetShops);
-        setCatalogueData(data);
+        setSourceData(applyOverrides(data));
+      }
+    } finally {
+      setIsRefreshingSheet(false);
+    }
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      const cached = loadSheetCache();
+      if (cached?.data?.length) {
+        setSourceData(applyOverrides(cached.data));
+        setLastSheetSync(cached.fetchedAt);
+        if (isCacheFresh(cached.fetchedAt)) {
+          return;
+        }
+      }
+
+      const data = await fetchDataFromGoogleSheets();
+      if (data.length > 0) {
+        setSourceData(applyOverrides(data));
       }
     };
     loadData();
@@ -130,12 +252,13 @@ function App() {
           <div className="router">
             <BrowserRouter>
               <Nav
-                  data={petShopData}
-                  rawData={catalogueData}
-                  defaultData={catalogueData}
-                  petShopData={petShopData}
-                  setPetShopData={setPetShopData}
-                  setCatalogueData={setCatalogueData}
+                  rawData={sourceData}
+                  defaultData={sourceData}
+                  filters={filters}
+                  patchFilters={patchFilters}
+                  lastSheetSync={lastSheetSync}
+                  isRefreshingSheet={isRefreshingSheet}
+                  onRefreshSheet={refreshFromSheet}
               />
               <Routes>
                 <Route
@@ -148,6 +271,7 @@ function App() {
                           selectedPetShop={selectedPetShop}
                           updateGoogleSheet={updateGoogleSheet}
                           refreshData={fetchDataFromGoogleSheets}
+                          updatePet={updatePet}
                       />
                     }
                 />
@@ -180,7 +304,6 @@ function App() {
             </BrowserRouter>
           </div>
         </div>
-        <Footer />
       </div>
   );
 }

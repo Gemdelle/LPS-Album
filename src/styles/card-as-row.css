@@ -1,4 +1,3 @@
-
 .cards {
     background-color: rgb(150, 151, 144);
     width: 100%;
@@ -21,7 +20,7 @@
     height: 16vw;
     margin: 1% auto;
     transition: all ease 200ms;
-    background-image: url("../assets/BaseName.png");
+    background-image: url("../assets/card-frames/no-name-frame.png");
     background-size: contain;
     background-repeat: no-repeat;
     display: flex;
@@ -37,7 +36,7 @@
 }
 
 .portrait {
-    background-image: url("../assets/Portrait.png");
+    background-image: url("../assets/square-pet-frame.png");
     background-size: cover;
     width: 85%;
     height: 85%;
@@ -47,7 +46,7 @@
 }
 
 .portraitName {
-    background-image: url("../assets/PortraitName.png");
+    background-image: url("../assets/square-pet-frame.png");
     background-size: cover;
     width: 85%;
     height: 85%;
@@ -139,22 +138,22 @@
 }
 
 .female {
-    background-image: url("../assets/Feminin.png");
+    background-image: url("../assets/icons/F-gem.png");
     background-position: center;
     background-size: contain;
-    width: 1.5vw;
-    height: 1.5vw;
+    width: 1vw;
+    height: 1vw;
     background-repeat: no-repeat;
     display: inline-block;
-    vertical-align: bottom;;
+    vertical-align: bottom;
 }
 
 .male {
-    background-image: url("../assets/Masculin.png");
+    background-image: url("../assets/icons/M-gem.png");
     background-position: center;
     background-size: contain;
-    width: 1.2vw;
-    height: 1.2vw;
+    width: 1vw;
+    height: 1vw;
     background-repeat: no-repeat;
     display: inline-block;
     vertical-align: bottom;
@@ -164,7 +163,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../assets/Bloodline_Base.png");
+    background-image: none;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -172,7 +171,7 @@
     height: 10vw;
 }
 
-.bloodline-rarity-container {
+.bloodline-wrap {
     width: 20%;
     height: 13vw;
     display: flex;
@@ -183,77 +182,12 @@
     bottom: 10%;
 }
 
-.rarity-active {
-    background-image: url("../assets/Rarity_Active.png");
-    background-position: center;
-    background-size: contain;
-    width: 5vw;
-    height: 5vw;
-}
-
-.rarity-inactive {
-    background-image: url("../assets/Rarity_Inactive.png");
-    background-position: center;
-    background-size: contain;
-    width: 5vw;
-    height: 5vw;
-}
-
-.rarity-container {
-    position: absolute;
-    bottom: 0%;
-    display: flex;
-}
-
-.rarity-1 {
-    margin-left: -25px;
-    margin-right: -25px;
-    margin-top: 8px;
-}
-
-.Porveldam {
-    background-image: url("../assets/Porveldam.png");
-    background-position: center;
-    background-size: contain;
-    width: 4vw;
-    height: 4vw;
-    background-repeat: no-repeat;
-}
-
-.Spadelline {
-    background-image: url("../assets/Spadelline.png");
-    background-position: center;
-    background-size: contain;
-    width: 2.5vw;
-    height: 2.5vw;
-    background-repeat: no-repeat;
-}
-
-.Zephiroth {
-    background-image: url("../assets/Zephiroth.png");
-    background-position: center;
-    background-size: contain;
-    margin-left: 3px;
-    width: 3vw;
-    height: 3vw;
-    background-repeat: no-repeat;
-}
-
-.Gladasmy {
-    background-image: url("../assets/Gladasmy.png");
-    background-position: center;
-    background-size: contain;
-    width: 3vw;
-    height: 3vw;
-    background-repeat: no-repeat;
-}
-
+.Porveldam,
+.Spadelline,
+.Zephiroth,
+.Gladasmy,
 .Illwhyrim {
-    background-image: url("../assets/Illwhyrim.png");
-    background-position: center;
-    background-size: contain;
-    margin-left: 3%;
+    background-image: none;
     width: 3vw;
     height: 3vw;
-    background-repeat: no-repeat;
 }

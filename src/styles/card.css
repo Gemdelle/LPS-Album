@@ -15,7 +15,7 @@
     width: 17vw;
     height: 30vw;
     margin: 1.5vw 0.8vw;
-    transition: all ease 200ms;
+    transition: all ease 500ms;
     background-image: url("../assets/card-frames/name-frame.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -30,7 +30,7 @@
     width: 17vw;
     height: 30vw;
     margin: 1.5vw 0.8vw;
-    transition: all ease 200ms;
+    transition: all ease 500ms;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     display: flex;
@@ -40,7 +40,7 @@
 }
 
 .card-container.not-owned.cardName:hover {
-  background-image: url("../assets/card-frames/name-frame.png");
+    background-image: url("../assets/card-frames/name-frame.png");
 }
 
 .card-container.vip {
@@ -72,7 +72,7 @@
 }
 
 .card-container.vip.not-owned:hover {
-  background-image: url("../assets/card-frames/vip-frame.png");
+    background-image: url("../assets/card-frames/vip-frame.png");
 }
 
 .card-container.favourite {
@@ -104,7 +104,7 @@
 }
 
 .card-container.favourite.not-owned:hover {
-  background-image: url("../assets/card-frames/favourite-frame.png");
+    background-image: url("../assets/card-frames/favourite-frame.png");
 }
 
 .card-body {
@@ -190,18 +190,18 @@
 }
 
 .female {
-    background-image: url("../assets/Feminin.png");
+    background-image: url("../assets/icons/F-gem.png");
     background-position: center;
     background-size: contain;
-    width: 1.5vw;
-    height: 1.5vw;
+    width: 1.2vw;
+    height: 1.2vw;
     background-repeat: no-repeat;
     display: inline-block;
-    vertical-align: bottom;;
+    vertical-align: bottom;
 }
 
 .male {
-    background-image: url("../assets/Masculin.png");
+    background-image: url("../assets/icons/M-gem.png");
     background-position: center;
     background-size: contain;
     width: 1.2vw;
@@ -220,20 +220,20 @@
     position: absolute;
     bottom: -1.2vw;
     left: 3.3vw;
-    transition: all 300ms ease-in-out;
+    transition: transform 280ms ease, filter 280ms ease;
     z-index: 99;
-        /* background-color: brown; */
+    /* background-color: brown; */
 }
 
 .like-container:hover {
-    transform: scale(103%);
+    transform: scale(1.12);
     cursor: pointer;
 }
 
 .liked-pet {
     width: 100%;
     height: 100%;
-    background-image: url("/public/icons/heart-light.png");
+    background-image: url("../assets/icons/heart.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -242,14 +242,15 @@
 .not-liked-pet {
     width: 100%;
     height: 100%;
-    background-image: url("/public/icons/heart-dark.png");
+    background-image: url("../assets/icons/heart.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    filter: grayscale(100%) brightness(70%) opacity(55%);
 }
 
 
-.owned-container {
+.card-container .owned-container {
     width: 30%;
     height: 15%;
     display: flex;
@@ -257,31 +258,30 @@
     align-items: center;
     position: absolute;
     bottom: -2.5vw;
-    transition: all 300ms ease-in-out;
+    transition: transform 280ms ease, filter 280ms ease;
     z-index: 99;
-    /* background-color: blue; */
 }
 
-.owned-container:hover {
-    transform: scale(103%);
+.card-container .owned-container:hover {
+    transform: scale(1.12);
     cursor: pointer;
 }
 
-.owned-container .owned {
+.card-container .owned-container .owned {
     width: 100%;
     height: 100%;
-    background-image: url("/src/assets/filters/owned-filter.png");
+    background-image: url("../assets/icons/owned.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.owned-container .not-owned {
+.card-container .owned-container .not-owned {
     width: 100%;
     height: 100%;
-    background-image: url("/src/assets/filters/not-owned-filter.png");
+    background-image: url("../assets/icons/not-owned.png");
     background-position: center;
-    background-size: 100% 100%;
+    background-size: contain;
     background-repeat: no-repeat;
 }
 
@@ -294,20 +294,21 @@
     position: absolute;
     top: -0.8vw;
     left: 0.1vw;
-    transition: all 300ms ease-in-out;
+    transition: transform 280ms ease, filter 280ms ease;
     z-index: 0;
     /* background-color: red; */
 }
 
 .studied-container:hover {
     cursor: pointer;
+    transform: scale(1.08);
 }
 
 .studied-pet,
 .not-studied-pet {
     width: 100%;
     height: 100%;
-    background-image: url("/src/assets/filters/study-filter.png");
+    background-image: url("../assets/icons/base-pet.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -319,11 +320,11 @@
 }
 
 .not-owned .studied-pet {
-    background-image: url("/src/assets/filters/study-filter-inactive.png");
+    background-image: url("../assets/icons/base-pet.png");
 }
 
 .not-owned .not-studied-pet {
-    background-image: url("/src/assets/filters/study-filter-inactive.png");
+    background-image: url("../assets/icons/base-pet.png");
 }
 
 .vip-container {
@@ -335,40 +336,41 @@
     position: absolute;
     bottom: -1.2vw;
     right: 2.7vw;
-    transition: all 300ms ease-in-out;
+    transition: transform 280ms ease, filter 280ms ease;
     z-index: 99;
     /* background-color: blue; */
 }
 
 .vip-container:hover {
-    transform: scale(103%);
+    transform: scale(1.12);
     cursor: pointer;
 }
 
-.vip-0 {
+.vip-container .vip-0 {
     width: 100%;
     height: 100%;
-    background-image: url("/src/assets/filters/no-vip-filter.png");
+    background-image: url("../assets/icons/vip.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.vip-1 {
+.vip-container .vip-1 {
     width: 100%;
     height: 100%;
-    background-image: url("/src/assets/filters/vip-filter.png");
+    background-image: url("../assets/icons/vip.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.not-owned .vip-0 {
-    background-image: url("/src/assets/filters/vip-filter-1-inactive.png");
-}
-
-.not-owned .vip-1 {
-    background-image: url("/src/assets/filters/vip-filter-2-inactive.png");
+.vip-container .vip-2 {
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/icons/vip.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .card-container.not-owned:hover {
@@ -380,7 +382,7 @@
     position: absolute;
     width: 2.2vw;
     height: 1.5vw;
-    background-image: url("/public/icons/base-pet-symbol.png");
+    background-image: url("../assets/icons/base-pet.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -390,11 +392,6 @@
     rotate: 15deg;
 }
 
-
-.rarity-1 {
-    margin-top: 1vw;
-
-}
 
 .gender-field {
     opacity: 0;

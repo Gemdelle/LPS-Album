@@ -13,4 +13,5 @@ export interface IPetshopData {
     vip: string;
     studied: string;
     status: string;
+    generation?: string | number;
   }

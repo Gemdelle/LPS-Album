@@ -1,6 +1,6 @@
 .filters-container {
   z-index: 2;
-  background-image: url("../assets/Filters.png");
+  background-image: none;
   background-size: cover;
   width: 20%;
   height: 40%;
@@ -42,6 +42,20 @@
 }
 
 .year-container div {
+  width: 4vw;
+  margin-bottom: 1vw;
+  font-weight: 600;
+  color: rgb(76, 69, 38);
+}
+
+.generation-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Old Standard TT', serif;
+  margin-left: 1vw;
+}
+
+.generation-filter-container div {
   width: 4vw;
   margin-bottom: 1vw;
   font-weight: 600;
@@ -121,8 +135,9 @@
 /* Animal Filter */
 
 .animal-scroll {
-  height: 14vw;
-  overflow: scroll;
+  height: auto;
+  max-height: 50vh;
+  overflow: auto;
 }
 
 .wrap-options {

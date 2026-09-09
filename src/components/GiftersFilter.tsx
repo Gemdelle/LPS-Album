@@ -1,31 +1,25 @@
+import { useMemo } from "react";
 import '../styles/gifters-filter.css';
 
-const GiftersFilter = ({ setPetShopData, defaultData }: any) => {
-    const giftersFromDefaultData = defaultData.map((data:any) => {
-        return data.gifter;
-    });
-    const uniqueGifters = new Set([...giftersFromDefaultData]);
-    
-    const gifters = Array.from(uniqueGifters);
-
-    function selectGifters(event:any){
-        const inputValue = event.currentTarget.value;
-        if (inputValue === '') {
-            setPetShopData(defaultData);
-        } else {
-            setPetShopData(defaultData.filter((data: any) => {
-                return inputValue === '' || data.gifter.toUpperCase().includes(inputValue);
-            }));
-        }
-    }
+const GiftersFilter = ({ filters, patchFilters, defaultData }: any) => {
+    const gifters = useMemo(() => {
+        const unique = new Set(
+            (defaultData || []).map((item: any) => item.gifter).filter(Boolean)
+        );
+        return Array.from(unique);
+    }, [defaultData]);
 
     return (
         <div className="gifters-container">
             <p className="title">Gifters </p>
-            <select onChange={selectGifters} className="select-gifters">
+            <select
+                value={filters.gifter}
+                onChange={(event) => patchFilters({ gifter: event.currentTarget.value })}
+                className="select-gifters"
+            >
                 <option value="">Choose One</option>
-                {gifters.map((gifter, index) => {
-                    return <option key={index} value={gifter.toUpperCase()}>{gifter}</option>
+                {gifters.map((gifter: any, index: number) => {
+                    return <option key={index} value={String(gifter).toUpperCase()}>{gifter}</option>
                 })}
             </select>
         </div>

@@ -1,48 +1,18 @@
-import { useState } from "react";
+const YEARS = ["2016", "2020", "2022"];
 
-const YearsFilter = ({ setPetShopData, defaultData }: any) => {
-    const [selectedYears, setSelectedYears] = useState(new Set<string>());
-
-    const [filterVisible, setFilterVisible] = useState(false);
-
-    function selectYears(event: any, year: string) {
-        if (event.target.checked) {
-            setSelectedYears(selectedYears.add(year))
-        } else {
-            selectedYears.delete(year);
-            setSelectedYears(selectedYears);
-        }
-
-        setPetShopData(defaultData.filter((data: any) => {
-            return selectedYears.has(String(data.birthday));
-        }));
-    }
-
-    const showYearsContainer = () => {
-        setFilterVisible(!filterVisible)
-    }
-
+const YearsFilter = ({ filters, patchFilters }: any) => {
     return (
-        <div>
-            <div className="title">
-                <div className={filterVisible ? "rotating-arrow" : "arrow"} onClick={showYearsContainer}></div>
-                <span>Year</span>
-            </div>
-
-            <div className={filterVisible ? "year-container" : "year-container + hidden"}>
-                <div>
-                    <input type="checkbox" onChange={(event) => selectYears(event, "2016")} />
-                    <span>2016</span>
-                </div>
-                <div>
-                    <input type="checkbox" onChange={(event) => selectYears(event, "2020")} />
-                    <span>2020</span>
-                </div>
-                <div>
-                    <input type="checkbox" onChange={(event) => selectYears(event, "2022")} />
-                    <span>2022</span>
-                </div>
-            </div>
+        <div className="header-filter">
+            <label>Year</label>
+            <select
+                value={filters.years[0] || ""}
+                onChange={(event) => patchFilters({ years: event.target.value ? [event.target.value] : [] })}
+            >
+                <option value="">All</option>
+                {YEARS.map((year) => (
+                    <option key={year} value={year}>{year}</option>
+                ))}
+            </select>
         </div>
     );
 };

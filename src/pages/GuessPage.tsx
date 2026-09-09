@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/guess.css';
+import Footer from "../components/Footer";
 
 const Cheats = ({ toggleCheats }: any) => {
     return (
@@ -140,8 +141,8 @@ const GuessPage = ({ setLocation, defaultData, incrementGameProgress, guessGameP
 
     return (
         <main>
-            {/* <Cheats toggleCheats={toggleCheats} /> */}
             {showContent()}
+            <Footer />
         </main>
     )
 }

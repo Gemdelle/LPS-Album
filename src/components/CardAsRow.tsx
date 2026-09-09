@@ -1,5 +1,4 @@
 import "../styles/card-as-row.css";
-import default_image from "../assets/default_image.jpg";
 
 interface ICardData {
     data: IPetshopData
@@ -11,11 +10,11 @@ interface IPetshopData{
     gender: string
     animal: string
     breed: string
-    liked: boolean
     colour: string
     type: string
     bloodline: string
     birthday: string
+    generation?: string | number
     clothes: string
     gifter: string
 }
@@ -26,11 +25,11 @@ const CardAsRow = ({ data: {
     gender,
     animal,
     breed,
-    liked,
     colour,
     type,
     bloodline,
     birthday,
+    generation,
     clothes,
     gifter
 } }: ICardData) => {
@@ -44,7 +43,7 @@ const CardAsRow = ({ data: {
             <div className="card-body">
                 <div className="image-container">
                     <div className={name ? "portrait" : "portraitName"}></div>
-                    <img className="image" src={`Images/${imageId}.jpg` || default_image} alt="" />
+                    <img className="image" src={`Images/${imageId}.jpg`} alt="" />
                 </div>
 
                 <div className="name-container">
@@ -65,20 +64,13 @@ const CardAsRow = ({ data: {
                     <span><strong><i>Colour: </i></strong>{colour}</span>
                     <span><strong><i>Clothes: </i></strong>{clothes}</span>
                     <span><strong><i>Birthday: </i></strong>{birthday}</span>
+                    <span><strong><i>Generation: </i></strong>{generation || "-"}</span>
                     <span><strong><i>Gifter: </i></strong>{gifter}</span>
                 </div>
 
-                <div className="bloodline-rarity-container">
+                <div className="bloodline-wrap">
                     <div className="bloodline-container">
                         <div className={bloodline} />
-                    </div>
-                    <div className="rarity-container">
-                        {[1, 2, 3].map((number, index) => {
-                            return <div
-                                key={index}
-                                className={liked ? `rarity-active rarity-${index}` : `rarity-inactive rarity-${index}`}
-                            ></div>
-                        })}
                     </div>
                 </div>
             </div>

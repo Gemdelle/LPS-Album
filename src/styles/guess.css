@@ -7,7 +7,7 @@
 #guessing-image {
     height: 26vw;
     width: 26vw;
-    background-image: url(/src/assets/Portrait.png);
+    background-image: url(../assets/square-pet-frame.png);
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -32,7 +32,7 @@
     align-items: center;
     width: 23vw;
     height: 4vw;
-    background-image: url(/src/assets/Answer.png);
+    background-image: url(../assets/card-frames/name-frame.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -78,7 +78,7 @@
     align-items: flex-start;
     width: 13vw;
     height: 13vw;
-    background-image: url(../assets/Number-answers.png);
+    background-image: url(../assets/card-frames/no-name-frame.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -96,7 +96,7 @@
 }
 
 .replay-btn {
-    background-image: url(../assets/Retry.png);
+    background-image: url(../assets/catalogue-frame.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -121,7 +121,7 @@
 }
 
 .replay-btn:hover {
-    background-image: url(../assets/Retry-hover.png);
+    background-image: url(../assets/cards-frame.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -148,7 +148,7 @@
 }
 
 .finish-container .stars-container {
-    background-image: url(../assets/Gem-number.png);
+    background-image: url(../assets/icons/F-gem.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -169,14 +169,14 @@
     position: absolute;
     width: 50vw;
     height: 40vw;
-    background-image: url(../assets/Win-background.png);
+    background-image: url(../assets/header.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .progress-count {
-    background-image: url(../assets/Progress.png);
+    background-image: url(../assets/sidebar.png);
     background-size: contain;
     background-repeat: no-repeat;
     height: 6vw;
@@ -197,7 +197,7 @@
 
 
 .star-accomplish {
-    background-image: url("../assets/Rarity_Active.png");
+    background-image: url("../assets/icons/vip.png");
     background-position: center;
     background-size: contain;
     width: 5vw;
@@ -205,7 +205,7 @@
 }
 
 .star-missing {
-    background-image: url("../assets/Rarity_Inactive.png");
+    background-image: url("../assets/icons/vip.png");
     background-position: center;
     background-size: contain;
     width: 5vw;
@@ -213,7 +213,7 @@
 }
 
 .finish-container .star-accomplish {
-    background-image: url("../assets/Rarity_Active.png");
+    background-image: url("../assets/icons/vip.png");
     background-position: center;
     background-repeat: no-repeat;
     width: 8vw;
@@ -222,7 +222,7 @@
 }
 
 .finish-container .star-missing {
-    background-image: url("../assets/Rarity_Inactive.png");
+    background-image: url("../assets/icons/vip.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;

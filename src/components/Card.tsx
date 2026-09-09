@@ -1,25 +1,18 @@
 import "../styles/card.css";
-import default_image from "../assets/default_image.jpg";
 import {IPetshopData} from "../types/types";
 import {useState} from "react";
-import {debug} from "util";
+import {isFavourite, nextVipLevel, vipLevel} from "../services/petOverrides";
 
 interface ICardData {
     data: IPetshopData;
-    updateGoogleSheet: (row: number, column: number, value: any) => Promise<void>;
-    refreshData: () => Promise<any>;
-    catalogueData: any;
-    setCatalogueData: any;
     handleUpdateField: (petshop: any, field: keyof IPetshopData, value: any) => Promise<void>;
+    updatePet: (id: string | number, patch: Record<string, any>) => void;
 }
 
 const Card = ({
                   data,
                   handleUpdateField,
-                  updateGoogleSheet,
-                  refreshData,
-                  catalogueData,
-                  setCatalogueData
+                  updatePet
               }: ICardData) => {
     const [editingField, setEditingField] = useState<string | null>(null);
     const [editableValue, setEditableValue] = useState<string>("");
@@ -54,77 +47,25 @@ const Card = ({
         );
     };
 
-    const toggleFavourite = async () => {
-        try {
-            const newLiked = data.favourite === "true" ? "FALSE" : "TRUE";
-            const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
-            if (rowIndex === -1) return alert("Error: ID no encontrado");
-
-            await updateGoogleSheet(rowIndex + 2, 6, newLiked); // Columna 6 (liked)
-            data.favourite = newLiked;
-
-            const updatedData = await refreshData();
-            setCatalogueData(updatedData);
-        } catch (error) {
-            alert("Error al actualizar el estado de liked. Inténtalo de nuevo.");
-            console.error(error);
-        }
+    const toggleFavourite = () => {
+        updatePet(data.id, { favourite: isFavourite(data.favourite) ? "false" : "true" });
     };
 
-    const toggleVip = async () => {
-        try {
-            const newVip = (data.vip == "" || Number(data.vip) == 0 || Number(data.vip) > 1) ? "1" : "0";
-            const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
-            if (rowIndex === -1) return alert("Error: ID no encontrado");
-
-            await updateGoogleSheet(rowIndex + 2, 20, newVip); // Columna 20 (vip)
-            data.vip = newVip;
-
-            const updatedData = await refreshData();
-            setCatalogueData(updatedData);
-        } catch (error) {
-            alert("Error al actualizar el estado de vip. Inténtalo de nuevo.");
-            console.error(error);
-        }
+    const toggleVip = () => {
+        updatePet(data.id, { vip: nextVipLevel(data.vip) });
     };
 
-    const toggleStudied = async () => {
-        try {
-            const newStudied = data.studied === "true" ? "FALSE" : "TRUE";
-            const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
-            if (rowIndex === -1) return alert("Error: ID no encontrado");
-
-            await updateGoogleSheet(rowIndex + 2, 19, newStudied); // Columna 19 (studied)
-            data.studied = newStudied;
-
-            const updatedData = await refreshData();
-            setCatalogueData(updatedData);
-        } catch (error) {
-            alert("Error al actualizar el estado de studied. Inténtalo de nuevo.");
-            console.error(error);
-        }
+    const toggleStudied = () => {
+        updatePet(data.id, { studied: data.studied === "true" ? "false" : "true" });
     };
 
-    const toggleOwned = async () => {
-        try {
-            const newOwned = data.status === "OWNED" ? "NOT_OWNED" : "OWNED";
-            const rowIndex = catalogueData.findIndex((p: any) => p.id === data.id);
-            if (rowIndex === -1) return alert("Error: ID no encontrado");
-
-            await updateGoogleSheet(rowIndex + 2, 12, newOwned); // Columna 12 (status)
-            data.status = newOwned;
-
-            const updatedData = await refreshData();
-            setCatalogueData(updatedData);
-        } catch (error) {
-            alert("Error al actualizar el estado de status. Inténtalo de nuevo.");
-            console.error(error);
-        }
+    const toggleOwned = () => {
+        updatePet(data.id, { status: data.status === "OWNED" ? "NOT_OWNED" : "OWNED" });
     };
 
     return (
         <div
-            className={`card-container ${data.status === "OWNED" ? `owned` : "not-owned"} ${Number(data.vip) == 1 && data.status !== "OWNED" ? "vip" : data.favourite == "true" ? "favourite" : data.status === "OWNED" ? `${data.name ? "card" : "cardName"}` : "cardName"}`}>
+            className={`card-container ${data.status === "OWNED" ? `owned` : "not-owned"} ${vipLevel(data.vip) >= 1 && data.status !== "OWNED" ? "vip" : isFavourite(data.favourite) ? "favourite" : data.status === "OWNED" ? `${data.name ? "card" : "cardName"}` : "cardName"}`}>
             <div className="card-body">
                 <div className="id-container">
                     <p className="id">- {data.id} -</p>
@@ -132,7 +73,7 @@ const Card = ({
 
                 <div className={`image-container`}>
                     <img className={`image ${data.status === "OWNED" ? `owned` : "not-owned"}`}
-                         src={`Images/${data.id}.jpg` || default_image} alt=""/>
+                         src={`Images/${data.id}.jpg`} alt="" loading="lazy" decoding="async"/>
                 </div>
 
                 <div className="name-container">
@@ -165,6 +106,7 @@ const Card = ({
                     <span><strong><i>Breed: </i></strong>{renderEditableField("breed", data.breed)}</span>
                     <span><strong><i>Colour: </i></strong>{renderEditableField("colour", data.colour)}</span>
                     <span><strong><i>Birthday: </i></strong>{renderEditableField("birthday", data.birthday)}</span>
+                    <span><strong><i>Generation: </i></strong>{renderEditableField("generation", String(data.generation || ""))}</span>
                     <span><strong><i>Gifter: </i></strong>{renderEditableField("gifter", data.gifter)}</span>
                 </div>
                 <div className={data.base === "true" ? "base-pet" : ""}></div>
@@ -172,17 +114,14 @@ const Card = ({
                     <div className={data.studied === "true" ? `studied-pet` : `not-studied-pet`}></div>
                 </div>
                 <div className="like-container" onClick={() => toggleFavourite()}>
-                    <div className={data.favourite === "true" ? `liked-pet` : `not-liked-pet`}></div>
+                    <div className={isFavourite(data.favourite) ? `liked-pet` : `not-liked-pet`}></div>
                 </div>
                 <div className="owned-container" onClick={() => toggleOwned()}>
                     <div className={data.status === "OWNED" ? `owned` : "not-owned"}></div>
                 </div>
-                {
-                    data.status !== "OWNED" ?
-                        <div className="vip-container" onClick={() => toggleVip()}>
-                            <div className={`vip-${data.vip == "" || Number(data.vip) > 1 ? "0" : data.vip}`}></div>
-                        </div> : null
-                }
+                <div className="vip-container" onClick={() => toggleVip()}>
+                    <div className={`vip-${vipLevel(data.vip)}`}></div>
+                </div>
             </div>
         </div>
     );

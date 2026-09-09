@@ -1,18 +1,20 @@
 footer {
     display: flex;
     justify-content: center;
-    height: 7vh;
+    width: 100%;
+    height: 12vh;
+    flex-shrink: 0;
     font-style: italic;
-    background-image: url(../assets/Footer.png);
-    background-size: contain;
+    background-color: #434937;
+    background-image: url(../assets/footer.png);
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
 
     font-family: 'Pinyon Script', cursive;
-    font-size: 1.4vw;
-    color: rgb(43, 40, 11);
-
-    text-shadow: 0 0.2vw 0.4vw rgb(0, 0, 0);
+    font-size: 1vw;
+    color: #434937;
+    text-shadow: none;
 }
 
 footer p {

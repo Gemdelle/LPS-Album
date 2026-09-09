@@ -1,48 +1,86 @@
 nav {
-    background-image: url("../assets/Nav.png");
-    background-size: 100% 160%;
-    background-position-y: 80%;
-    overflow: visible;
-    height: 15vh;
+    background-image: url("../assets/header.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
-    z-index: 3;
-    position: sticky;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 0.8vw;
+    height: 13%;
+    box-sizing: border-box;
+    overflow: visible;
+    flex-shrink: 0;
+    position: relative;
     z-index: 999;
-}
-
-/* START FILTERS */
-.filter-container {
-    width: 45%;
-    height: 60%;
-    margin: 0vw 2.5vw;
-    background-color: red;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6vh 7% 0.8vh 5.8%;
+    gap: 0.6vw;
 }
 
-/* END FILTERS */
+.filter-container {
+    width: 52%;
+    height: auto;
+    margin: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    gap: 0.35vw;
+    overflow: visible;
+}
 
-/* START LINKS */
+.header-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.12vw;
+    min-width: 0;
+    flex: 1;
+}
+
+.header-filter label {
+    font-family: 'Old Standard TT', serif;
+    font-size: 0.7vw;
+    color: rgb(70, 66, 48);
+    line-height: 1;
+}
+
+.header-filter select,
+.header-filter input,
+.name-input {
+    width: 100%;
+    height: 1.55vw;
+    min-height: 18px;
+    box-sizing: border-box;
+    border: 1px solid rgb(170, 160, 120);
+    border-radius: 0.2vw;
+    background: #fff;
+    font-family: 'Old Standard TT', serif;
+    font-size: 0.7vw;
+    color: rgb(70, 66, 48);
+    padding: 0 0.25vw;
+}
+
+.name-filter-container {
+    flex: 1.4;
+}
+
 nav ul {
-    height: 60%;
-    width: 20%;
+    height: auto;
+    width: 18%;
+    min-width: 12vw;
+    margin: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 0.85vw;
     font-family: 'Old Standard TT', serif;
-    font-size: 1.3vw;
+    font-size: 1.05vw;
     list-style: none;
     padding: 0;
-    /* background-color: violet; */
 }
 
 nav ul li span {
-    color: rgb(124, 120, 101);
+    color: rgb(90, 82, 58);
 }
 
 .link {
@@ -55,158 +93,83 @@ nav ul li span {
     transform: scale(105%);
     color: rgb(61, 59, 51);
 }
-/* END LINKS */
 
-/* START STATS */
 .stats-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 23%;
-    height: 60%;
-    /* background-color: aquamarine; */
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    width: 28%;
+    min-width: 16vw;
+    gap: 0.55vw;
 }
 
-.owned-container,
-.named-container,
-.gender-container,
-.bloodlines-container {
+.header-totals {
     display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 0;
+}
+
+.header-total {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 26%;
-    height: 100%;
+    padding: 0 0.45vw;
+    border-right: 1px solid rgb(150, 140, 110);
 }
 
-.stat-owned,
-.stat-not-owned,
-.stat-named,
-.stat-not-named,
-.stat-girls,
-.stat-boys,
-.stat-porveldam,
-.stat-spadelline,
-.stat-zephiroth,
-.stat-gladasmy,
-.stat-illwhyrim,
-.stat-filter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 50%;
-    height: 100%;
+.header-total:last-child {
+    border-right: none;
 }
 
-/* STAT IMG */
-.stat-owned div,
-.stat-not-owned div,
-.stat-named div,
-.stat-not-named div,
-.stat-girls div,
-.stat-boys div,
-.stat-porveldam div,
-.stat-spadelline div,
-.stat-zephiroth div,
-.stat-gladasmy div,
-.stat-illwhyrim div,
-.stat-filter div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    width: 100%;
-    height: 60%;
-}
-
-/* stat N° */
-.stats-container span {
-    font-size: 1vw;
+.header-total strong {
     font-family: 'EB Garamond', serif;
-    color: rgb(70, 70, 70);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 35%;
-    font-weight: bold;
-    letter-spacing: 0.05vw;
+    font-size: 1vw;
+    color: rgb(55, 52, 40);
+    line-height: 1.1;
 }
 
-.stat-owned div {
-    background-image: url("../assets/Obtained.png");
+.header-total span {
+    font-family: 'Old Standard TT', serif;
+    font-size: 0.58vw;
+    color: rgb(90, 86, 70);
+    height: auto;
 }
 
-.stat-not-owned div {
-    background-image: url("../assets/NotObtained.png");
-}
-
-.stat-named div {
-    background-image: url("../assets/Named.png");
-}
-
-.stat-not-named div {
-    background-image: url("../assets/NotNamed.png");
-}
-
-.stat-girls div {
-    background-image: url("../assets/Feminin.png");
-    width: 70%;
-}
-
-.stat-boys div {
-    background-image: url("../assets/Masculin.png");
-    width: 60%;
-}
-
-/* START ACCOUNT MODAL */
-
-.account-modal {
-    width: 70vw;
-    height: 80vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    background-image: url(../assets/frames/modal.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+.sheet-sync {
+    width: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-end;
+    gap: 0.12vw;
+    position: relative;
+    z-index: 50;
 }
 
-/* 
-.stat-porveldam div {
-    background-image: url("../assets/Porveldam.png");
-    width: 2.5vw;
-    background-size: 50%;
+.sheet-sync-button {
+    font-family: 'Old Standard TT', serif;
+    font-size: 0.68vw;
+    font-style: italic;
+    font-weight: bold;
+    color: #f7f4ea;
+    background: #4a4a4a;
+    border: none;
+    border-radius: 0.9vw;
+    padding: 0.28vw 0.7vw;
+    cursor: pointer;
 }
 
-.stat-spadelline div {
-    background-image: url("../assets/Spadelline.png");
-    width: 2.5vw;
-    background-size: 50%;
+.sheet-sync-button:disabled {
+    cursor: wait;
+    opacity: 0.7;
 }
 
-.stat-zephiroth div {
-    background-image: url("../assets/Zephiroth.png");
-    width: 2.5vw;
-    background-size: 70%;
+.sheet-sync-time {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.55vw;
+    color: rgb(90, 86, 70);
+    text-align: right;
+    white-space: nowrap;
 }
-
-.stat-gladasmy div {
-    background-image: url("../assets/Gladasmy.png");
-    width: 2.5vw;
-    background-size: 38%;
-}
-
-.stat-illwhyrim div {
-    background-image: url("../assets/Illwhyrim.png");
-    width: 2.5vw;
-    background-size: 70%;
-} */
-/* END STAT */

@@ -1,6 +1,6 @@
 aside {
     z-index: 2;
-    background-image: url("../assets/Filters.png");
+    background-image: none;
     background-size: cover;
     width: 20%;
     height: 52vw;
