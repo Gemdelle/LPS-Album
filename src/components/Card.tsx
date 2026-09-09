@@ -2,17 +2,20 @@ import "../styles/card.css";
 import {IPetshopData} from "../types/types";
 import {useState} from "react";
 import {isFavourite, nextVipLevel, vipLevel} from "../services/petOverrides";
+import zoomNumberFrame from "../assets/frames/zoom-number-frame.png";
 
 interface ICardData {
     data: IPetshopData;
     handleUpdateField: (petshop: any, field: keyof IPetshopData, value: any) => Promise<void>;
     updatePet: (id: string | number, patch: Record<string, any>) => void;
+    onOpenImage?: () => void;
 }
 
 const Card = ({
                   data,
                   handleUpdateField,
-                  updatePet
+                  updatePet,
+                  onOpenImage
               }: ICardData) => {
     const [editingField, setEditingField] = useState<string | null>(null);
     const [editableValue, setEditableValue] = useState<string>("");
@@ -47,6 +50,8 @@ const Card = ({
         );
     };
 
+    const isMale = String(data.gender || "").trim().toUpperCase().startsWith("M");
+
     const toggleFavourite = () => {
         updatePet(data.id, { favourite: isFavourite(data.favourite) ? "false" : "true" });
     };
@@ -55,72 +60,89 @@ const Card = ({
         updatePet(data.id, { vip: nextVipLevel(data.vip) });
     };
 
-    const toggleStudied = () => {
-        updatePet(data.id, { studied: data.studied === "true" ? "false" : "true" });
-    };
-
     const toggleOwned = () => {
         updatePet(data.id, { status: data.status === "OWNED" ? "NOT_OWNED" : "OWNED" });
     };
 
+    const toggleGender = () => {
+        updatePet(data.id, { gender: isMale ? "F" : "M" });
+    };
+
     return (
         <div
-            className={`card-container ${data.status === "OWNED" ? `owned` : "not-owned"} ${vipLevel(data.vip) >= 1 && data.status !== "OWNED" ? "vip" : isFavourite(data.favourite) ? "favourite" : data.status === "OWNED" ? `${data.name ? "card" : "cardName"}` : "cardName"}`}>
+            className={`card-container ${vipLevel(data.vip) >= 1 ? "vip" : "basic"} ${data.status === "OWNED" ? "owned" : "not-owned"}`}>
             <div className="card-body">
-                <div className="id-container">
-                    <p className="id">- {data.id} -</p>
+                <div className="card-number">
+                    <img className="card-number-frame" src={zoomNumberFrame} alt="" />
+                    <span className="card-number-text">- {data.id} -</span>
                 </div>
 
-                <div className={`image-container`}>
-                    <img className={`image ${data.status === "OWNED" ? `owned` : "not-owned"}`}
-                         src={`Images/${data.id}.jpg`} alt="" loading="lazy" decoding="async"/>
+                <div className="card-hero">
+                    <div
+                        className="image-container"
+                        onClick={onOpenImage}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if ((e.key === "Enter" || e.key === " ") && onOpenImage) {
+                                e.preventDefault();
+                                onOpenImage();
+                            }
+                        }}
+                    >
+                        <img
+                            className="image"
+                            src={`Images/${data.id}.jpg`}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            onError={(e) => {
+                                e.currentTarget.style.visibility = "hidden";
+                            }}
+                        />
+                    </div>
                 </div>
 
                 <div className="name-container">
                     <p className="name">{renderEditableField("name", data.name)}</p>
                 </div>
 
-                <div className="data-container">
-          <span>
-            <strong><i>Gender: </i></strong>
-              {editingField === "gender" ? (
-                  <input
-                      type="text"
-                      value={editableValue}
-                      onChange={(e) => setEditableValue(e.target.value)}
-                      onKeyDown={(e) => handleKeyPress(e, "gender")}
-                      onBlur={() => setEditingField(null)}
-                      autoFocus
-                  />
-              ) : (
-                  <div
-                      className={`${data.gender === "F" ? "female" : "male"}`}
-                      onClick={() => handleEditClick("gender", data.gender)}
-                  >
-                      <span className="gender-field">{data.gender || "-"}</span>
-                  </div>
-              )}
-          </span>
-                    <span><strong><i>Type: </i></strong>{renderEditableField("type", data.type)}</span>
-                    <span><strong><i>Animal: </i></strong>{renderEditableField("animal", data.animal)}</span>
-                    <span><strong><i>Breed: </i></strong>{renderEditableField("breed", data.breed)}</span>
-                    <span><strong><i>Colour: </i></strong>{renderEditableField("colour", data.colour)}</span>
-                    <span><strong><i>Birthday: </i></strong>{renderEditableField("birthday", data.birthday)}</span>
-                    <span><strong><i>Generation: </i></strong>{renderEditableField("generation", String(data.generation || ""))}</span>
-                    <span><strong><i>Gifter: </i></strong>{renderEditableField("gifter", data.gifter)}</span>
-                </div>
-                <div className={data.base === "true" ? "base-pet" : ""}></div>
-                <div className="studied-container" onClick={() => toggleStudied()}>
-                    <div className={data.studied === "true" ? `studied-pet` : `not-studied-pet`}></div>
-                </div>
-                <div className="like-container" onClick={() => toggleFavourite()}>
-                    <div className={isFavourite(data.favourite) ? `liked-pet` : `not-liked-pet`}></div>
-                </div>
-                <div className="owned-container" onClick={() => toggleOwned()}>
-                    <div className={data.status === "OWNED" ? `owned` : "not-owned"}></div>
-                </div>
-                <div className="vip-container" onClick={() => toggleVip()}>
-                    <div className={`vip-${vipLevel(data.vip)}`}></div>
+                <div className="card-details">
+                    <div className="data-container">
+                        <span><strong><i>Type:</i></strong>{renderEditableField("type", data.type)}</span>
+                        <span><strong><i>Animal:</i></strong>{renderEditableField("animal", data.animal)}</span>
+                        <span><strong><i>Breed:</i></strong>{renderEditableField("breed", data.breed)}</span>
+                        <span><strong><i>Colour:</i></strong>{renderEditableField("colour", data.colour)}</span>
+                        <span><strong><i>Birthday:</i></strong>{renderEditableField("birthday", data.birthday)}</span>
+                        <span><strong><i>Generation:</i></strong>{renderEditableField("generation", String(data.generation || ""))}</span>
+                        <span><strong><i>Gifter:</i></strong>{renderEditableField("gifter", data.gifter)}</span>
+                    </div>
+                    <div className="card-actions">
+                        <div
+                            className={`owned-toggle ${data.status === "OWNED" ? "unlocked" : "locked"}`}
+                            onClick={toggleOwned}
+                            role="button"
+                            aria-label="Owned"
+                        />
+                        <div
+                            className={`vip-toggle vip-${vipLevel(data.vip)}`}
+                            onClick={toggleVip}
+                            role="button"
+                            aria-label="VIP"
+                        />
+                        <div
+                            className={`like-toggle ${isFavourite(data.favourite) ? "liked" : "not-liked"}`}
+                            onClick={toggleFavourite}
+                            role="button"
+                            aria-label="Like"
+                        />
+                        <div
+                            className={`gender-toggle ${isMale ? "male" : "female"}`}
+                            onClick={toggleGender}
+                            role="button"
+                            aria-label="Gender"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -80,7 +80,18 @@ function normalizeSheetValue(header: string, value: string) {
     }
     return gender;
   }
-  if (value !== "" && !Number.isNaN(Number(value)) && header !== "id" && header !== "name" && header !== "gender") {
+  if (
+    value !== "" &&
+    !Number.isNaN(Number(value)) &&
+    header !== "id" &&
+    header !== "name" &&
+    header !== "gender" &&
+    header !== "animal" &&
+    header !== "breed" &&
+    header !== "colour" &&
+    header !== "type" &&
+    header !== "gifter"
+  ) {
     return Number(value);
   }
   return value;
@@ -129,7 +140,11 @@ function App() {
             const headerIndexes = SHEET_HEADERS.map((header) => {
                 const aliases = header === "generation"
                     ? ["generation", "generacion", "generación", "gen"]
-                    : [header];
+                    : header === "animal"
+                        ? ["animal", "especie", "species"]
+                        : header === "breed"
+                            ? ["breed", "raza"]
+                            : [header];
                 return actualHeaders.findIndex((actual) =>
                     aliases.some((alias) => actual.toLowerCase() === alias.toLowerCase())
                 );

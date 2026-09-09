@@ -32,7 +32,7 @@
     align-items: center;
     width: 23vw;
     height: 4vw;
-    background-image: url(../assets/card-frames/name-frame.png);
+    background-image: url(../assets/card-frames/basic-frame.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -78,7 +78,7 @@
     align-items: flex-start;
     width: 13vw;
     height: 13vw;
-    background-image: url(../assets/card-frames/no-name-frame.png);
+    background-image: url(../assets/card-frames/basic-frame.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

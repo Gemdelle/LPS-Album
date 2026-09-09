@@ -1,26 +1,19 @@
-import { useMemo } from "react";
-import '../styles/gifters-filter.css';
+import { uniqueLabels } from "../services/filterUtils";
 
 const GiftersFilter = ({ filters, patchFilters, defaultData }: any) => {
-    const gifters = useMemo(() => {
-        const unique = new Set(
-            (defaultData || []).map((item: any) => item.gifter).filter(Boolean)
-        );
-        return Array.from(unique);
-    }, [defaultData]);
+    const gifters = uniqueLabels((defaultData || []).map((pet: any) => pet.gifter));
 
     return (
-        <div className="gifters-container">
-            <p className="title">Gifters </p>
+        <div className="header-filter">
+            <label>Gifter</label>
             <select
-                value={filters.gifter}
-                onChange={(event) => patchFilters({ gifter: event.currentTarget.value })}
-                className="select-gifters"
+                value={filters.gifter || ""}
+                onChange={(event) => patchFilters({ gifter: event.target.value })}
             >
-                <option value="">Choose One</option>
-                {gifters.map((gifter: any, index: number) => {
-                    return <option key={index} value={String(gifter).toUpperCase()}>{gifter}</option>
-                })}
+                <option value="">All</option>
+                {gifters.map(([key, label]) => (
+                    <option key={key} value={key}>{label}</option>
+                ))}
             </select>
         </div>
     );

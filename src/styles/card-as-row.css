@@ -20,7 +20,7 @@
     height: 16vw;
     margin: 1% auto;
     transition: all ease 200ms;
-    background-image: url("../assets/card-frames/no-name-frame.png");
+    background-image: url("../assets/card-frames/basic-frame.png");
     background-size: contain;
     background-repeat: no-repeat;
     display: flex;

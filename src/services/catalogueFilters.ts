@@ -86,7 +86,7 @@ export function applyCatalogueFilters(data: any[], filters: CatalogueFilters) {
         if (owned.size > 0 && !owned.has(String(pet.status || "").toUpperCase())) {
             return false;
         }
-        if (filters.gifter && !String(pet.gifter || "").toUpperCase().includes(filters.gifter)) {
+        if (filters.gifter && normalizeKey(pet.gifter) !== filters.gifter) {
             return false;
         }
         if (years.size > 0 && !years.has(String(pet.birthday))) {

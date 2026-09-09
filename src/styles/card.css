@@ -4,442 +4,242 @@
 }
 
 .cards {
-    /* background-color: rgb(150, 151, 144); */
     width: 95%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.card {
-    width: 17vw;
-    height: 30vw;
-    margin: 1.5vw 0.8vw;
-    transition: all ease 500ms;
-    background-image: url("../assets/card-frames/name-frame.png");
-    background-size: 100% 100%;
+.card-container {
+    width: 16.8vw;
+    aspect-ratio: 545 / 781;
+    height: auto;
+    margin: 0.55vw 0.4vw;
+    padding: 0;
+    box-sizing: border-box;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.cardName {
-    background-image: url("../assets/card-frames/no-name-frame.png");
-    width: 17vw;
-    height: 30vw;
-    margin: 1.5vw 0.8vw;
-    transition: all ease 500ms;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.card-container.not-owned.cardName:hover {
-    background-image: url("../assets/card-frames/name-frame.png");
+.card-container.basic {
+    background-image: url("../assets/card-frames/basic-frame.png");
 }
 
 .card-container.vip {
     background-image: url("../assets/card-frames/vip-frame.png");
-    width: 17vw;
-    height: 30vw;
-    margin: 1.5vw 0.8vw;
-    transition: all ease 200ms;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.card-container.vip.not-owned {
-    background-image: url("../assets/card-frames/vip-not-owned.png");
-    width: 17vw;
-    height: 30vw;
-    margin: 1.5vw 0.8vw;
-    transition: all ease 200ms;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.card-container.vip.not-owned:hover {
-    background-image: url("../assets/card-frames/vip-frame.png");
-}
-
-.card-container.favourite {
-    background-image: url("../assets/card-frames/favourite-frame.png");
-    width: 17vw;
-    height: 30vw;
-    margin: 1.5vw 0.8vw;
-    transition: all ease 200ms;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.card-container.favourite.not-owned {
-    background-image: url("../assets/card-frames/favourite-not-owned.png");
-    width: 17vw;
-    height: 30vw;
-    margin: 1.5vw 0.8vw;
-    transition: all ease 200ms;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.card-container.favourite.not-owned:hover {
-    background-image: url("../assets/card-frames/favourite-frame.png");
 }
 
 .card-body {
-    width: 75%;
-    height: 87%;
+    width: 78%;
+    height: 90%;
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: flex-start;
+    min-height: 0;
+    margin-top: -3.4vw;
+}
+
+.card-number {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+    width: 6.4vw;
+    aspect-ratio: 726 / 285;
+    height: auto;
+    flex-shrink: 0;
+    margin-top: -0.4vw;
+}
+
+.card-number-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.card-number-text {
+    position: relative;
+    z-index: 50;
+    font-family: 'Pinyon Script', cursive;
+    font-size: 0.8vw;
+    color: rgb(247, 244, 226);
+    letter-spacing: 0.04vw;
+}
+
+.card-hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 42%;
 }
 
 .image-container {
-    width: 70%;
-    height: 70%;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    /* background-color: red; */
 }
 
 .image-container img {
     z-index: 2;
     width: 100%;
     height: 100%;
-}
-
-.image.not-owned {
-    transition: all 300ms ease-in-out;
-    filter: saturate(0);
-}
-
-.card-container.not-owned:hover .image.not-owned {
+    object-fit: contain;
     filter: none;
 }
 
 .name-container {
-    width: 90%;
-    height: 10%;
+    /* background-color: green; */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0.8vw;
+    flex-shrink: 0;
+    margin-top: 2%;
+    margin-bottom: 16%;
 }
 
 .name {
     font-family: 'MedusaGothic';
-    font-size: 0.65vw;
-    letter-spacing: 0.15vw;
+    font-size: 0.72vw;
+    letter-spacing: 0.04vw;
     color: rgb(98, 99, 89);
     text-align: center;
-}
-
-.id-container {
-    display: flex;
-    width: 100%;
-    height: 6%;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0.3vw;
-}
-
-.id {
-    font-size: 1vw;
-    font-family: 'Pinyon Script', cursive;
-    font-weight: 800;
-    color: rgb(89, 91, 78);
-}
-
-.data-container {
-    font-size: medium;
-    width: 75%;
-    height: 85%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    font-size: 0.8vw;
-    font-family: 'Old Standard TT', serif;
-}
-
-.item {
-    font-style: italic;
-    font-weight: bold;
-}
-
-.female {
-    background-image: url("../assets/icons/F-gem.png");
-    background-position: center;
-    background-size: contain;
-    width: 1.2vw;
-    height: 1.2vw;
-    background-repeat: no-repeat;
-    display: inline-block;
-    vertical-align: bottom;
-}
-
-.male {
-    background-image: url("../assets/icons/M-gem.png");
-    background-position: center;
-    background-size: contain;
-    width: 1.2vw;
-    height: 1.2vw;
-    background-repeat: no-repeat;
-    display: inline-block;
-    vertical-align: bottom;
-}
-
-.like-container {
-    width: 20%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: -1.2vw;
-    left: 3.3vw;
-    transition: transform 280ms ease, filter 280ms ease;
-    z-index: 99;
-    /* background-color: brown; */
-}
-
-.like-container:hover {
-    transform: scale(1.12);
-    cursor: pointer;
-}
-
-.liked-pet {
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/icons/heart.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.not-liked-pet {
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/icons/heart.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    filter: grayscale(100%) brightness(70%) opacity(55%);
-}
-
-
-.card-container .owned-container {
-    width: 30%;
-    height: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: -2.5vw;
-    transition: transform 280ms ease, filter 280ms ease;
-    z-index: 99;
-}
-
-.card-container .owned-container:hover {
-    transform: scale(1.12);
-    cursor: pointer;
-}
-
-.card-container .owned-container .owned {
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/icons/owned.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.card-container .owned-container .not-owned {
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/icons/not-owned.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.studied-container {
-    width: 20%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: -0.8vw;
-    left: 0.1vw;
-    transition: transform 280ms ease, filter 280ms ease;
-    z-index: 0;
-    /* background-color: red; */
-}
-
-.studied-container:hover {
-    cursor: pointer;
-    transform: scale(1.08);
-}
-
-.studied-pet,
-.not-studied-pet {
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/icons/base-pet.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: transform 0.3s ease-in-out;
-}
-
-.studied-pet {
-    transform: translateY(1vh);
-}
-
-.not-owned .studied-pet {
-    background-image: url("../assets/icons/base-pet.png");
-}
-
-.not-owned .not-studied-pet {
-    background-image: url("../assets/icons/base-pet.png");
-}
-
-.vip-container {
-    width: 20%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: -1.2vw;
-    right: 2.7vw;
-    transition: transform 280ms ease, filter 280ms ease;
-    z-index: 99;
+    margin: 0;
     /* background-color: blue; */
 }
 
-.vip-container:hover {
+.card-details {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+}
+
+.data-container {
+    width: 60%;
+    min-width: 0;
+    height: auto;
+    margin-left: 12%;
+    font-size: 0.9vw;
+    line-height: 1.3;
+    font-family: 'Old Standard TT', serif;
+    color: rgb(70, 66, 48);
+    /* background-color: yellow; */
+}
+
+.data-container>span {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    gap: 0.32vw;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.data-container>span span,
+.data-container>span strong,
+.data-container>span i {
+    display: inline;
+}
+
+.data-container>span strong {
+    flex-shrink: 0;
+}
+
+.data-container input {
+    width: auto;
+    min-width: 0;
+    font-size: 0.72vw;
+    font-family: 'Old Standard TT', serif;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin: 0;
+    gap: 0.22vw;
+    flex-shrink: 0;
+}
+
+.card-container .owned-toggle,
+.card-container .vip-toggle,
+.card-container .like-toggle,
+.card-container .gender-toggle {
+    width: 1.35vw;
+    height: 1.35vw;
+    flex-shrink: 0;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: transform 280ms ease, filter 280ms ease;
+}
+
+.card-container .owned-toggle:hover,
+.card-container .vip-toggle:hover,
+.card-container .like-toggle:hover,
+.card-container .gender-toggle:hover {
     transform: scale(1.12);
-    cursor: pointer;
 }
 
-.vip-container .vip-0 {
-    width: 100%;
-    height: 100%;
+.card-container .owned-toggle.unlocked {
+    background-image: url("../assets/icons/owned.png");
+}
+
+.card-container .owned-toggle.locked {
+    background-image: url("../assets/icons/not-owned.png");
+}
+
+.card-container .vip-toggle {
     background-image: url("../assets/icons/vip.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    filter: brightness(45%);
 }
 
-.vip-container .vip-1 {
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/icons/vip.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+.card-container .vip-toggle.vip-1,
+.card-container .vip-toggle.vip-2 {
+    filter: brightness(100%);
 }
 
-.vip-container .vip-2 {
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/icons/vip.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+.card-container .like-toggle.liked {
+    background-image: url("../assets/icons/heart.png");
+    filter: brightness(100%);
 }
 
-.card-container.not-owned:hover {
-    cursor: pointer;
-    filter: none;
+.card-container .like-toggle.not-liked {
+    background-image: url("../assets/icons/heart.png");
+    filter: brightness(55%);
 }
 
-.base-pet {
-    position: absolute;
-    width: 2.2vw;
-    height: 1.5vw;
-    background-image: url("../assets/icons/base-pet.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    right: 20%;
-    top: 12%;
-    z-index: 9;
-    rotate: 15deg;
+.card-container .gender-toggle.female {
+    background-image: url("../assets/icons/F-gem.png");
 }
 
-
-.gender-field {
-    opacity: 0;
+.card-container .gender-toggle.male {
+    background-image: url("../assets/icons/M-gem.png");
 }
-
-/* .Porveldam {
-  background-image: url("../assets/Porveldam.png");
-  background-position: center;
-  background-size: contain;
-  width: 4vw;
-  height: 4vw;
-  background-repeat: no-repeat;
-}
-
-.Spadelline {
-  background-image: url("../assets/Spadelline.png");
-  background-position: center;
-  background-size: contain;
-  width: 2.5vw;
-  height: 2.5vw;
-  background-repeat: no-repeat;
-}
-
-.Zephiroth {
-  background-image: url("../assets/Zephiroth.png");
-  background-position: center;
-  background-size: contain;
-  margin-left: 3px;
-  width: 3vw;
-  height: 3vw;
-  background-repeat: no-repeat;
-}
-
-.Gladasmy {
-  background-image: url("../assets/Gladasmy.png");
-  background-position: center;
-  background-size: contain;
-  width: 3vw;
-  height: 3vw;
-  background-repeat: no-repeat;
-}
-
-.Illwhyrim {
-  background-image: url("../assets/Illwhyrim.png");
-  background-position: center;
-  background-size: contain;
-  margin-left: 3%;
-  width: 3vw;
-  height: 3vw;
-  background-repeat: no-repeat;
-} */

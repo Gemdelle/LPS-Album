@@ -7,6 +7,8 @@ import IdFilter from "./IdFilter";
 import GenderFilter from "./GenderFilter";
 import TypesFilter from "./TypesFilter";
 import AnimalFilter from "./AnimalFilter";
+import BreedFilter from "./BreedFilter";
+import GiftersFilter from "./GiftersFilter";
 import GenerationFilter from "./GenerationFilter";
 import OwnedFilter from "./OwnedFilter";
 
@@ -42,7 +44,9 @@ const Nav = ({ rawData, defaultData, filters, patchFilters, lastSheetSync, isRef
                 <GenderFilter filters={filters} patchFilters={patchFilters} />
                 <TypesFilter filters={filters} patchFilters={patchFilters} />
                 <GenerationFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
-                <AnimalFilter filters={filters} patchFilters={patchFilters} />
+                <AnimalFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
+                <BreedFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
+                <GiftersFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
             </div>
 
             <div className='stats-container'>

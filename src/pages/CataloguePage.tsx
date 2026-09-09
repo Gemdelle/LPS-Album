@@ -5,12 +5,17 @@ import { IPetshopData } from '../types/types';
 import { formatGeneration } from '../services/catalogueFilters';
 import { isFavourite, nextVipLevel, vipLevel } from '../services/petOverrides';
 import Footer from "../components/Footer";
+import zoomNumberFrame from "../assets/frames/zoom-number-frame.png";
+import zoomNameFrame from "../assets/frames/zoom-name-frame.png";
+
+const petImageSrc = (id: string | number) => `/Images/${id}.jpg`;
 
 const CataloguePage = ({ setLocation, data, updatePet }: any) => {
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editableName, setEditableName] = useState<string>("");
     const [catalogueData, setCatalogueData] = useState(data);
     const [useCardView, setUseCardView] = useState(false);
+    const [zoomedId, setZoomedId] = useState<string | number | null>(null);
 
     useEffect(() => {
         setLocation('/');
@@ -19,6 +24,48 @@ const CataloguePage = ({ setLocation, data, updatePet }: any) => {
     useEffect(() => {
         setCatalogueData(data);
     }, [data]);
+
+    const zoomIndex = catalogueData.findIndex((pet: any) => String(pet.id) === String(zoomedId));
+    const zoomedPet = zoomIndex >= 0 ? catalogueData[zoomIndex] : null;
+
+    const stepZoom = (delta: number) => {
+        if (catalogueData.length === 0) {
+            return;
+        }
+        const current = zoomIndex >= 0 ? zoomIndex : 0;
+        const next = (current + delta + catalogueData.length) % catalogueData.length;
+        setZoomedId(catalogueData[next].id);
+    };
+
+    useEffect(() => {
+        if (zoomedId == null) {
+            return;
+        }
+        if (!catalogueData.some((pet: any) => String(pet.id) === String(zoomedId))) {
+            setZoomedId(null);
+        }
+    }, [catalogueData, zoomedId]);
+
+    useEffect(() => {
+        if (zoomedId == null) {
+            return;
+        }
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setZoomedId(null);
+            }
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                stepZoom(-1);
+            }
+            if (event.key === "ArrowRight") {
+                event.preventDefault();
+                stepZoom(1);
+            }
+        };
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [zoomedId, catalogueData, zoomIndex]);
 
     const handleNameClick = (petshop: any) => {
         setEditingId(petshop.id);
@@ -87,6 +134,7 @@ const CataloguePage = ({ setLocation, data, updatePet }: any) => {
                         data={petshop}
                         handleUpdateField={handleUpdateField}
                         updatePet={updatePet}
+                        onOpenImage={() => setZoomedId(petshop.id)}
                     />
                 ) : (
                     <div key={`${index}-${petshop.id}`}
@@ -113,7 +161,18 @@ const CataloguePage = ({ setLocation, data, updatePet }: any) => {
                         {formatGeneration(petshop.generation) ? (
                             <span className="generation-tag">{formatGeneration(petshop.generation)}</span>
                         ) : null}
-                        <div className="pet-image-wrap">
+                        <div
+                            className="pet-image-wrap"
+                            onClick={() => setZoomedId(petshop.id)}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                    e.preventDefault();
+                                    setZoomedId(petshop.id);
+                                }
+                            }}
+                        >
                             <img
                                 src={imageSrc}
                                 alt={`Petshop ${petshop.id}`}
@@ -151,6 +210,55 @@ const CataloguePage = ({ setLocation, data, updatePet }: any) => {
             </div>
             <Footer />
             </div>
+            {zoomedPet ? (
+                <div
+                    className="pet-zoom-overlay"
+                    onClick={() => setZoomedId(null)}
+                    role="presentation"
+                >
+                    {catalogueData.length > 1 ? (
+                        <button
+                            type="button"
+                            className="pet-zoom-arrow pet-zoom-prev"
+                            aria-label="Previous pet"
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                stepZoom(-1);
+                            }}
+                        />
+                    ) : null}
+                    <div
+                        className="pet-zoom-stage"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <div className="pet-zoom-id">
+                            <img className="pet-zoom-id-frame" src={zoomNumberFrame} alt="" />
+                            <span className="pet-zoom-id-text">- {zoomedPet.id} -</span>
+                        </div>
+                        <div className="pet-zoom-wrap">
+                            <img src={petImageSrc(zoomedPet.id)} alt={`Petshop ${zoomedPet.id}`} />
+                            <div className="pet-frame" aria-hidden="true"></div>
+                        </div>
+                        <div className="pet-zoom-name">
+                            <img className="pet-zoom-name-frame" src={zoomNameFrame} alt="" />
+                            <span className={`pet-zoom-name-text ${zoomedPet.name ? "" : "unnamed-name"}`.trim()}>
+                                {zoomedPet.name || "?"}
+                            </span>
+                        </div>
+                    </div>
+                    {catalogueData.length > 1 ? (
+                        <button
+                            type="button"
+                            className="pet-zoom-arrow pet-zoom-next"
+                            aria-label="Next pet"
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                stepZoom(1);
+                            }}
+                        />
+                    ) : null}
+                </div>
+            ) : null}
         </main>
     );
 };

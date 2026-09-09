@@ -1,11 +1,8 @@
-﻿import { normalizeKey } from "../services/filterUtils";
+﻿import { uniqueLabels } from "../services/filterUtils";
 
-const ANIMALS = [
-    "Bear", "Bee", "Bird", "Cat", "Dog", "Ferret", "Fish",
-    "Guinea Pig", "Hamster", "Monkey", "Owl", "Rabbit", "Snail", "Turtle"
-];
+const AnimalFilter = ({ filters, patchFilters, defaultData }: any) => {
+    const animals = uniqueLabels((defaultData || []).map((pet: any) => pet.animal));
 
-const AnimalFilter = ({ filters, patchFilters }: any) => {
     return (
         <div className="header-filter">
             <label>Animal</label>
@@ -17,8 +14,8 @@ const AnimalFilter = ({ filters, patchFilters }: any) => {
                 })}
             >
                 <option value="">All</option>
-                {ANIMALS.map((animal) => (
-                    <option key={animal} value={normalizeKey(animal)}>{animal}</option>
+                {animals.map(([key, label]) => (
+                    <option key={key} value={key}>{label}</option>
                 ))}
             </select>
         </div>

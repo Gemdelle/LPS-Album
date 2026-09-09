@@ -65,6 +65,7 @@
     height: 68%;
     margin: 0.5vw 0 0.5vw;
     filter: drop-shadow(0 0.18vw 0.28vw rgba(0, 0, 0, 0.55));
+    cursor: pointer;
 }
 
 .pet-frame {
@@ -175,8 +176,8 @@
     transition: transform 300ms ease-in-out, filter 300ms ease-in-out;
 }
 
-.vip-toggle:hover {
-    scale: 110%;
+.pet-container .vip-toggle:hover {
+    transform: scale(1.12);
 }
 
 .pet-container .vip-toggle.vip-1,
@@ -337,4 +338,140 @@
 
 .no-image {
     background-color: red;
+}
+
+.pet-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6vw;
+    background: rgba(18, 22, 14, 0.78);
+    cursor: pointer;
+}
+
+.pet-zoom-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+    isolation: isolate;
+}
+
+.pet-zoom-id,
+.pet-zoom-name {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+}
+
+.pet-zoom-id {
+    width: 13.4vw;
+    height: 4.2vw;
+    margin: 0 0 1.35vw;
+}
+
+.pet-zoom-id-frame,
+.pet-zoom-name-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.pet-zoom-id-text,
+.pet-zoom-name-text {
+    position: relative;
+    z-index: 50;
+}
+
+.pet-zoom-id-text {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.55vw;
+    font-weight: 800;
+    color: rgb(247, 244, 226);
+    letter-spacing: 0.06vw;
+    text-shadow: 0 0.08vw 0.18vw rgba(0, 0, 0, 0.65);
+}
+
+.pet-zoom-name {
+    width: min(70vh, 38vw);
+    height: 3.6vw;
+    margin-top: 1.35vw;
+    padding: 0 1.4vw;
+    box-sizing: border-box;
+}
+
+.pet-zoom-name-text {
+    font-family: 'Old Standard TT', serif;
+    font-size: 1.05vw;
+    font-style: italic;
+    color: rgb(247, 244, 226);
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 0 0.08vw 0.18vw rgba(0, 0, 0, 0.65);
+}
+
+.pet-zoom-name-text.unnamed-name {
+    color: rgb(247, 244, 226);
+}
+
+.pet-zoom-wrap {
+    position: relative;
+    z-index: 1;
+    width: min(70vh, 38vw);
+    height: min(70vh, 38vw);
+    filter: drop-shadow(0 0.4vw 0.8vw rgba(0, 0, 0, 0.65));
+}
+
+.pet-zoom-wrap .pet-frame {
+    z-index: 2;
+    inset: -2%;
+}
+
+.pet-zoom-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: none;
+}
+
+.pet-zoom-arrow {
+    width: 4.2vw;
+    height: 4.2vw;
+    flex-shrink: 0;
+    border: none;
+    background-color: transparent;
+    background-image: url('../assets/arrow-left.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 280ms ease, filter 280ms ease;
+}
+
+.pet-zoom-next {
+    transform: scaleX(-1);
+}
+
+.pet-zoom-prev:hover {
+    transform: scale(1.12);
+    filter: brightness(1.12);
+}
+
+.pet-zoom-next:hover {
+    transform: scaleX(-1) scale(1.12);
+    filter: brightness(1.12);
 }
