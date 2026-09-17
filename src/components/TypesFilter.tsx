@@ -5,6 +5,7 @@ const TYPES = [
     { value: "EVENT", label: "Event" },
     { value: "POSTCARD", label: "Postcard" },
     { value: "SHINY", label: "Shiny" },
+    { value: "GLITTER", label: "Glitter" },
     { value: "FAIRY", label: "Fairy" },
 ];
 
