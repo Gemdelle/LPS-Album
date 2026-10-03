@@ -36,11 +36,11 @@ const Nav = ({ rawData, defaultData, filters, patchFilters, filteredCount, lastS
 
             <div className='filter-container'>
                 <NameFilter filters={filters} patchFilters={patchFilters} />
+                <IdFilter filters={filters} patchFilters={patchFilters} />
                 <NamedFilter filters={filters} patchFilters={patchFilters} />
                 <OwnedFilter filters={filters} patchFilters={patchFilters} />
                 <YearsFilter filters={filters} patchFilters={patchFilters} />
                 <ColoursFilter filters={filters} patchFilters={patchFilters} />
-                <IdFilter filters={filters} patchFilters={patchFilters} />
                 <GenderFilter filters={filters} patchFilters={patchFilters} />
                 <TypesFilter filters={filters} patchFilters={patchFilters} />
                 <GenerationFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
