@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { breedChoices } from "../services/filterUtils";
+import { breedChoices, hasMissingBreed } from "../services/filterUtils";
 
 const BreedFilter = ({ filters, patchFilters, defaultData }: any) => {
     const selectedAnimal = filters.animals[0] || "";
     const breeds = breedChoices(defaultData || [], selectedAnimal);
+    const showMissing = breeds.length > 0 && hasMissingBreed(defaultData || [], selectedAnimal);
     const selected = filters.breeds[0] || "";
-    const selectedIsValid = !selected || selected === "-" || breeds.some(([key]) => key === selected);
+    const selectedIsValid = !selected || (selected === "-" && showMissing) || breeds.some(([key]) => key === selected);
 
     useEffect(() => {
         if (!selectedIsValid) {
@@ -35,7 +36,7 @@ const BreedFilter = ({ filters, patchFilters, defaultData }: any) => {
                 })}
             >
                 <option value="">All</option>
-                <option value="-">-</option>
+                {showMissing ? <option value="-">-</option> : null}
                 {breeds.map(([key, label]) => (
                     <option key={key} value={key}>{label}</option>
                 ))}

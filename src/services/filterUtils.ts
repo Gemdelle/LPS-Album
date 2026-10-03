@@ -21,6 +21,29 @@ export function uniqueLabels(values: unknown[]) {
     );
 }
 
+function isMissingCategory(value: unknown) {
+    return !normalizeKey(value);
+}
+
+export function hasMissingBreed(pets: any[], selectedAnimal: string) {
+    const list = pets || [];
+    const scoped = selectedAnimal
+        ? list.filter((pet) => normalizeKey(pet.animal) === selectedAnimal)
+        : list;
+    return scoped.some((pet) => isMissingCategory(pet.breed));
+}
+
+export function hasMissingVariant(pets: any[], selectedAnimal: string, selectedBreed: string) {
+    const list = pets || [];
+    let scoped = selectedAnimal
+        ? list.filter((pet) => normalizeKey(pet.animal) === selectedAnimal)
+        : list;
+    if (selectedBreed && selectedBreed !== "-") {
+        scoped = scoped.filter((pet) => normalizeKey(pet.breed) === selectedBreed);
+    }
+    return scoped.some((pet) => isMissingCategory(pet.variant));
+}
+
 export function breedChoices(pets: any[], selectedAnimal: string) {
     const list = pets || [];
     if (selectedAnimal) {

@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { variantChoices } from "../services/filterUtils";
+import { hasMissingVariant, variantChoices } from "../services/filterUtils";
 
 const VariantFilter = ({ filters, patchFilters, defaultData }: any) => {
     const selectedAnimal = filters.animals[0] || "";
     const selectedBreed = filters.breeds[0] || "";
     const variants = variantChoices(defaultData || [], selectedAnimal, selectedBreed);
+    const showMissing = variants.length > 0 && hasMissingVariant(defaultData || [], selectedAnimal, selectedBreed);
     const selected = filters.variants[0] || "";
-    const selectedIsValid = !selected || selected === "-" || variants.some(([key]) => key === selected);
+    const selectedIsValid = !selected || (selected === "-" && showMissing) || variants.some(([key]) => key === selected);
 
     useEffect(() => {
         if (!selectedIsValid) {
@@ -35,7 +36,7 @@ const VariantFilter = ({ filters, patchFilters, defaultData }: any) => {
                 })}
             >
                 <option value="">All</option>
-                <option value="-">-</option>
+                {showMissing ? <option value="-">-</option> : null}
                 {variants.map(([key, label]) => (
                     <option key={key} value={key}>{label}</option>
                 ))}
