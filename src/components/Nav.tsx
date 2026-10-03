@@ -8,6 +8,7 @@ import GenderFilter from "./GenderFilter";
 import TypesFilter from "./TypesFilter";
 import AnimalFilter from "./AnimalFilter";
 import BreedFilter from "./BreedFilter";
+import VariantFilter from "./VariantFilter";
 import GiftersFilter from "./GiftersFilter";
 import GenerationFilter from "./GenerationFilter";
 import OwnedFilter from "./OwnedFilter";
@@ -45,6 +46,7 @@ const Nav = ({ rawData, defaultData, filters, patchFilters, filteredCount, lastS
                 <GenerationFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
                 <AnimalFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
                 <BreedFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
+                <VariantFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
                 <GiftersFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
                 <div className="header-filter filter-result">
                     <label>Results</label>

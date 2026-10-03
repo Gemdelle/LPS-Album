@@ -4,6 +4,7 @@ export interface IPetshopData {
     gender: string;
     animal: string;
     breed: string;
+    variant?: string;
     colour: string;
     type: string;
     birthday: string;

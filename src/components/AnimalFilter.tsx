@@ -10,7 +10,8 @@ const AnimalFilter = ({ filters, patchFilters, defaultData }: any) => {
                 value={filters.animals[0] || ""}
                 onChange={(event) => patchFilters({
                     animals: event.target.value ? [event.target.value] : [],
-                    breeds: []
+                    breeds: [],
+                    variants: []
                 })}
             >
                 <option value="">All</option>

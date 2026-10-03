@@ -44,6 +44,11 @@ nav {
     line-height: 1;
 }
 
+.header-filter select:disabled {
+    color: rgb(70, 66, 48);
+    opacity: 1;
+}
+
 .header-filter select,
 .header-filter input,
 .name-input {

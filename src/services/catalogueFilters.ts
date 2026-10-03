@@ -15,6 +15,7 @@ export type CatalogueFilters = {
     types: string[];
     animals: string[];
     breeds: string[];
+    variants: string[];
     generations: string[];
 };
 
@@ -33,6 +34,7 @@ export const EMPTY_FILTERS: CatalogueFilters = {
     types: [],
     animals: [],
     breeds: [],
+    variants: [],
     generations: [],
 };
 
@@ -67,6 +69,7 @@ export function applyCatalogueFilters(data: any[], filters: CatalogueFilters) {
     const types = new Set(filters.types);
     const animals = new Set(filters.animals);
     const breeds = new Set(filters.breeds);
+    const variants = new Set(filters.variants);
     const generations = new Set(filters.generations);
 
     return data.filter((pet) => {
@@ -115,6 +118,9 @@ export function applyCatalogueFilters(data: any[], filters: CatalogueFilters) {
             return false;
         }
         if (breeds.size > 0 && !breeds.has(normalizeKey(pet.breed))) {
+            return false;
+        }
+        if (variants.size > 0 && !variants.has(normalizeKey(pet.variant))) {
             return false;
         }
         if (generations.size > 0 && !generations.has(generationKey(pet.generation))) {

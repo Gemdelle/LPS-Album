@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './styles/names.css';
 import Nav from './components/Nav';
@@ -17,7 +17,7 @@ const SHEET_GID = '0';
 const GOOGLE_SHEETS_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
 const GOOGLE_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwEdxi_rF3vMyu592vTSmjN3d2eelkSmL0QTr6gm5Aj5zergyjGHtVvSbrSXhHvCMyqcA/exec";
 
-const SHEET_HEADERS = ["id", "name", "gender", "animal", "breed", "favourite", "colour", "type", "birthday", "gifter", "bloodline", "status", "generation", "season", "pre-evolution", "post-evolution", "wishlist-link", "base", "studied", "vip"];
+const SHEET_HEADERS = ["id", "name", "gender", "animal", "breed", "variant", "favourite", "colour", "type", "birthday", "gifter", "bloodline", "status", "generation", "season", "pre-evolution", "post-evolution", "wishlist-link", "base", "studied", "vip"];
 
 function parseCsv(text: string): string[][] {
   const rows: string[][] = [];
@@ -88,6 +88,7 @@ function normalizeSheetValue(header: string, value: string) {
     header !== "gender" &&
     header !== "animal" &&
     header !== "breed" &&
+    header !== "variant" &&
     header !== "colour" &&
     header !== "type" &&
     header !== "gifter"
@@ -119,9 +120,9 @@ function App() {
     [sourceData]
   );
 
-  const patchFilters = (partial: Partial<CatalogueFilters>) => {
+  const patchFilters = useCallback((partial: Partial<CatalogueFilters>) => {
     setFilters((prev) => ({ ...prev, ...partial }));
-  };
+  }, []);
 
   // 🔹 Función para obtener datos de Google Sheets (hoja pública)
     const fetchDataFromGoogleSheets = async () => {
@@ -144,7 +145,9 @@ function App() {
                         ? ["animal", "especie", "species"]
                         : header === "breed"
                             ? ["breed", "raza"]
-                            : [header];
+                            : header === "variant"
+                                ? ["variant", "variante"]
+                                : [header];
                 return actualHeaders.findIndex((actual) =>
                     aliases.some((alias) => actual.toLowerCase() === alias.toLowerCase())
                 );

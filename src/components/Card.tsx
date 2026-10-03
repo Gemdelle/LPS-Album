@@ -109,6 +109,7 @@ const Card = ({
                         <span><strong><i>Type:</i></strong>{renderEditableField("type", data.type)}</span>
                         <span><strong><i>Animal:</i></strong>{renderEditableField("animal", data.animal)}</span>
                         <span><strong><i>Breed:</i></strong>{renderEditableField("breed", data.breed)}</span>
+                        <span><strong><i>Variant:</i></strong>{renderEditableField("variant", data.variant || "")}</span>
                         <span><strong><i>Colour:</i></strong>{renderEditableField("colour", data.colour)}</span>
                         <span><strong><i>Birthday:</i></strong>{renderEditableField("birthday", data.birthday)}</span>
                         <span><strong><i>Generation:</i></strong>{renderEditableField("generation", String(data.generation || ""))}</span>

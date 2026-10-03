@@ -11,6 +11,7 @@ interface IPetshopData{
     gender: string
     animal: string
     breed: string
+    variant?: string
     colour: string
     type: string
     bloodline: string
@@ -26,6 +27,7 @@ const CardAsRow = ({ data: {
     gender,
     animal,
     breed,
+    variant,
     colour,
     type,
     bloodline,
@@ -56,7 +58,8 @@ const CardAsRow = ({ data: {
                     <span><strong><i>Gender: </i></strong><div className={gender === "F" ? "female" : "male"}></div></span>
                     <span><strong><i>Type: </i></strong>{type}</span>
                     <span><strong><i>Animal: </i></strong>{animal}</span>
-                    <span><strong><i>Breed: </i></strong>{breed}</span>
+                    <span><strong><i>Breed: </i></strong>{breed || "-"}</span>
+                    <span><strong><i>Variant: </i></strong>{variant || "-"}</span>
                 </div>
 
                 <div className="data-container-02">

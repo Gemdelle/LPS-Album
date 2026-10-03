@@ -1,22 +1,23 @@
 import { useEffect } from "react";
-import { breedChoices } from "../services/filterUtils";
+import { variantChoices } from "../services/filterUtils";
 
-const BreedFilter = ({ filters, patchFilters, defaultData }: any) => {
+const VariantFilter = ({ filters, patchFilters, defaultData }: any) => {
     const selectedAnimal = filters.animals[0] || "";
-    const breeds = breedChoices(defaultData || [], selectedAnimal);
-    const selected = filters.breeds[0] || "";
-    const selectedIsValid = !selected || breeds.some(([key]) => key === selected);
+    const selectedBreed = filters.breeds[0] || "";
+    const variants = variantChoices(defaultData || [], selectedAnimal, selectedBreed);
+    const selected = filters.variants[0] || "";
+    const selectedIsValid = !selected || variants.some(([key]) => key === selected);
 
     useEffect(() => {
         if (!selectedIsValid) {
-            patchFilters({ breeds: [], variants: [] });
+            patchFilters({ variants: [] });
         }
     }, [selectedIsValid, patchFilters]);
 
-    if (breeds.length === 0) {
+    if (variants.length === 0) {
         return (
             <div className="header-filter">
-                <label>Breed</label>
+                <label>Variant</label>
                 <select value="" disabled>
                     <option value="">-</option>
                 </select>
@@ -26,16 +27,15 @@ const BreedFilter = ({ filters, patchFilters, defaultData }: any) => {
 
     return (
         <div className="header-filter">
-            <label>Breed</label>
+            <label>Variant</label>
             <select
                 value={selectedIsValid ? selected : ""}
                 onChange={(event) => patchFilters({
-                    breeds: event.target.value ? [event.target.value] : [],
-                    variants: []
+                    variants: event.target.value ? [event.target.value] : []
                 })}
             >
                 <option value="">All</option>
-                {breeds.map(([key, label]) => (
+                {variants.map(([key, label]) => (
                     <option key={key} value={key}>{label}</option>
                 ))}
             </select>
@@ -43,4 +43,4 @@ const BreedFilter = ({ filters, patchFilters, defaultData }: any) => {
     );
 };
 
-export default BreedFilter;
+export default VariantFilter;
