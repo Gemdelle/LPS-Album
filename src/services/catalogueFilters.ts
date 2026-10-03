@@ -117,8 +117,12 @@ export function applyCatalogueFilters(data: any[], filters: CatalogueFilters) {
         if (animals.size > 0 && !animals.has(normalizeKey(pet.animal))) {
             return false;
         }
-        if (breeds.size > 0 && !breeds.has(normalizeKey(pet.breed))) {
-            return false;
+        if (breeds.size > 0) {
+            const breedKey = normalizeKey(pet.breed);
+            const wantsMissing = breeds.has("-");
+            if (wantsMissing ? Boolean(breedKey) : !breeds.has(breedKey)) {
+                return false;
+            }
         }
         if (variants.size > 0 && !variants.has(normalizeKey(pet.variant))) {
             return false;
