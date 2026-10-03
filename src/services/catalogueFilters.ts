@@ -124,8 +124,12 @@ export function applyCatalogueFilters(data: any[], filters: CatalogueFilters) {
                 return false;
             }
         }
-        if (variants.size > 0 && !variants.has(normalizeKey(pet.variant))) {
-            return false;
+        if (variants.size > 0) {
+            const variantKey = normalizeKey(pet.variant);
+            const wantsMissing = variants.has("-");
+            if (wantsMissing ? Boolean(variantKey) : !variants.has(variantKey)) {
+                return false;
+            }
         }
         if (generations.size > 0 && !generations.has(generationKey(pet.generation))) {
             return false;
