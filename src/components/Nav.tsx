@@ -40,7 +40,7 @@ const Nav = ({ rawData, defaultData, filters, patchFilters, filteredCount, lastS
                 <NamedFilter filters={filters} patchFilters={patchFilters} />
                 <OwnedFilter filters={filters} patchFilters={patchFilters} />
                 <YearsFilter filters={filters} patchFilters={patchFilters} />
-                <ColoursFilter filters={filters} patchFilters={patchFilters} />
+                <ColoursFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />
                 <GenderFilter filters={filters} patchFilters={patchFilters} />
                 <TypesFilter filters={filters} patchFilters={patchFilters} />
                 <GenerationFilter filters={filters} patchFilters={patchFilters} defaultData={defaultData} />

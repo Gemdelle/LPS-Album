@@ -1,22 +1,81 @@
-import { normalizeKey } from "../services/filterUtils";
+import { useEffect, useRef, useState } from "react";
+import { uniqueLabels } from "../services/filterUtils";
 
-const COLOURS = ["BLACK", "BLUE", "BROWN", "GRAY", "GREEN", "LIGHT_BLUE", "ORANGE", "PINK", "RED", "VIOLET", "WHITE", "YELLOW"];
+const ColoursFilter = ({ filters, patchFilters, defaultData }: any) => {
+    const [open, setOpen] = useState(false);
+    const rootRef = useRef<HTMLDivElement>(null);
+    const colours = uniqueLabels((defaultData || []).map((pet: any) => pet.colour));
+    const selected = new Set<string>(filters.colours || []);
+    const selectedLabels = colours
+        .filter(([key]) => selected.has(key))
+        .map(([, label]) => label);
+    const summary = selectedLabels.length === 0 ? "All" : selectedLabels.join(", ");
 
-const ColoursFilter = ({ filters, patchFilters }: any) => {
+    useEffect(() => {
+        if (!open) {
+            return;
+        }
+        const onPointerDown = (event: MouseEvent) => {
+            if (!rootRef.current?.contains(event.target as Node)) {
+                setOpen(false);
+            }
+        };
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setOpen(false);
+            }
+        };
+        window.addEventListener("mousedown", onPointerDown);
+        window.addEventListener("keydown", onKeyDown);
+        return () => {
+            window.removeEventListener("mousedown", onPointerDown);
+            window.removeEventListener("keydown", onKeyDown);
+        };
+    }, [open]);
+
+    const toggle = (key: string) => {
+        const next = new Set(selected);
+        if (next.has(key)) {
+            next.delete(key);
+        } else {
+            next.add(key);
+        }
+        patchFilters({ colours: Array.from(next) });
+    };
+
     return (
-        <div className="header-filter">
+        <div className="header-filter colour-filter" ref={rootRef}>
             <label>Colour</label>
-            <select
-                value={filters.colours[0] || ""}
-                onChange={(event) => patchFilters({ colours: event.target.value ? [event.target.value] : [] })}
+            <button
+                type="button"
+                className="colour-filter-toggle"
+                title={summary}
+                onClick={() => setOpen((value) => !value)}
             >
-                <option value="">All</option>
-                {COLOURS.map((colour) => (
-                    <option key={colour} value={normalizeKey(colour)}>
-                        {colour.replace("_", " ").toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase())}
-                    </option>
-                ))}
-            </select>
+                {summary}
+            </button>
+            {open ? (
+                <div className="colour-filter-menu">
+                    <label className="colour-filter-option">
+                        <input
+                            type="checkbox"
+                            checked={selected.size === 0}
+                            onChange={() => patchFilters({ colours: [] })}
+                        />
+                        <span>All</span>
+                    </label>
+                    {colours.map(([key, label]) => (
+                        <label key={key} className="colour-filter-option">
+                            <input
+                                type="checkbox"
+                                checked={selected.has(key)}
+                                onChange={() => toggle(key)}
+                            />
+                            <span>{label}</span>
+                        </label>
+                    ))}
+                </div>
+            ) : null}
         </div>
     );
 };
