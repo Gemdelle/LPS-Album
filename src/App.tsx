@@ -7,6 +7,7 @@ import CataloguePage from './pages/CataloguePage';
 import GuessPage from './pages/GuessPage';
 import ProtectedRoute from "./components/ProtectedRoute";
 import localPetshops from './data/petshops_data.json';
+import { insertMissingPets } from './data/missingPets';
 import { applyOverrides, clearOverrides, mergePet, saveOverride } from './services/petOverrides';
 import { applyCatalogueFilters, CatalogueFilters, EMPTY_FILTERS } from './services/catalogueFilters';
 import { isCacheFresh, loadSheetCache, patchSheetCache, saveSheetCache } from './services/sheetCache';
@@ -171,16 +172,17 @@ function App() {
                 throw new Error("Google Sheets returned no rows.");
             }
 
-            console.log("Fetched data:", data.length, "pets from spreadsheet");
-            saveSheetCache(data);
+            const pets = insertMissingPets(data);
+            console.log("Fetched data:", pets.length, "pets from spreadsheet");
+            saveSheetCache(pets);
             setLastSheetSync(Date.now());
-            return data;
+            return pets;
         } catch (error) {
             const staleCache = loadSheetCache();
             if (staleCache?.data?.length) {
                 console.warn(`Sheet fetch failed, using cached copy for ${SPREADSHEET_ID}:`, error);
                 setLastSheetSync(staleCache.fetchedAt);
-                return applyOverrides(staleCache.data);
+                return applyOverrides(insertMissingPets(staleCache.data));
             }
             console.warn(`Using local petshops data. Google Sheets fetch failed for ${SPREADSHEET_ID}:`, error);
             return applyOverrides(localPetshops as any[]);
@@ -234,7 +236,7 @@ function App() {
     const loadData = async () => {
       const cached = loadSheetCache();
       if (cached?.data?.length) {
-        setSourceData(applyOverrides(cached.data));
+        setSourceData(applyOverrides(insertMissingPets(cached.data)));
         setLastSheetSync(cached.fetchedAt);
         if (isCacheFresh(cached.fetchedAt)) {
           return;
